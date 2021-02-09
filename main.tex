@@ -1,0 +1,126 @@
+% This template was written by John Davies <john.davies@glasgow.ac.uk> 2017-02-06
+% It matches the university specification at the time of writing
+%   for the widths of the page margins and one-and-a-half line spacing
+% You may want to include more packages, particularly for heavy mathematics
+% Please let me know if you find any errors or wish to suggest improvements
+
+\documentclass[12pt,titlepage,oneside]{book}
+\usepackage[T1]{fontenc} % modern encoding
+% Comment out the next three lines of LaTeX if you wish to use Computer Modern fonts
+%   (this is the default for LaTeX)
+% Make sure that your TeX installation can produce good pdf with these fonts.
+% The following three lines are a good alternative if you don't use much mathematics
+\usepackage{mathptmx}  % uses Times for text and mathematics
+\usepackage[scaled]{helvet} %  helvetica for sanserif, scaled 95% by default
+\usepackage{courier}  % courier for typewriter font, pretty ugly but available
+% otherwise the stix package offers more options and symbols
+% \usepackage{stix}  % uses Times for text and a range of fonts for mathematics
+% End of choices for fonts
+\usepackage{graphicx}  % standard package for importing graphics files
+\usepackage{cite}  % improves format of numerical citations, such as [1-3]
+\usepackage[top=1.8cm, bottom=1.8cm,left=4.0cm,right=1.5cm]{geometry}
+% These margins are the university guidelines
+%\usepackage[onehalfspacing]{setspace}  % gives one-and-a-half line spacing
+% doublespacing is another option and can be changed in the text
+\usepackage[doublespacing]{setspace}
+\usepackage{dcolumn}% Align table columns on decimal point
+\usepackage{bm}% bold math
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{color}
+\usepackage{acronym}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{hyperref}
+
+\hypersetup{
+%--- fill inside borders ---
+  colorlinks=true,        % false: boxed links; true: colored links
+  linkcolor=black,         % color of internal links
+  citecolor=cyan,         % color of links to bibliography
+}
+
+%% ----- comment commands for each of us
+\newcommand{\chris}[1]{\textbf{\textcolor{red}{CHRIS: #1}}}
+\newcommand{\francesco}[1]{\textbf{\textcolor{green}{FRANCESCO: #1}}}
+\newcommand{\hunter}[1]{\textbf{\textcolor{blue}{HUNTER: #1}}}
+\newcommand{\siong}[1]{\textbf{\textcolor{cyan}{SIONG: #1}}}
+\newcommand{\rod}[1]{\textbf{\textcolor{yellow}{ROD: #1}}}
+
+\acrodef{GW}[GW]{Gravitational wave}
+\acrodef{BBH}[BBH]{binary black hole}
+\acrodef{CW}[CW]{continuous gravitational waves}
+\acrodef{EM}[EM]{electromagnetic}
+\acrodef{CBC}[CBC]{compact binary coalescence}
+\acrodef{BNS}[BNS]{binary neutron star}
+\acrodef{NSBH}[NSBH]{neutron star black hole}
+\acrodef{PSD}[PSD]{power spectral density}
+\acrodef{ELBO}[ELBO]{evidence lower bound}
+\acrodef{LIGO}[LIGO]{advanced Laser Interferometer Gravitational wave Observatory}
+\acrodef{LISA}[LISA]{Laser Interferometer Space Antenna}
+\acrodef{CVAE}[CVAE]{conditional variational autoencoder}
+\acrodef{KL}[KL]{Kullback--Leibler}
+\acrodef{GPU}[GPU]{graphics processing unit}
+\acrodef{LVC}[LVC]{LIGO-Virgo Collaboration}
+\acrodef{PP}[p-p]{probability-probability}
+\acrodef{SNR}[SNR]{signal-to-noise ratio}
+\acrodef{AE}[AE]{autoencoder}
+\acrodef{VAE}[VAE]{variational autoencoder}
+
+\acrodef{FFT}[FFT]{fast Fourier transform}
+\acrodef{CNN}[CNN]{convolutional neural network}
+\acrodef{ROC}[ROC]{receiver operator characteristic}
+
+
+\begin{document}
+\begin{titlepage}
+\centering
+\vspace*{3cm}  % Need the * or the space is swallowed at the top of the page
+\bfseries\Large
+Optimizing the search for Gravitational Waves using Machine Learning \\
+\vspace{3cm}
+\normalfont\large
+Hunter Gabbard\\
+\vspace{2cm}
+%Submitted in fulfilment of the requirements for the\\
+%Degree of Doctor of Philosophy\\
+\vspace{2cm}
+School of Physics and Astronomy\\
+College of Science and Engineering\\
+University of Glasgow\\
+\vspace{1cm}
+\includegraphics[scale=0.125]{GlaLogo.pdf}
+\\
+\vspace{1cm}
+% Insert month and year of date deposited with library for final version
+January 2021
+\end{titlepage}
+\frontmatter  % Turn off chapter numbering, use roman page numbers
+\include{abstract}
+\tableofcontents
+%\listoftables
+%\listoffigures
+%\include{acknowledgements}
+%\include{declaration}
+
+\mainmatter % Turn on chapter numbering, reset page numbers, use arabic
+\include{GW_background}
+\include{ML_background}
+\include{matching_matched_filtering}
+\include{technical_matching}
+\include{vitamin}
+\include{technical_vitamin}
+\include{conclusions}
+
+%\include{ThesisOutline}
+
+\backmatter  % Turn off chapter numbering
+% I assume that the bibliography is assembled by hand.
+% Change the file if you use bibtex or something like that.
+%\include{bibliography}
+
+\bibliographystyle{abbrv}
+\bibliography{references}
+
+\end{document}

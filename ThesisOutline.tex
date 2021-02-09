@@ -1,0 +1,59 @@
+%
+% Extra sections required for progression report
+%
+
+\chapter{Thesis outline}
+
+\section{Background chapter on GWs}
+
+In this chapter I will discuss the most relevant general relativity concepts with regards to gravitational waves. There will be a very brief description of the LIGO detector configuration including some discussion on how non-astrophysical noise affects the data quality coming out of the detectors. I will end by describing the most widely used techniques in LIGO for both detecting and estimating the source parameters of gravitational wave events.
+
+\section{Background chapter on machine learning}
+
+Start out by providing some successful use-cases of machine learning and motivation for why machine learning is applicable to gravitational wave data analysis. Discuss the basics of machine learning from first principals (i.e. perceptron to deep neural networks). Discuss basics of the two types of networks used in the thesis (i.e. convolutional neural networks and conditional variational autoencoders).
+
+\section{Chapter on matching matched filtering using convolutional neural networks for gravitational wave astornomy}
+
+This will be a near copy and paste of our first paper published in Physical Review Letters on the use of convolutional neural networks to match the efficiency of the standard LIGO detection method matched template filtering. Most of the material is already here for this.
+
+\section{Chapter on Bayesian parameter estimation using conditional variational autencoders for gravitational wave astronomy}
+
+This will be a near copy and paste of our most recent paper (submitted to Nature Physics) where we show for the first time that a machine learning algorithm (conditional variational autoencoders) can reproduce Bayesian gravitational wave source parameter posterior estimates with a 7 order of magnitude increase in speed. Most of the material is already here for this.
+
+\section{Technical chapter on matching matched filtering paper}
+
+A more in-depth discussion on the techniques used in our PRL paper. This may include further expansion on application of training techniques, deeper discussion the strengths and weaknesses of the technique and a more nuanced explanation of what is going on inside of the network. Much of the work already carried out can be added to this chapter, though it may require an additional few months of analysis.
+
+\section{Technical chapter on Bayesian PE using CVAE paper}
+
+A more in-depth discussion on the techniques used in our Nature Physics paper. This may include further expansion on application of training techniques, deeper discussion the strengths and weaknesses of the technique and a more nuanced explanation of what is going on inside of the network. Much of the work already carried out can be added to this chapter, though it may require an additional month or two of analysis.
+
+\section{Conclusions / discussion chapter}
+
+A recap of what was done over the course of the entire thesis. Some discussion what could be done next and what was done wrong. The analysis for both technical chapters will need to be finished prior to the completion of the conclusions chapter.
+
+%
+% List of objections in second year progress report
+%
+
+\chapter{List of objectives in second year report}
+
+\begin{itemize}
+    \item \textbf{Achieve $95$ - $100\%$ overlap with the toy sine-Gaussian test case:} This was not achieved as we ended up finding a better method than generative adversarial networks (i.e. conditional variational autoencoders). Our figure of merit has also changed from overlap to KL divergence and we have moved on from the toy model case.
+    \item \textbf{Achieve $90$ - $100\%$ overlap with the gravitational wave test case:} This has largely been achieved in our most recent paper using a new method and with a different figure of merit (i.e. KL divergence).
+    \item \textbf{Write and publish paper on INN applied towards GW parameter estimation:} This has largely been achieved. We are not using invertible neural networks anymore (now using conditional variational autoencders) and we have written up and submitted the paper to Nature Physics. Currently in the refereeing stage.
+    \item \textbf{Complete 6-month placement at Craft Prospect company:} This has been done and I even received a job offer out of it.
+    \item \textbf{Do a more in-depth analysis of previous results from both GAN and CNN study:} We have not had the time to do this yet (as we have been busy trying to get this Nature paper out), but will finish this up in the coming year.
+    
+\end{itemize}
+
+\chapter{List of objectives and outline plan for next 12 months}
+
+\begin{itemize}
+    \item Resubmit paper to Nature Physics with comments to referees.
+    \item Perform further technical analysis on matching matched filtering paper.
+    \item Perform further technical analysis on Bayesian parameter estimation CVAE paper.
+    \item (Time dependent) Write up technical PRD paper on the further technical analysis performed above.
+    \item Write thesis.
+\end{itemize}
+

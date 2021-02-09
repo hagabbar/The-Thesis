@@ -1,0 +1,220 @@
+\chapter{Gravitational waves}
+
+\section{Gravitational Waves}
+
+Gravitational waves were predicted by Einstein in his theory of general relativity well over 100 years ago. In his theory, Einstein formalises the relationship between matter and space-time as
+
+\begin{equation}
+    G_{\mu \nu} + \Lambda g_{\mu \nu} = \frac{8 \pi G}{c^{4}} T_{\mu \nu},
+\end{equation}{}
+
+where $\Lambda$ is the cosmological constant (scalar measurement describing the energy density of space), $g_{\mu \nu}$ is the metric which describes the geometric structure of space-time, $G$ is Newton's gravitational constant, $c$ is the speed of light, $T_{\mu \nu}$ is the stress energy tensor which describes the density, direction, flow of energy in space-time and $G_{\mu \nu}$ is the Einstein tensor defined as
+
+\begin{equation}
+    G_{\mu \nu} = R_{\mu \nu} - \frac{1}{2} R g_{\mu \nu}
+\end{equation}
+
+where $R_{\mu \nu}$ is the Rici curvature tensor which determines the degree to which matter will tend to change as a function of time and $R$ is a real valued scalar number describing the degree of curvature. 
+
+Gravitational waves may be defined as small perturbations over the curved background spacetime metric $\bar{g}_{\mu \nu}$
+
+\begin{equation}
+    g_{\mu \nu} = \bar{g}_{\mu \nu}(x) + h_{\mu \nu}(x),
+\end{equation}{}
+
+where $h_{\mu \nu}(x)$ is the gravitational wave perturbation. This perturbation is both plus and cross polarized, denoted as
+
+\begin{equation}
+    h_{\plus} = 
+    h_{\cross} = 
+\end{equation}{}
+
+\section{The Detectors}
+
+The \ac{LIGO} gravitational wave detectors are composed of 
+two detectors, one in Hanford, Washington State and the 
+other in Livingston, Louisiana. There are also other ground-based detectors 
+in Hannover, Germany (GEO), Pisa, Italy (Virgo) and Kamioka, Japan 
+(KAGRA). In addition to ground-based detectors there are eventual plans 
+to build a space-based observatory called the \ac{LISA} which 
+will search for super massive binary black holes (among other 
+sources). Each detector can be thought 
+of as a large-scale Michelson-Morley Interferometer composed 
+of two arms orthogonal to each other. Each arm of 
+the detectors is 4km in length. The strain a \ac{GW} induces on two free point masses 
+can be expressed as 
+
+\begin{equation}
+    h(t) = \frac{2 \Delta L}{L},
+\end{equation}
+
+where $h(t)$ is the strain amplitude of the \ac{GW} 
+as a function of time, $\Delta L$ is 
+the relative change in length induced by the \ac{GW} on the two 
+point masses and $L$ is the baseline length between the point 
+masses without a \ac{GW} present. 
+
+We record the change in length 
+on the two point masses through the use of a ND:Yag 20W 
+laser and large mirrors. Photons emited from the laser pass through a beam 
+splitter and down the two arms of the detectors. The 
+photons then hit end test mass mirrors at both ends 
+and are then caught in a Fabry-Perot signal recylcing 
+cavity in order to effectively increase the baseline 
+length of the arms. Eventually, some photons are released 
+from the Fabry-Perot cavities and return to the beam splitter 
+and are recorded on a set of photodiodes which measure 
+the phase difference between photons from both 
+arms.
+
+Through some algebraic manipulation we can get an estimate on the 
+light travel time difference between the two interferometer 
+arms as 
+
+\begin{equation}
+    \Delta \tau(t) = h(t) \frac{2L}{c} = h(t) \tau_{rt0}.
+\end{equation}
+
+%
+% Need to figure out what tau rt0 is ...
+%
+where $\tau_{rt0}$ is the return trip time down 
+one arm and the phase difference being 
+
+\begin{equation}
+    \Delta \phi(t) = h(t) \tau_{rt0} \frac{2\pi c}{\lambda}.
+\end{equation}
+
+Here we can clearly see that the phase difference 
+between the two light signals is scaled by the 
+length of the interferometer arms $L$. Because the 
+detectors are tuned such that the photons arriving 
+back at the beam splitter act to destructively 
+interfere with each other, there should theoretically 
+be no signal hitting the photodiodes in nominal operating times. When a \ac{GW} 
+impinges on the detector, it will compress one arm 
+while stretching the other arm. There will then be a 
+noticeable difference in phase between the light traveling 
+down both arms. Because of this difference in phase, the 
+light recombining at the beam splitter will no longer 
+destructively interfere and a signal will appear 
+on the photodetectors.
+
+\subsection{Detector noise}
+
+Although this change in phase between 
+the two detector arms can be measured through 
+photon counting, the detectors are 
+also sensitive to non-astrophysical noise 
+sources. These noise sources can drastically affect 
+the sensitivity of the detectors and may also mimic 
+gravitational wave events. Some common noise sources 
+include anthropgenic noise, quantum shot noise, 
+seismic noise and thermal noise. 
+
+Seismic noise largely affects the sensitivity of 
+the detectors in the low frequency regime where 
+an earthquake produces sets of waves which travel both 
+through the earths core/mantel and also along the 
+surface of the earth. When one of these seismic waves 
+hits the detectors it can knock the interferometer arms 
+out of alignment. Closely related to seismic noise 
+(though at different frequencies) anthropogenic noise 
+can result from individuals walking around in the 
+\ac{LIGO} control rooms or large trucks passing 
+on a nearby highway.
+
+%
+% Not sure if this is right. 
+%
+Thermal noise results from the heat produced by 
+the lasers passing through large coated mirrors in 
+the interferometer. When laser photons pass through 
+these mirrors, the photons subsequently heat up 
+the coating/mirror material. This heat causes the molecules 
+which make up the coating/lens material to behave in 
+random Brownian motion, thus causing the photons to deviate from 
+their intended path.
+
+Quantum shot noise results from the wave packet-like 
+behavior of light as it travels through a medium. 
+Because of Poisson statistics, we know that the 
+uncertainty on the number of photons that we 
+count arriving at the \ac{LIGO} photodiodes 
+after recombination at the beam splitter is 
+proportional to the expected number of photons 
+arriving each second. The greater the power 
+of the laser, the greater the quantum shot 
+noise at higher photon frequencies.
+
+%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%% 
+\section{LIGO sources}
+
+There are a variety of events which can cause significant 
+enough distortions in spacetime to produce 
+\ac{GW} events. Such events include \ac{CBC} signals, burst events,
+continuous \ac{GW}s from rotating neutron stars and 
+stochastic \ac{GW}s (leftover echoes from the Big Bang). In this 
+section I will describe these events and how \ac{GW}s are 
+produced from them.
+
+\subsection{Compact Binary Coalescencs}
+
+\ac{CBC} signals arise from the collision of massive compact 
+objects moving at high relativistic speeds. Such systems can 
+include binary black holes, neutron star - black hole pairs, binary 
+neutron stars and super massive black hole encounter events. 
+
+As the two objects rotate about each other, energy is radiated away in the 
+form of \ac{GW}s due to the asymmetric motion of the heavy objects. 
+Over the course of millions of years, the two objects will 
+inspiral in towards each other. In so doing the objects will 
+orbit faster, peturbing spacetime to a greater degree and 
+thus releasing more energy in the form \ac{GW}s. In the final few 
+seconds prior to merger the objects will release a large amount of 
+\ac{GW} energy collide. If the objects are binary black holes, they 
+will coalesce into a single black hole which will ``ring'' for a 
+short amount of time. If the objects are binary neutron stars they will 
+typically collide and then produce a large supernovoe event, emiting 
+a large amount of \ac{EM} light in the process (which importantly 
+can be measured by other telescopes across the spectrum on Earth). 
+
+\subsection{Continuous Waves}
+
+\ac{CW} signals are canonically associated with 
+
+\subsection{Stochastic Gravitational Waves}
+
+\subsection{Burst signals}
+
+\section{Searching for compact binary coalescence signals}
+
+The output of the \ac{LIGO} gravitational wave detector is a time series produced by the resulting phase shift of two lasers after recombination on a photodiode. Because our detector is not perfectly isolated from all non-astrophysical sources, the output of the detector will be a function of both a gravitational wave impinging on it, as well some noise
+
+\begin{equation}
+    s(t) = h(t) + n(t),
+\end{equation}{}
+
+where $h(t)$ is the combined strain from a gravitational wave induced on the interferometer and $n(t)$ is the noise contribution. We generally assume that the noise is both stationary and Gaussian, although in reality the detector noise can be non-Gaussian. For those cases where we have non-Gaussianity we run various glitch identification tools and techniques to identify problematic areas of the detector data output. 
+
+Assuming Gaussian noise, our problem then becomes, how does one distinguish noise from actual signal? Fortunately, the problem of extracting low \ac{SNR} signals from the background is not uncommon in physics and the field of statistics and may be accomplished through a technique known as matched template filtering.
+
+\subsubsection{Matched template filtering}
+
+Given the current level of sensitivity of the detectors, we will be dealing within a regime where the \ac{GW} signal we are trying to detect will often be burried far below the overall background of the detector noise. We can take advantage of the fact that we generally have a good understanding of the form of $h(t)$. If we know exactly the form of $h(t)$, we may construct a simple filtering technique whereby we multiply the output of the detector $s(t)$ by $h(t)$ and integrate over some observation time. The noise contribution term of the expression
+
+\begin{equation}
+    \frac{1}{T} \int_0^T dt n(t) h(t) \sim (\frac{\tau_{0}}{T})^{(1/2)} n_{0} h_{0}
+\end{equation}{}
+
+as we increase the observation time $T$, we see that the overall value of the function tends to zero. So, given enough observation time, we can effectively filter out the contribution from the noise. The keen reader will spot one issue. Given that we may not have an infinite amount of observation time due to the duty cycle of the detectors and the fact that amplitude of the gravitational wave signal is not constant as a function of time, how can we make this filtering technique more optimal given finite observation time $T$. We define an optimal signal-to-noise ratio
+
+\begin{equation}
+    SNR_{opt} = 4 \int_0^{\infty} df \frac{|\bar{h}(f)|^2}{S_{n}(f)},
+\end{equation}{}
+
+where $|\bar{h}(f)|^2$ is is the inner product of the ideal signal template with itself and $S_{n}(f)$ is the single-sided noise \ac{PSD}. In matched template filtering, we generate many thousands of templates and compute the optimal \ac{SNR} of each. The best matching will contain the highest optimal \ac{SNR} for that event. If the \ac{SNR} is above the detection threshold (usually defined as 8), we say that there is a candidate gravitational wave signal present in the data.
+
+\subsubsection{Bayesian parameter estimation}
