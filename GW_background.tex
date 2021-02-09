@@ -183,13 +183,65 @@ can be measured by other telescopes across the spectrum on Earth).
 
 \subsection{Continuous Waves}
 
-\ac{CW} signals are canonically associated with 
+\ac{CW} signals are canonically associated with spinning non-axisymmetric 
+neutron stars. Other more exotic sources can result from clouds of bosons 
+annihilating each around fast-spinning black holes. 
+Neutron stars are the leftover cores of dead stars 
+which have exploded in a supernovae and then collapsed down 
+into an object roughly the mass of our sun and with a radius of a 
+few km. \ac{GW} signals are produced from mass quadrupole radiation in the 
+gravitational field and spinning neutron stars can cause such 
+disturbances through cracking and cooling of the crust, internal non-axisymmetric 
+magnetic field flows, and mountains of mass accreted on the 
+surface from a larger companion star \cite{1712.05897}.
 
 \subsection{Stochastic Gravitational Waves}
 
 \subsection{Burst signals}
 
-\section{Searching for compact binary coalescence signals}
+\section{Search methods for gravitational wave signals}
+
+In this section, I will describe several methods used by the 
+\ac{LVC} to search for signals from \ac{CBC}, \ac{GW}, burst and 
+stochastic \ac{GW}s.
+
+\subsection{\ac{CW} search method}
+
+There are estimated to be roughly $\sim 10^{8} - 10^{9}$ neutrons stars 
+in our own Milky Way Galaxy, of which only $\sim 2500$ have already 
+been observed by the wider scientific community. One method for detecting 
+\ac{CW} signals is to go after these already known $2500$ neutron 
+stars and perform a targeted search.
+
+\subsubsection{Targeted search}
+The GW strain given by a non-axisymmetric spinning neutron star 
+is typically defined by 
+
+\begin{equation}
+    h_{0} = \frac{4\pi^2G}{c^4} \frac{I_{zz} f^2}{d} \epsilon,
+\end{equation}
+
+where $I_{zz}$ is the moment of intertia around the z-axis of the 
+neutron star, $f$ is the \ac{GW} frequency (roughly proportional to 
+the star spin frequency) and $\epsilon$ is the elipticity. In a targetted 
+search, we generally assume that the sky position, frequency, spin and 
+other parameters are well known. There is also a middle-ground option of 
+performing a directed search where we only assume to know the sky location 
+very well. Nominally, a \ac{FFT} is first performed on the 
+data afterwhich a transformation of some sort is then applied (
+frequency-Hough, ``stack-slide'', PowerFlux) in order to 
+map the observed data to source properties. After this mapping performed, 
+we essentially then try to look for excesses in power above 
+a pre-defined threshold over a large number of frequency bins. The 
+methods listed above put many different spins on this\cite{PhysRevD.90.042002}.
+
+\subsubsection{All-sky search}
+
+\subsection{Burst search method}
+
+\subsection{Stochastic search method}
+
+\subsection{\ac{CBC} search method}
 
 The output of the \ac{LIGO} gravitational wave detector is a time series produced by the resulting phase shift of two lasers after recombination on a photodiode. Because our detector is not perfectly isolated from all non-astrophysical sources, the output of the detector will be a function of both a gravitational wave impinging on it, as well some noise
 
