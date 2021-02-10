@@ -57,7 +57,7 @@ So, how do we build a machine learning algorithm? Before making things too compl
     y_{p} = \sigma(z),
 \end{equation}{}
 
-where $y_{p}$ is our predicted output (e.g. class label), $x$ is our given input, $w$ is a learned scalar weighting term on $x$, $b$ is a learned scalar bias term on $x$ and $\sigma$ is a nonlinear activation function (such as a sigmoid) which rescales the output. All weights and biases are typically initialized randomly prior to training and there are many formalisms for choosing the optimal initialization. In order to approximate more complicated functions, we can string together multiple perceptrons (neurons) in a layer where each neuron is fully-connected to the given input $x$ (i.e. every element in our input is multiplied by each weight of each neuron in our first layer). To make a deep network, we can randomly initialize another layer of neurons (of arbitrary size) which takes as input the output from the previous first layer of neurons. Additional layers can be added in perpetuity. During training, weights and biases are updated according to the performance of the algorithm with respect to a loss function which describes how well the algorithm is performing with respect to the true value of each training sample. This loss function can take many forms, but most often a mean squared error is used
+where $y_{p}$ is our predicted output (e.g. class label), $x$ is our given input, $w$ is a learned scalar weighting term on $x$, $b$ is a learned scalar bias term on $x$ and $\sigma$ is a nonlinear activation function (such as a sigmoid) which rescales the output. We apply a nonlinear activation function in order to allow our perceptron to learn non-linear functions/features. All weights and biases are typically initialized randomly prior to training and there are many formalisms for choosing the optimal initialization. In order to approximate more complicated functions, we can string together multiple perceptrons (neurons) in a layer where each neuron is fully-connected to the given input $x$ (i.e. every element in our input is multiplied by each weight of each neuron in our first layer). To make a deep network, we can randomly initialize another layer of neurons (of arbitrary size) which takes as input the output from the previous first layer of neurons. Additional layers can be added in perpetuity. During training, weights and biases are updated according to the performance of the algorithm with respect to a loss function which describes how well the algorithm is performing with respect to the true value of each training sample. This loss function can take many forms, but most often a mean squared error is used
 
 \begin{equation}
     L = \frac{1}{n} \sum_{i=1}^{n}(y^{l}_n-y^{t}_n)^2.
@@ -110,7 +110,35 @@ I was commonly told when first wadding into the pool of deep learning that the p
 %
 % When in doubt, make more training data
 %
-First off, when in doubt, the more training data available to you, the better. Time and again, during a large part of my thesis work, we would spend countless hours tuning and tweaking our neural network architecture only to run up against some insurmountable wall of impeded progress. Only to increase the number of training samples by a factor of 10 and see a significant increase in performance. 
+First off, when in doubt, the more training data available to you, the better. Time and again, during a large part of my thesis work, we would spend countless hours tuning and tweaking our neural network architecture only to run up against some insurmountable wall of impeded progress. Only to increase the number of training samples by several factors and see a significant increase in performance. 
+
+\subsection{Data pre-processing and augmentation}
+
+\subsubsection{Data pre-processing}
+Commonly, our input datasets are in a messy form. In order to help the network learn more efficiently, it is encouraged to perform some pre-procesing steps. It's important to do this because if our input data has large values over a wide range, and because our network is trying to learn a mapping from input to prediction, the learned weights may also end up being very large. Large learned variable weights can lead to massive gradients which cause the network to update weights in large step sizes, making the whole network more unstable in the process. We can overcome this by normalising our input dataset to be between the range of zero to one 
+
+\begin{equation}
+    y = \frac{x - x_{\textrm{min}}}{x_{\textrm{max}}-x_{\textrm{min}}},
+\end{equation}
+
+where $y$ is our new normalised data, $x$ is our original unnormalised data, $x_{\textrm{min}}$ is our unnormalised data minimum value and $x_{\textrm{max}}$ is our unnormalised data maximum value. It can also be advantageous to rescale our input data to a standard normal distribution if our data has widely varying scales by applying 
+
+\begin{equation}
+    y = \frac{x - x_{\textrm{mean}}}{x_{\textrm{std}}},
+\end{equation}
+
+where $x_{\textrm{mean}}$ is the mean of our data and $x_{\textrm{std}}$ is the standard devitation of our data. In addition to rescaling our input data, we ocassionally need to also rescale our training labels. This is especially relevant if the activation function in our final neural network layer is fixed to be between some values. For example, if we were using a sigmoid activation function where the values of the output of the sigmoid are only allowed to be between zero and one, then we would also want our training label values to lie between zero and one since the network would not be able to produce values outside of that range.
+
+\subsubsection{Data augmentation}
+
+Neural networks can sometimes be composed of hundreds, thousands, even million of parameters to be tuned during training. Given the massive number of parameters, many complex networks require an equally massive number of training samples. But, what do you do if you are only given a limited number of training samples? This is where data augmentation comes to the rescue. In order to generate more training data, we can apply simple shifts to the existing limited dataset and greatly expand the number of training samples. This can be accomplished through many of the following methods:
+
+\begin{itemize}
+    \item Translation: Shift the input data sample in the x/y/z direction.
+    \item Rotation: Rotate data about a fixed point.
+    \item Cropping: Choose a random subset of the input sample, cut out all data outside of subsection, rescale cropped data to original input size.
+    \item Gaussian noise: Add varying amounts of Gaussian noise in order to simulate poor quality signals.
+\end{itemize}
 
 %
 % The purpose of Validation
