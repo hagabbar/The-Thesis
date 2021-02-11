@@ -47,17 +47,39 @@ such a distribution.
 %
 % The perceptron and deep neural networks
 %
-So, how do we build a machine learning algorithm? Before making things too complicated lets first define a simple neural network architecture, the perceptron. A perceptron is made up of one neuron. For the sake of simplicity lets presume we want to perform a binary classification task. The perceptron can be defined as a learned function
+So, how do we build a machine learning algorithm? Before making things too complicated lets first define a simple neural network architecture, the perceptron. A perceptron is made up of one neuron which takes a set of inputs from a trainig sample and outputs a prediction given that training sample (illustrated in Fig. \ref{fig:Perceptron_network}). For the sake of simplicity lets presume we want to perform a binary classification task. The perceptron can be defined as a learned function
 
 \begin{equation}
-    z = w x + b
+    z = \sum_{i=1}^{N} w_{i} x_{i} + b
 \end{equation}{}
 
 \begin{equation}
     y_{p} = \sigma(z),
 \end{equation}{}
 
-where $y_{p}$ is our predicted output (e.g. class label), $x$ is our given input, $w$ is a learned scalar weighting term on $x$, $b$ is a learned scalar bias term on $x$ and $\sigma$ is a nonlinear activation function (such as a sigmoid) which rescales the output. We apply a nonlinear activation function in order to allow our perceptron to learn non-linear functions/features. All weights and biases are typically initialized randomly prior to training and there are many formalisms for choosing the optimal initialization. In order to approximate more complicated functions, we can string together multiple perceptrons (neurons) in a layer where each neuron is fully-connected to the given input $x$ (i.e. every element in our input is multiplied by each weight of each neuron in our first layer). To make a deep network, we can randomly initialize another layer of neurons (of arbitrary size) which takes as input the output from the previous first layer of neurons. Additional layers can be added in perpetuity. During training, weights and biases are updated according to the performance of the algorithm with respect to a loss function which describes how well the algorithm is performing with respect to the true value of each training sample. This loss function can take many forms, but most often a mean squared error is used
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/Perceptron_network.png}
+    \caption{A perceptron network whose inputs $x_1 ... x_N$ are each multiplied 
+    by a learned set of corresponding weights $w_1 ... w_N$ and summed together in $z$. 
+    The summed value is then passed through an activation function to get the final 
+    output of the network.}
+    \label{fig:Perceptron_network}
+\end{figure}
+
+where $y_{p}$ is our predicted output (e.g. class label), $x$ is our given input, $w$ is a learned scalar weighting term on $x$, $b$ is a learned scalar bias term on $x$ and $\sigma$ is a nonlinear activation function (Fig. \ref{fig:sigmoid}) which rescales the output.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/sigmoid_function.png}
+    \caption{A sigmoid activation function plotted over the input 
+    range -10 to 10. Given an input over a pre-defined range, the 
+    activation function will rescale the input to be between the range 
+    of 0 to 1.}
+    \label{fig:sigmoid}
+\end{figure}
+
+We apply a nonlinear activation function in order to allow our perceptron to learn non-linear functions/features. All weights and biases are typically initialized randomly prior to training and there are many formalisms for choosing the optimal initialization. In order to approximate more complicated functions, we can string together multiple perceptrons (neurons) in a layer where each neuron is fully-connected to the given input $x$ (i.e. every element in our input is multiplied by each weight of each neuron in our first layer). To make a deep network, we can randomly initialize another layer of neurons (of arbitrary size) which takes as input the output from the previous first layer of neurons. Additional layers can be added in perpetuity. During training, weights and biases are updated according to the performance of the algorithm with respect to a loss function which describes how well the algorithm is performing with respect to the true value of each training sample. This loss function can take many forms, but most often a mean squared error is used
 
 \begin{equation}
     L = \frac{1}{n} \sum_{i=1}^{n}(y^{l}_n-y^{t}_n)^2.
