@@ -79,7 +79,18 @@ where $y_{p}$ is our predicted output (e.g. class label), $x$ is our given input
     \label{fig:sigmoid}
 \end{figure}
 
-We apply a nonlinear activation function in order to allow our perceptron to learn non-linear functions/features. All weights and biases are typically initialized randomly prior to training and there are many formalisms for choosing the optimal initialization. In order to approximate more complicated functions, we can string together multiple perceptrons (neurons) in a layer where each neuron is fully-connected to the given input $x$ (i.e. every element in our input is multiplied by each weight of each neuron in our first layer). To make a deep network, we can randomly initialize another layer of neurons (of arbitrary size) which takes as input the output from the previous first layer of neurons. Additional layers can be added in perpetuity. During training, weights and biases are updated according to the performance of the algorithm with respect to a loss function which describes how well the algorithm is performing with respect to the true value of each training sample. This loss function can take many forms, but most often a mean squared error is used
+We apply a nonlinear activation function in order to allow our perceptron to learn non-linear functions/features. All weights and biases are typically initialized randomly prior to training and there are many formalisms for choosing the optimal initialization. In order to approximate more complicated functions, we can string together multiple perceptrons (neurons) in a layer where each neuron is fully-connected to the given input $x$ (i.e. every element in our input is multiplied by each weight of each neuron in our first layer). To make a deep network, we can randomly initialize another layer of neurons (of arbitrary size) which takes as input the output from the previous first layer of neurons (illustrated in Fig.\ref{fig:deep_nn}). Additional layers can be added in perpetuity. During training, weights and biases are updated according to the performance of the algorithm with respect to a loss function which describes how well the algorithm is performing with respect to the true value of each training sample. This loss function can take many forms, but most often a mean squared error is used
+
+\begin{figure}
+    \centering
+    \includegraphics[width=17cm,height=20cm,keepaspectratio]{figures/DeepFullyConnectedNetwork.png}
+    \caption{A deep fully-connected neural network. Inputs $x_1 ... x_N$ are given as input to the 
+    first layer of the neural network and are fully-connected to every node in that layer. The outputs 
+    of each node are then passed on to the next set of nodes in the next layer and are also fully-
+    connected. The final layer passes through a final single node which determines the class/value 
+    of the given input.}
+    \label{fig:deep_nn}
+\end{figure}
 
 \begin{equation}
     L = \frac{1}{n} \sum_{i=1}^{n}(y^{l}_n-y^{t}_n)^2.
@@ -381,8 +392,17 @@ We call the output of the encoder the latent space representation.
 The predicted numbers from the encoder representing the latent 
 space are then given as input to the decoder network. The 
 decoder then tries to reconstruct the given input to the 
-encoder network. We measure how well the network is performing 
+encoder network (Fig.\ref{fig:autoencoder_diagram}). We measure how well the network is performing 
 through a loss function given as 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=19cm,height=20cm,keepaspectratio]{figures/autoencoder_diagram.png}
+    \caption{An autoencoder network composed of two neural networks defined as the encoder 
+    and the decoder networks. Here, both networks are represented as fully-connected networks, but could also be any number of other network architectures such \ac{CNN}s and \ac{LSTM} networks. The encoder network takes as input a set of data and compresses the data  
+    through a bottleneck called the latent space. The latent space is then given as input to the decoder network which tries to reconstruct the given input $x_1 ... x_N$.}
+    \label{fig:autoencoder_diagram}
+\end{figure}
 
 \begin{equation}
     l(f(x)) = \sum_k{(f(x)_k - x_k)^2},
