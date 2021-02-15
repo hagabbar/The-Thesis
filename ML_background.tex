@@ -436,7 +436,8 @@ learned part of the latent space.
 %
 \subsubsection{Variational Autoencoders}
 
-We can overcome this, through the use of a \ac{VAE}. 
+We can overcome this, through the use of a \ac{VAE} (see illustration in 
+Fig.\ref{fig:simple_vae}. 
 A \ac{VAE} is nearly identical to an \ac{AE}, except for 
 the main differences arising from how the latent space 
 is represented and how the loss function is constructed. 
@@ -451,6 +452,13 @@ The decoder network produces estimates trying to reconstruct
 the given input to the encoder network. The loss for 
 a \ac{VAE} is also slightly different and is represented 
 as 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=16cm,height=20cm,keepaspectratio]{figures/simple_vae_diagram.png}
+    \caption{A simplified diragram of a variational autoencoder network. The input data $x$ is passed to the encoder neural network which produces predictions on the means $\mu$ and standard deviations $\sigma$ of multi-variate Gaussian distributions describing the latent space. Samples are drawn from the predicted distributions $z$ in order to get samples from the latent space. These latent space samples are then passed to the decoder network which attempts to reconstruct the given input $x$.}
+    \label{fig:simple_vae}
+\end{figure}
 
 \begin{equation}
     l(f(x)) = \sum_k{ (f(x)_k - x_k)^2 + 
@@ -751,7 +759,7 @@ possible to do by making a minor update to the
 \end{equation}
 
 Here, we now condition the encoder $q_{\theta}(z|x_k,c)$ on both 
-the training images $x_k$ and the class of said images $c$. In the decoder 
+the training images $x_k$ and the class of said images $c$ (see Fig.\ref{fig:simple_cvae}). In the decoder 
 $p(x_k|z,c)$ we condition on samples from the latent space $z$ and the 
 class $c$. For classification purposes, the class is usually 
 parameterized as a single scalar number which is appended to the input to 
@@ -759,3 +767,10 @@ the encoder and decoder networks. Now, if we wanted to use the decoder
 as a fashion image generator, we would only simply need to draw a 
 random sample from the latent space, choose a class number, and then 
 feed both as inputs to the decoder network. 
+
+\begin{figure}
+    \centering
+    \includegraphics[width=16cm,height=20cm,keepaspectratio]{figures/simple_cvae_diagram.png}
+    \caption{A simple \ac{CVAE} diagram consisting of an encoder and decoder network. $x$ data is given as input to the encoder and latent space samples are given as input to the decoder as was the case with the \ac{VAE} diagram in Fig.\ref{fig:simple_vae}. However, now we additionally condition the encoder on the class of $x$ by appending the class label in numerical form to $x$. We also condition the decoder on class $c$ by appending it to the latent space samples $z$.}
+    \label{fig:simple_cvae}
+\end{figure}
