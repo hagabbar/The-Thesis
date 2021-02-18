@@ -1,30 +1,29 @@
-\chapter{Basic machine learning principals}
+\chapter{An introduction to machine learning}
 
 %
 % Discuss the basics of what a machine learning algorithm is
 %
-In this chapter I will explain some of the basic underlying
-principals of machine learning techniques including: 
-fully-connected neural networks, \ac{CNN}s 
-and \ac{CVAE}s. I will also 
+In this chapter I will explain in detail the machine learning techniques used in this thesis including: 
+fully-connected neural networks\cite{Goodfellow-et-al-2016}, \ac{CNN}s \cite{NIPS2012_4824} 
+and \ac{CVAE}s \cite{1812.04405}. I will also 
 describe some of the basic principals of how neural networks 
-learn (e.g. backpropogation), how they are initialized, 
+learn (e.g. backpropogation\cite{LeCun1998f}), how they are initialized, 
 best training practices, methods for evaluating performance, 
 and methods for data augmentation/processing.
 
 First off, to dispel any notion of machine learning being 
-thought of as black magic, machine learning is nothing more 
+thought of as uninterpretable, machine learning is nothing more 
 than statistics and function approximation at the end of 
 the day. The overarching goal being to approximate a 
 function which is trained to find a global minimum 
 (though this rarely is the case in reality and most 
-often a local minimum will suffice). How one defines 
+often a local minimum will suffice) according to a cost function. How one defines 
 this minimised function is the name of the game and there 
 are many methods for doing so. 
 
-A machine learning algorithm can perform many useful tasks 
-such as: classification, regression, anomaly 
-detection, denoising and density estimation. Of course, 
+A machine learning algorithm can perform a variety of objectives 
+including: classification\cite{1404.7584}, regression\cite{6909637}, anomaly 
+detection\cite{9243329}, denoising \cite{1912.13171} and density estimation\cite{1910.13233}. Of course, 
 there are many other tasks a machine learning algorithm 
 can tackle, but the three which are primarily used in this 
 thesis are classification, regression and density estimation.
@@ -33,21 +32,20 @@ to learn the optimal function to classify a given set
 of inputs (e.g. a time series or image) and returns as 
 output the likelihood that the given input came from a 
 particular class or set of 
-classes. A machine learning algorithm can also perform 
-non-linear regression by instead of outputing numeric 
-values describing class probability, we have the algorithm 
-predict a continuous variable. Finally, we can even have a machine learning 
-algorithm produce probability distributions for a given 
-input (e.g. gravitational wave source parameter posteriors) by 
-making the algorithm predict moments which describe 
+classes. A machine learning algorithm can also alternatively perform 
+non-linear regression by switching from outputting numeric 
+values describing class probability to  
+predicting a continuous variable. Finally, we can even have a machine learning 
+algorithm produce probability distributions (e.g. gravitational wave source parameter posteriors) for a given input by 
+enforcing that the algorithm predict moments which describe % not super happy about this sentence.
 such a distribution. 
 
-\section{Introduction to fully-connected neural networks}
+\section{Fully-connected neural networks}
 
 %
 % The perceptron and deep neural networks
 %
-So, how do we build a machine learning algorithm? Before making things too complicated lets first define a simple neural network architecture, the perceptron. A perceptron is made up of one neuron which takes a set of inputs from a trainig sample and outputs a prediction given that training sample (illustrated in Fig. \ref{fig:Perceptron_network}). For the sake of simplicity lets presume we want to perform a binary classification task. The perceptron can be defined as a learned function
+So, how do we build a machine learning algorithm? Before diving too deep, lets first define a simple neural network architecture, the perceptron \cite{minsky69perceptrons}. A perceptron is made up of one neuron which takes a set of inputs, multiplies each input by a learned scalar value called a weight, sums all the multiplied values up and passes them through a re-scaling function to produce a prediction (illustrated in Fig. \ref{fig:Perceptron_network}). For the sake of simplicity lets presume we want to perform a binary classification task. The perceptron can be defined as a learned function
 
 \begin{equation}
     z = \sum_{i=1}^{N} w_{i} x_{i} + b
@@ -67,7 +65,7 @@ So, how do we build a machine learning algorithm? Before making things too compl
     \label{fig:Perceptron_network}
 \end{figure}
 
-where $y_{p}$ is our predicted output (e.g. class label), $x$ is our given input, $w$ is a learned scalar weighting term on $x$, $b$ is a learned scalar bias term on $x$ and $\sigma$ is a nonlinear activation function (Fig. \ref{fig:sigmoid}) which rescales the output.
+where $y_{p}$ is our predicted output (e.g. class label), $x$ is our given input, $w$ is a learned scalar weighting term on $x$, $b$ is a learned scalar bias term on $x$ and $\sigma$ is a nonlinear activation function which rescales the output. Because we usually frame the classification problem such that a prediction of $0$ represents class $1$ and a prediction of $1$ represents class $2$, we typically apply a sigmoid activation function (Fig. \ref{fig:sigmoid}) since it limits the output to be between $0$ and $1$.
 
 \begin{figure}
     \centering
@@ -79,7 +77,7 @@ where $y_{p}$ is our predicted output (e.g. class label), $x$ is our given input
     \label{fig:sigmoid}
 \end{figure}
 
-We apply a nonlinear activation function in order to allow our perceptron to learn non-linear functions/features. All weights and biases are typically initialized randomly prior to training and there are many formalisms for choosing the optimal initialization. In order to approximate more complicated functions, we can string together multiple perceptrons (neurons) in a layer where each neuron is fully-connected to the given input $x$ (i.e. every element in our input is multiplied by each weight of each neuron in our first layer). To make a deep network, we can randomly initialize another layer of neurons (of arbitrary size) which takes as input the output from the previous first layer of neurons (illustrated in Fig.\ref{fig:deep_nn}). Additional layers can be added in perpetuity. During training, weights and biases are updated according to the performance of the algorithm with respect to a loss function which describes how well the algorithm is performing with respect to the true value of each training sample. This loss function can take many forms, but most often a mean squared error is used
+We also apply a nonlinear activation function in order to allow our perceptron to learn non-linear functions/features \cite{1811.03378}. All weights and biases are typically initialized randomly prior to training and there are many schemes for choosing the optimal initialization \cite{1704.08863}. In order to approximate more complicated functions, we can string together multiple perceptrons (neurons) in a layer where each neuron is fully-connected to the given input $x$ (i.e. every element in our input is multiplied by each weight of each neuron in our first layer)\cite{Goodfellow-et-al-2016}. To make a deep network, we can randomly initialize another layer of neurons (of arbitrary size) which takes as input the output from the previous first layer of neurons (illustrated in Fig.\ref{fig:deep_nn}). Additional layers can be added in perpetuity, although there are issues that can arise due to a vanishing gradient or hardware memory limitations \cite{1211.5063}. During training, weights and biases are updated according to the performance of the algorithm with respect to a loss function which describes how well the algorithm is performing with respect to the true value of each training sample\cite{1702.05659}. This loss function can take many forms, but most often a mean squared error is used
 
 \begin{figure}
     \centering
@@ -99,7 +97,8 @@ We apply a nonlinear activation function in order to allow our perceptron to lea
 %
 % the loss function
 %
-When the predicted label of nth training sample in the final layer $l$ $y^{l}_n$ is the same as the nth training sample true label $y^{t}_n$, the loss term equals zero and is at a minimum. The reader's next question may rightly be, how does one go about choosing the right weights $w$ and biases $b$ for each neuron in the network? In other words, how much of an effect will changing $[w,b]$ have on the resulting loss function $L$. This may be accomplished through the use of gradient decent. Specifically, we will be discussing a variant of gradient decent, stochastic gradient decent.
+Where $y^{l}_n$ is the neural network prediction and $y^{t}_n$ is the true value.
+When the predicted label of nth training sample in the final layer $l$ $y^{l}_n$ is similar to the nth training sample true label $y^{t}_n$, the loss term approaches zero and is at a minimum. The reader's next question may rightly be, how does one go about choosing the right weights $w$ and biases $b$ for each neuron in the network? In other words, how much of an effect will changing $[w,b]$ have on the resulting loss function $L$. We can quantify the amount to change $[w,b]$ such that the loss is optimised through gradient decent\cite{1609.04747}. Specifically, we will be discussing a variant of gradient decent, stochastic gradient decent.
 
 % Hebian theory "neurons that fire together, wire together"
 %
@@ -118,7 +117,7 @@ However, this only returns the gradients for the final output layer. In  order t
 %
 % Back prop explanation
 %
-In back propagation we use the computed gradient from the final layer and compute the gradient between that final layer gradient and the output from the third to last layer. The individuals contributions from each neuron in the second to last layer are summed (same as was done in the final layer computation) and the gradients in the second to last layer are propagated back again to the third to last layer. Mathematically, we can define this process as the derivative of the loss with respect to the outputs of each layer $l$
+In back propagation we use the computed gradient from the final layer and compute the gradient between that final layer gradient and the output from the second to last layer. The individual contributions from each neuron in the second to last layer are summed (same as was done in the final layer computation) and the gradients in the second to last layer are propagated back again to the third to last layer. Mathematically, we can define this process as the derivative of the loss with respect to the outputs of each layer $l$
 
 \begin{equation}
     \nabla L(y^{l}) = \frac{\delta L}{\delta y^{(l)}}.
@@ -143,12 +142,15 @@ I was commonly told when first wadding into the pool of deep learning that the p
 %
 % When in doubt, make more training data
 %
-First off, when in doubt, the more training data available to you, the better. Time and again, during a large part of my thesis work, we would spend countless hours tuning and tweaking our neural network architecture only to run up against some insurmountable wall of impeded progress. Only to increase the number of training samples by several factors and see a significant increase in performance. 
+
+\subsubsection{Training data size}
+First off, when in doubt the more training data you make available to yourself, the better.
+Time and again, during a large part of my thesis work, I would spend countless hours tuning and tweaking my neural network architecture only to run up against some insurmountable wall of impeded progress. Only then to increase the number of training samples by several factors and see a significant increase in performance. 
 
 \subsection{Data pre-processing and augmentation}
 
 \subsubsection{Data pre-processing}
-Commonly, our input datasets are in a messy form. In order to help the network learn more efficiently, it is encouraged to perform some pre-procesing steps. It's important to do this because if our input data has large values over a wide range, and because our network is trying to learn a mapping from input to prediction, the learned weights may also end up being very large. Large learned variable weights can lead to massive gradients which cause the network to update weights in large step sizes, making the whole network more unstable in the process. We can overcome this by normalising our input dataset to be between the range of zero to one 
+Commonly, our input datasets are in a messy form. In order to help the network learn more efficiently, it is encouraged to perform some pre-procesing steps. It's important to do this because if our input data has large values over a wide range, and our network is trying to learn a mapping from input to prediction, the learned weights may also end up being very large. Large learned variable weights can lead to massive gradients which cause the network to update weights in large step sizes, making the whole network more unstable in the process. We can overcome this by normalising our input dataset to be between the range of zero to one 
 
 \begin{equation}
     y = \frac{x - x_{\textrm{min}}}{x_{\textrm{max}}-x_{\textrm{min}}},
@@ -179,7 +181,7 @@ Neural networks can sometimes be composed of hundreds, thousands, even million o
 \subsection{Validation}
 In order to understand how well your model is performing with respect to the training data, one may plot the resultant average output of the loss function as a function of the number of training iterations. Ideally, we would like the loss to rapidly decrease and to then flatten out. Although this will give us an indication of how well the network is performing on the training set, it does not inform us as to how well the model will generalize to a novel testing set. In order to quantify the generalization ability of the network, we may set aside a small portion of the training set prior to training as a validation set. During training, we can temporarily freeze the weights and run the validation set through the model in order to compute a validation loss. 
 
-If we plot both the validation loss and the training loss as a function of time, we again ideally would like to see both curves decrease as a function of training iteration and then level out. However, if we see that the training curve initially decreases and then continues to decrease while the validation curve initially decreases and then subsequently increases we may say that the model has overfit the training data. Overfitting the training set generally indicates that either our model is too complicated and has essentially memorized the training the set or that we do not have enough training data to sufficiently cover the entire parameter space. 
+If we plot both the validation loss and the training loss as a function of time, we again ideally would like to see both curves decrease as a function of training iteration and then level out. However, if we see that the training curve initially decreases and then continues to decrease while the validation curve initially decreases and then subsequently increases we may say that the model has overfit the training data. Overfitting the training set generally indicates that either our model is too complicated and has essentially memorized the training set or that we do not have enough training data to sufficiently cover the entire parameter space. Overfitting can be mitigated by increasing the training set size, adding dropout connections (see Regularization sub section), early stopping of the training run or reducing the complexity of the neural network.
 
 If on the other hand we see that the validation loss decreases far quicker than the training loss then we may say that the model has underfit the data, which is generally an indication that the model needs to have an increased capacity.
 
@@ -212,7 +214,7 @@ where $z_n$ is the output of the neural network layer summed over all outputs in
 
 \subsection{Hyperparameter optimization}
 
-Many instances, after we have spent all the time cleaning our data, 
+In many instances, after we have spent all our time cleaning the data, 
 choosing a model to solve our problem and then finally 
 training our model, we find that the most tedious and 
 time consuming part of the whole endeavor is all those 
@@ -295,7 +297,8 @@ why they are so powerful for image based tasks.
 The basic building block of a \ac{CNN}, convolutional 
 filters are analogous to neurons in a standard fully-connected 
 neural network. A convolutional filter is typically made up of 
-an $N \times N$ matrix of any size that the user wants. Normally, 
+an $N \times N$ matrix of any size that the user wants( for illustraed 
+exmample, see Fig.\ref{fig:cnn_filter_illustration}). Normally, 
 the dimensions are of odd size because all pixels from the input 
 to the filter are enforced to be centered around the output 
 of the filter. This effectively acts to anchor the output 
@@ -303,6 +306,13 @@ of the filter, in a sense acting to interpolate all
 the anchor pixels neighboring pixels. Without using odd size filters, distortions 
 across multiple layers can cause issues, though are not impossible 
 to overcome through added network complexity.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=17cm,height=20cm,keepaspectratio]{figures/cnn_filter_illustration.png}
+    \caption{An illustration of a simple \ac{CNN} filter. The filter is a $2 \times 2$ filter randomly initalised with a set of weights for each dimension. Each filter weight is multiplied by the corresponding input dimension over which it is currently covering. All multiplied values are then summed together to produce the output of the filter. The filter slides over one element (if stride is set to 1) and the computation is done again until the whole input space has been covered.}
+    \label{fig:cnn_filter_illustration}
+\end{figure}
 
 Values in the $N \times N$ matrix of the filter are initialised 
 randomly with an added bias term. The initialised values in the 
@@ -370,11 +380,9 @@ how to either classify or regress.
 
 \section{Conditional Variational Autoencoders}
 
-\ac{CVAE}s are themselves a variant of 
-\ac{VAE}s. However, in order to understand what a \ac{VAE} 
-is we need to have a solid understanding of its predecessor, 
-an \ac{AE}.
-
+In this section I will describe the network architecture of a 
+\ac{CVAE}. This will be done by first describing an \ac{AE} network, then 
+a \ac{VAE} network and finally a \ac{CVAE} network.
 
 %
 % Autoencoders
@@ -611,7 +619,7 @@ minimized through backpropogation.
 %
 \subsubsection{The reparameterization trick}
 
-First proposed by Kingma et al. in their now famous \ac{VAE} 
+First proposed by Kingma et al. in their seminal \ac{VAE} 
 paper \cite{1312.6114}, the reparameterization trick acts to 
 solve a problem that we now have with the above derived loss 
 function for the \ac{VAE}. That problem being that we cannot 
