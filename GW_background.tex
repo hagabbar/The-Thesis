@@ -253,7 +253,7 @@ where $h(t)$ is the combined strain from a gravitational wave induced on the int
 
 Assuming Gaussian noise, our problem then becomes, how does one distinguish noise from actual signal? Fortunately, the problem of extracting low \ac{SNR} signals from the background is not uncommon in physics and the field of statistics and may be accomplished through a technique known as matched template filtering.
 
-\subsubsection{Matched template filtering}
+\subsection{Matched template filtering}
 
 Given the current level of sensitivity of the detectors, we will be dealing within a regime where the \ac{GW} signal we are trying to detect will often be burried far below the overall background of the detector noise. We can take advantage of the fact that we generally have a good understanding of the form of $h(t)$. If we know exactly the form of $h(t)$, we may construct a simple filtering technique whereby we multiply the output of the detector $s(t)$ by $h(t)$ and integrate over some observation time. The noise contribution term of the expression
 
@@ -269,4 +269,63 @@ as we increase the observation time $T$, we see that the overall value of the fu
 
 where $|\bar{h}(f)|^2$ is is the inner product of the ideal signal template with itself and $S_{n}(f)$ is the single-sided noise \ac{PSD}. In matched template filtering, we generate many thousands of templates and compute the optimal \ac{SNR} of each. The best matching will contain the highest optimal \ac{SNR} for that event. If the \ac{SNR} is above the detection threshold (usually defined as 8), we say that there is a candidate gravitational wave signal present in the data.
 
-\subsubsection{Bayesian parameter estimation}
+\subsection{Bayesian gravitational wave parameter estimation}
+
+%
+% Use this reference: https://www.cambridge.org/core/journals/publications-of-the-astronomical-society-of-australia/article/an-introduction-to-bayesian-inference-in-gravitationalwave-astronomy-parameter-estimation-model-selection-and-hierarchical-models/D459F61D8C37F0BEF86D60F42A418304
+%
+
+%
+% Introduce Bayes theorem
+%
+It is not only important that we detect a \ac{GW} event, but also that we infer the underlying properties of that event in the form of its source parameters (i.e. component mass, distance, sky location, etc.). In \ac{LIGO}, the tried and true method for inferring source parameters is done through Bayes theorem. Bayes theorem was first used by Reverand Thomas Bayes in the 18th century and in it he proposed a new paradigm for thinking about the laws of conditional probability. To describe succinctly, Bayes theorem says that one can infer the limits on an unknown parameter by computing the likelihood of a given observation and our prior belief on the distribution of the unknown parameter. To put it in the context of \ac{GW} astronomy, given an observed gravitational wave event and some prior assumptions, we would like to infer the source parameter values of that signal while also taking into account the uncertainty added by the signal being burried in noise. We call the inferred source parameters with uncertainty the posterior 
+
+%
+% Introduce posterior
+%
+\begin{equation}
+    p(\theta | d),
+\end{equation}
+
+where $p(\theta | d)$ is the probability of the source parameters of the signal ($\theta$ being a continuous variable), given some observed data (in the form of a time/frequency series). We assume that the integral over the total posterior is normalised such that 
+
+%
+% State that posterior is normalised such it integrates to 1
+%
+\begin{equation}
+    \int d\theta p(\theta | d) = 1.
+\end{equation}
+
+According to Bayes theorem, we can write the posterior as 
+
+%
+% Show Bayes theorem
+%
+\begin{equation}
+    p(\theta | d) = \frac{p(d|\theta)p(\theta)}{p(d)},
+\end{equation}
+
+%
+% Discussion on priors
+%
+where $p(d|\theta)$ is the likelihood of our observable $d$ given source parameters $\theta$, $p(\theta$) is our prior assumptions on the distribution of the source parameters $\theta$ and $p(d)$ is a normalisation factor called the evidence. The prior $p(\theta)$ is largely informed by our understanding on the formation channels of \ac{GW} sources and our level of understanding on the general physics which govern events. For example, we would intuitively think that the mass of an object should always be positive, so will set the priors such that the component masses of a \ac{GW} source must always lie between two positive values. However, if we aren't as knowledgeable about a particular parameter $\theta$, we might try choosing a relatively uninformative prior by employing something like a broad uniform distribution. Choice of prior can also be incredibly influential on the conclusions drawn on some \ac{GW} parameters such as spin. For further interesting discussions on prior choices see Salvatore et al. \cite{PhysRevLett.119.251103}.
+
+%
+% Discussion on likelihood
+%
+The way in which we define the likelihood $p(d|\theta)$ (our certainty on the observed data) is essentially up to the practitioner. For \ac{GW} astronomy, we define a likelihood which assumes that the detectors operate under Gaussian noise-like conditions. The Gaussian-noise likelihood function can written as 
+
+\begin{equation}
+    p(d|\theta) = \frac{1}{\sqrt{2\pi \sigma^2}} \textrm{exp}\left(-\frac{1}{2} 
+    \frac{(d - \mu)^2}{\sigma^2}\right),
+\end{equation}
+
+where $\sigma$ is the detector noise, $d$ is the observed data and $\mu$ is a template \ac{GW} waveform parameterized by source parameters $\theta$. 
+
+%
+% Discussion on the evidence
+%
+
+\subsubsection{Sampling}
+
+\subsubsection{Phase marginalization}
