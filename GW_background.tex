@@ -325,7 +325,63 @@ where $\sigma$ is the detector noise, $d$ is the observed data and $\mu$ is a te
 %
 % Discussion on the evidence
 %
+The evidence $p(d)$ can be defined as 
 
-\subsubsection{Sampling}
+\begin{equation}
+    p(d) = \int p(d|\theta) p(\theta) d\theta.
+    \label{eq:evidence}
+\end{equation}
 
-\subsubsection{Phase marginalization}
+The evidence is usually referred to as the marginal likelihood. Because we are marginalising over all parameters $\theta$ in Eq. \ref{eq:evidence}, we can think of the evidence as essentially a normalising factor. Since the evidence is just simply a normalising factor and it is prohibitively expensive to compute this factor, most Bayesian practitioners will ignore Eq. \ref{eq:evidence} and rewrite Bayes theorem in the simpler form 
+
+\begin{equation}
+    p(\theta | d) \propto p(d | \theta) p(\theta).
+\end{equation}
+
+\subsubsection{Markov Chain Monte Carlo}
+
+%
+% Intro and Monte Carlo sampling
+% Great video on this: https://www.youtube.com/watch?v=OTO1DygELpY&ab_channel=StataCorpLLC
+\ac{MCMC} is usually used when we would like to try and sample from some distribution $p$, or approximate the expectation value of some function $f(x)$ which is of a high dimension/complexity. Where $p$ is so complicated that trying to sample from $p$ analytically would be prohibitively expensive. The Monte Carlo portion of \ac{MCMC} refers to a technique known as Monte Carlo sampling. Monte Carlo sampling means to randomly sample from some distribution. For example, I could choose to randomly sample from a normal distribution $N(0,1)$ or from uniform distribution between -1 and 1. We would define the normal or the uniform distribution that I'm sampling from the proposal distribution. We should see if we randomly sample from the proposal distribution enough times, that a histogram of the resulting samples should resemble that of the original proposal distribution. 
+
+%
+% Markov Chain
+%
+Markov Chain refers to how we are going to go about sampling from that space. Specifically, a Markov Chain is a sequence of numbers where each number in the sequence is dependent on the previous number in the sequence. For example, if we again decided to randomly sample from proposal distribution $N(0,1)$, but instead after each sample is drawn we change the mean of the proposal distribution to be equal to that of the previous sample $N(x_{n-1},1)$, we would end up with something known as a random walk. I will note hear that this approach would not necessarily reproduce the original proposal distribution.
+
+%
+% How to accept/reject proposals
+%
+
+We can use a variety of algorithms to go about deciding how exactly accept or reject new samples drawn from the proposal distribution. One common algorithm for doing so is the Metropolis-Hastings algorithm. This algorithms works by first calculating the likelihood value for the new proposed sample, as well as the likelihood value of the previously proposed sample, and then computes the ratio of these two values. If the likelihood value of the new proposed sample is greater than the old value, then we will always accept the new value. If however, the new value is not greater than the old value, then we will not necessarily discard the old value. Instead, we can treat the new proposed likelihood value as an acceptance probability. In order to determine acceptance in this case, we can draw a uniform random number between 0 and 1 and keep the new value if it's likelihood is greater than the randomly drawn number.
+
+%
+% Issues with Metropolis Hastings
+%
+Unfortunately there are a few downsides to using the Metropolis Hastings algorithm. One them being that we have to choose a starting point for the random walk, which is initially liable to be far from the true posterior. Thus it may take some iterations for the algorithm to walk its way towards areas of high likelihood. We can avoid this issue by discarding an arbitrary number of samples at the beginning of the walk such that the remaining represent a point after which the algorithm has reached a stable equilibrium. We call the discarded samples the burn-in period. Another issue relates to something known as autocorrelation. Predictions on parameters $\theta$ are known to be somewhat correlated with each other due to the fact that they are all generated from the same Markov process. The fact that this correlation exists is fine, but excessive correlation can mean that there are issues with the model being used. A helpful method for tempering such correlations can be through the process of thinning. Thinning involves generating a large amount of samples from the proposal distribution, but only keeping every $N^{\textrm{th}}$ sample from that large sample set. 
+
+%
+% Could be useful to make a trace plot here.
+%
+
+\subsubsection{Nested Sampling}
+
+Nested sampling is another method used in order to explicitly sample from the posterior. This is done by first drawing $N$ random points from the prior distribution $p(\theta)$. We then iterate over a pre-determined number of iterations. For each iteration we compute the likelihood of all sampled points and determine the point with the minimum likelihood value. We then compute an estimate for the amount of prior mass covered by the the current samples above the minimum likelihood value sample.
+
+\begin{equation}
+    Z = \int p(\theta) L(\theta) d\theta
+\end{equation}
+
+where $p(\theta)$ is the prior distribution and $L(\theta)$ is the likelihood function.
+
+\begin{equation}
+    X(L^{*}) = \int p(\theta) \mathds{1} (L(\theta) > L^{*}) d\theta
+\end{equation}
+
+where $X(L^{*})$ represents the amount of prior probability with likelihood greater than $L^{*}$.
+%
+% Intro to nested sampling
+%
+
+\subsubsection{Nuisance parameter marginalization}
