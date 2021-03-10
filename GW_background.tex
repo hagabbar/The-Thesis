@@ -255,19 +255,43 @@ Assuming Gaussian noise, our problem then becomes, how does one distinguish nois
 
 \subsection{Matched template filtering}
 
-Given the current level of sensitivity of the detectors, we will be dealing within a regime where the \ac{GW} signal we are trying to detect will often be burried far below the overall background of the detector noise. We can take advantage of the fact that we generally have a good understanding of the form of $h(t)$. If we know exactly the form of $h(t)$, we may construct a simple filtering technique whereby we multiply the output of the detector $s(t)$ by $h(t)$ and integrate over some observation time. The noise contribution term of the expression
+Given the current level of sensitivity of the detectors, we will be dealing within a regime where the \ac{GW} signal we are trying to detect will often be burried far below the overall background of the detector noise. Within the context of \ac{CBC} signals, it is known that as two compact objects inspiral in towards each other that both the frequency and strength of the resultant \ac{GW} signal increases with time. We can take advantage of the fact that we generally have a good understanding of the form of $h(t)$. If we know exactly the form of $h(t)$, we may construct a simple filtering technique whereby we multiply the output of the detector $s(t)$ by $h(t)$ and integrate over some observation time. We can describe the noise contribution to the noise-free signal $h(t)$ as 
 
-\begin{equation}
-    \frac{1}{T} \int_0^T dt n(t) h(t) \sim (\frac{\tau_{0}}{T})^{(1/2)} n_{0} h_{0}
+\begin{equation} \label{eq:noise_contrib}
+    \frac{1}{T} \int_0^T dt n(t) h(t) \sim (\frac{\tau_{0}}{T})^{(1/2)} n_{0} h_{0}.
 \end{equation}{}
 
-as we increase the observation time $T$, we see that the overall value of the function tends to zero. So, given enough observation time, we can effectively filter out the contribution from the noise. The keen reader will spot one issue. Given that we may not have an infinite amount of observation time due to the duty cycle of the detectors and the fact that amplitude of the gravitational wave signal is not constant as a function of time, how can we make this filtering technique more optimal given finite observation time $T$. We define an optimal signal-to-noise ratio
+In E.q. \ref{eq:noise_contrib} we see that as we increase the observation time $T$, we see that the overall value of the function tends to zero. So, given enough observation time, we can effectively filter out the contribution from the noise. The keen reader will spot one issue. Given that we may not have an infinite amount of observation time due to the duty cycle of the detectors and the fact that amplitude of the gravitational wave signal is not constant as a function of time, how can we make this filtering technique more optimal given finite observation time $T$. We define an optimal signal-to-noise ratio
 
 \begin{equation}
     SNR_{opt} = 4 \int_0^{\infty} df \frac{|\bar{h}(f)|^2}{S_{n}(f)},
 \end{equation}{}
 
 where $|\bar{h}(f)|^2$ is is the inner product of the ideal signal template with itself and $S_{n}(f)$ is the single-sided noise \ac{PSD}. In matched template filtering, we generate many thousands of templates and compute the optimal \ac{SNR} of each. The best matching will contain the highest optimal \ac{SNR} for that event. If the \ac{SNR} is above the detection threshold (usually defined as 8), we say that there is a candidate gravitational wave signal present in the data.
+
+%
+% chi squared test
+%
+Because the \ac{LIGO} detectors can sometimes have non-Gaussian noise artefacts, these ``glitches'' can mimic high \ac{SNR} events. The high \ac{SNR} glitch events typically contain lots of power within a very small frequency band, distinguishing themselves from \ac{GW} events. To quantify the likelihood of a candidate high \ac{SNR} event being a real \ac{GW} signal, we use a statistic known as the chi-squared test. Specifically, the chi-squared test checks the statistical differences between the distribution of power across a set number of frequency bins in the observed data with frequency bins from the template which has been determined to match best with the data according to the matched template filtering algorithm.
+
+Frequency bins are chosen such that each individual bin contributes an equal amount to the total matched filter \ac{SNR}. The Pearson chi-squared statistic is defined as 
+
+\begin{equation}
+    \chi^2 = \sum_{i=1}^{n} \frac{(O(i) - E_i)^2}{E_i} 
+    = N \sum_{i=1}^{n} \frac{(O(i)/N - p_i)^2}{p_i},
+\end{equation}
+
+%
+% Really need to figure out what p_i actually is
+%
+where $\chi^2$ is a finite value which determines how well your observations $O$ match your expected values $E$, $N$ are all your frequency bins, and $p_i$ is the level of matching in the $i$th frequency bin. To put this in terms of \ac{GW} matched template filtering we can plug in our variables describing our observed data and expected template values into the expression to get 
+
+\begin{equation} \label{eq:gw_chisquared}
+    \chi^2 = p \sum_{i=1}^p \left[  \left( \frac{\rho_{\mathrm{cos}}^2 }{p} - \rho_{\mathrm{cos}, i}^2 \right) 
+    + \left( \frac{\rho_{\mathrm{sin}}^2 }{p} - \rho_{\mathrm{sin}, i}^2 \right) \right],
+\end{equation}
+
+where $p$ are the frequency bins, $\rho_{\mathrm{cos}}$ and $\rho_{\mathrm{sin}}$ are the \ac{SNR} values of the best matching template in both polarisations. The higher the value of E.q. \ref{eq:gw_chisquared}, the more likely that the observed data matches the best matching template. The \ac{SNR} previously determined by the matched filtering algorithm is then weighted by the chi-squared value. If the weighted match filter \ac{SNR} lies below a user predefined value, the candidate event is discarded and not considered for further analyses \cite{0264-9381-33-21-215004}.
 
 \subsection{Bayesian gravitational wave parameter estimation}
 
@@ -365,21 +389,47 @@ Unfortunately there are a few downsides to using the Metropolis Hastings algorit
 % Could be useful to make a trace plot here.
 %
 
+%
+% The whole section here really needs to be rewritten so that it's actually coherent.
+% see: http://www.inference.org.uk/bayesys/nest.pdf
 \subsubsection{Nested Sampling}
 
-Nested sampling is another method used in order to explicitly sample from the posterior. This is done by first drawing $N$ random points from the prior distribution $p(\theta)$. We then iterate over a pre-determined number of iterations. For each iteration we compute the likelihood of all sampled points and determine the point with the minimum likelihood value. We then compute an estimate for the amount of prior mass covered by the the current samples above the minimum likelihood value sample.
+Nested sampling is another method which can be used in order to explicitly sample from the posterior. However, that wasn't the primary goal in mind when the method was first developed and the posterior is only really obtained as a byproduct. An additional motivation for nested sampling relates to the fact that \ac{MCMC} can have issues when trying to deal with complex multi-modal and degenerate distributions, so an improved method that handles such issues was needed at the time. Nested sampling was first introduced by Skilling in 2004 because he wanted a way to go about computing the evidence (sometimes known as the marginal likelihood) in a feasible way in order to compare different models effectively. The evidence can be described as
 
 \begin{equation}
-    Z = \int p(\theta) L(\theta) d\theta
+    Z = \int p(\theta) L(\theta) d\theta \label{eq:evidence}
 \end{equation}
 
-where $p(\theta)$ is the prior distribution and $L(\theta)$ is the likelihood function.
+where $p(\theta)$ is the prior distribution and $L(\theta)$ is the likelihood function. Samples from the posterior can then be obtained as a byproduct following the evaluation of the evidence $Z$. One might naively assume that it would be easy to evaluate this integral by directly computing the expression for each parameter $\theta$. Unfortunately, this procedure can get computationally expensive quickly as the number of inferred parameters $\theta$ increases. Rather than integrating over the whole space of parameters $\theta$ explicitly, it would be advantageous to redefine Eq. \ref{eq:evidence} so that it was only dependent on a single parameter and an approximate method for computing the integral could be found. The fundamental idea that a complex high-dimensional problem with many inferred parameters implies a representation in a 1-dimensional form is one of the key ideas of nested sampling. This then begs the question, how do we go about computing the evidence in a 1-dimensional way?
+
+We can start by generating a finite lattice of points sampled stochastically from the prior distribution. These random points are colloquially known as ``live'' points. Next, we would like to design an algorithm which evolves the ``live'' points to explore the likelihood space to find the global (or at least close to global) point of maximum likelihood. Ideally we would like to draw from a prior which also decreases in size as we move into regions of the likelihood space which dominates the posterior. Theoretically, the point with the highest likelihood would have a very small region of the prior space to sample from and the point of lowest likelihood would have nearly the whole prior space to sample from. Because the prior is by definition normalised to be between $0$ and $1$ if we framed the problem such that it was likelihood as a function of prior space being sampled from, we would have a nicely behaved, smooth, monotonically decreasing function which could be integrated easily. We can start by expressing Eq. \ref{eq:evidence} as 
 
 \begin{equation}
-    X(L^{*}) = \int p(\theta) \mathds{1} (L(\theta) > L^{*}) d\theta
+    Z = \sum_{i=1}^{N} L_i w_i,
 \end{equation}
 
-where $X(L^{*})$ represents the amount of prior probability with likelihood greater than $L^{*}$.
+$L_i$ is the corresponding likelihood value of the $i$th sample and $w_i$ is a weighting term defined as
+
+\begin{equation}
+    w_i = p(\theta_i) d\theta.
+\end{equation}
+
+This weight can be thought of as the subset of the prior distribution which is represented by the $\theta_i$th sample. The total prior mass can be defined as
+
+\begin{equation}
+    X(\lambda) = \int_{L(\theta) > \lambda} p(\theta) d\theta,
+\end{equation}
+
+where $X(\lambda)$ is the prior mass distribution (a summation over the prior $p(\theta)$) and $\lambda$ is an arbitrary cutoff value. We see that as $\lambda$ increases, the enclosed prior mass $X(\lambda)$ will then decrease. Because $X(\lambda)$ must lie between 0 and 1 and is a smooth continuous function, we can rewrite the evidence integral in terms of a single variable expression which is far easier to compute than Eq. \ref{eq:evidence}
+
+\begin{equation}
+    Z = \int_{0}^{1} L dX. \label{eq:simple_evidence}
+\end{equation}
+
+The likelihood $L$ is fairly easy to evaluate for any one sample within the enclosed likelihood space $L$ 
+
+We can explicitly evaluate the simplified evidence in Eq. \ref{eq:simple_evidence} by first drawing $N$ random points from the prior distribution $p(\theta)$. We then iterate over a pre-determined number of iterations. For each iteration we compute the likelihood of all sampled points and determine the point with the minimum likelihood value. We then compute an estimate on the difference between the amount of prior mass covered by the the current samples above and up to the minimum likelihood value sample. We call this estimate the weight $w_i$ and we increment the evidence $Z$ by $L_i w_i$. Finally, we replace the lowest likelihood point $L_i$ with a new point which is sampled through a process like \ac{MCMC}. We only need to generate one new point because we can simply reuse the remaining $N-1$ surviving points since they are all better than the lowest likelihood point. We can generate a new sample by making a copy of one of the remaining samples and then evolving that sample through an \ac{MCMC} process. Alternatively, one can also generate a new point by genetic mixing of survivor point coordinates \cite{skilling2006}.
+
 %
 % Intro to nested sampling
 %
