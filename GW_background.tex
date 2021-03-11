@@ -291,7 +291,17 @@ where $\chi^2$ is a finite value which determines how well your observations $O$
     + \left( \frac{\rho_{\mathrm{sin}}^2 }{p} - \rho_{\mathrm{sin}, i}^2 \right) \right],
 \end{equation}
 
-where $p$ are the frequency bins, $\rho_{\mathrm{cos}}$ and $\rho_{\mathrm{sin}}$ are the \ac{SNR} values of the best matching template in both polarisations. The higher the value of E.q. \ref{eq:gw_chisquared}, the more likely that the observed data matches the best matching template. The \ac{SNR} previously determined by the matched filtering algorithm is then weighted by the chi-squared value. If the weighted match filter \ac{SNR} lies below a user predefined value, the candidate event is discarded and not considered for further analyses \cite{0264-9381-33-21-215004}.
+where $p$ are our frequency bins, $\rho_{\mathrm{cos}}$ and $\rho_{\mathrm{sin}}$ are the matched filter \ac{SNR} values of the best matching template in both polarisations. The higher the value of E.q. \ref{eq:gw_chisquared}, the less likely that the observed data matches the best matching template. The \ac{SNR} previously determined by the matched filtering algorithm is then weighted by the chi-squared value. If the weighted match filter \ac{SNR} lies below a user predefined value, the candidate event is discarded and not considered for further analyses \cite{0264-9381-33-21-215004}. The final detection statistic is the quadrature sum of the chi-squared weighted matched filter \ac{SNR} across all detectors where the event was seen.
+
+%
+% Coincidence testing
+%
+Furthermore, we need to ensure that events which we observe in one detector are generally consistent with what we would expect to find in other active \ac{GW} detectors around the globe. If an event has been identified in one detector, it must also appear in other active detectors within the expected window of time it would require for the \ac{GW} to travel from one detector to another (roughly equivalent to the speed of light). The amount of time varies depending on sky location of the event, but generally it is expected to arrive at another detector within 15 milliseconds (with added uncertainty due to measurement uncertainty). The same event in multiple detectors are also expected to have the same matching template from the matched filtering algorithm.
+
+%
+% Time slides
+% Not sure if I'm describing time slides correctly here.
+Now that we have a detection statistic in the form of the weighted quadrature summed \ac{SNR} across multiple detectors described above, we would like a method for determining the statistical significance of this statistic. This can be done by determining the false alarm rate of the detectors as a function of the weighted detection statistic. Because we don't necessarily know how the noise of the detector is going to be distributed due to the varied non-Gaussian nature of the detectors, we have to experimentally measure the false alarm rate. We can measure this through the use of time slides. Time slides are applied by computing the number of detected triggers outside of the light travel time coincidence window (15 milliseconds) for a pre determined number of observation windows. The triggers are calculated using the best matching template for the original candidate event. The time slide windows used with the best matching template, the more sensitive the estimate on the false alarm rate. The false alarm rate is then used in order to assign a p-value to the candidate \ac{GW} event.
 
 \subsection{Bayesian gravitational wave parameter estimation}
 
