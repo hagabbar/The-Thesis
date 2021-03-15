@@ -196,7 +196,14 @@ magnetic field flows, and mountains of mass accreted on the
 surface from a larger companion star \cite{1712.05897}.
 
 \subsection{Stochastic Gravitational Waves}
+%
+% Cite this living review
+% https://link.springer.com/article/10.1007/s41114-017-0004-1
 
+Although the more loud signals like GW150914 get the majority of attention these days, there are many more much quieter signals that are present in the detector data streams than are detected with usual \ac{CBC} detection techniques. To quantify this statement, we can get an exact number for the rate of \ac{CBC} binary black hole signals occurring at any given time by multiplying the local rate of \ac{CBC} binary black hole events by a comoving volume (up to a predetermined redshift). If we use a redshift of $z \sim 6$ for this calculation, we wind up with a \ac{CBC} binary black hole rate of $\sim 1$ per minute. The vast majority of these events will not lie within the detectibility band of the \ac{LIGO} detectors and will make up random (or ``stochastic'') background of events in the noise. The stochastic \ac{GW} background is not only made up of \ac{CBC} signals, but any \ac{GW} event which is low enough in \ac{SNR} to lie within the general noise background of the detectors.
+
+This stochastic background of \ac{GW} events could provide valuable insights into fundamental physics if we were able to resolve them from the instrumental/environmental noise background of the detectors. One common example used to explain the potential significance of stochastic \ac{GW} detection is the Cosmic Microwave Background (CMB). The CMB is the leftover remnants from the Big Bang ($\sim 400,000$ years after) and is the imprint left over by photons at the moment the universe had cooled enough to allow them to travel through space. Unfortunately, we are not able to see any further back since the universe prior to this period was to hot to allow photons to travel. If we were able to resolve the stochastic \ac{GW} background we would then be able to see even further back in time, right up until the very end of inflation, which is $\sim 10^{-32}$s after the Big Bang. Such accuracy could provide new insights into the early universe, as well as key information about early astrophysical source population properties and formation mechanisms. \cite{Romano2017}
+ 
 \subsection{Burst signals}
 
 \section{Search methods for gravitational wave signals}
@@ -240,6 +247,28 @@ methods listed above put many different spins on this\cite{PhysRevD.90.042002}.
 \subsection{Burst search method}
 
 \subsection{Stochastic search method}
+
+%
+% Intro to cross correlation
+% Will want to rephrase the lisa null combinations phrase since it's too 
+% similar to what you are citing.
+The stochastic search method largely involves attempting to piece out \ac{GW} stochastic noise from the detector environmental/non-astrophysical noise. We do this by using a method known as cross-correlation analysis. Cross correlation is essentially a (sliding) dot product between two vectors of numbers, where we observe peaks in the dot product where the series are most similar. For \ac{LIGO} we look for cross correlations across multiple detectors. In \ac{LISA} we have to use special null combinations of the data where the \ac{GW} signal is suppressed enough to where there is nearly only detector noise present in the data stream. The suppression is possible to do through the symmetrized Signac method \cite{PhysRevD.64.062002}. If this can be done, one can then do an excess power measurement in order to see if there is a signal present in the noise. Alternately, it may also be useful to have a solid understanding of how to model the noise in the \ac{LISA} detectors in order to distinguish between \ac{GW} signal and noise. 
+
+Normally, it is nearly impossible to distinguish between detector noise and the stochastic \ac{GW} background in a single detector, which is why we look for correlations between data across multiple detectors. This is made under the assumption that instrumental noise is not correlated between multiple detectors. It turns out that if we take the expected value of the cross correlation of the data between two detectors, we end up with the the variance of the stochastic \ac{GW} signal (since it is by definition supposed to be present in the data of both detectors).
+
+%
+% Frequentist vs. Bayesian approach for stochastic search
+%
+In order to get a more rigorous statistical estimate of the cross correlation value, one can use a number of frequentist and Bayesian approaches. The frequentist approach involves using a maximum likelihood ratio to compare two models. The two models being a noise+signal model and a noise-alone model. The frequentist approach then computes the maximum likelihood value for both models and estimates a ratio between the two values (divide the maximum likelihood estimate of the signal+noise model by the likelihood estimate of the noise model). The likelihood function which is normally used is a Gaussian multivariate function.
+
+The Bayesian approach again use the likelihood function for each model described above, but additionally need the joint prior probability distributions for both the signal and noise parameters. A flat prior is usually used for the signal variance and Jeffrey’s prior is used for the noise variance. One can then construct a join posterior probability distribution for each model in order to figure out the likelihood of signal being present in the noise. We can quantify this exactly by computing the Bayes factor between the signal+noise model and the noise alone model.
+
+
+%
+% Cite this living review: https://link.springer.com/article/10.1007/s41114-017-0004-1
+%
+
+
 
 \subsection{\ac{CBC} search method}
 
