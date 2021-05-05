@@ -68,11 +68,18 @@
 \acrodef{AE}[AE]{autoencoder}
 \acrodef{VAE}[VAE]{variational autoencoder}
 \acrodef{LSTM}[LSTM]{Long Short Term Memory}
+\acrodef{GR}[GR]{general relativity}
 
 \acrodef{FFT}[FFT]{fast Fourier transform}
 \acrodef{CNN}[CNN]{convolutional neural network}
 \acrodef{ROC}[ROC]{receiver operator characteristic}
 \acrodef{MCMC}[MCMC]{Markov Chain Monte Carlo}
+\acrodef{ML}[ML]{machine learning}
+\acrodef{ANN}[ANN]{artificial neural network}
+\acrodef{MAF}[MAF]{masked autoregressive flow}
+\acrodef{GAN}[GAN]{generative adversarial network}
+\acrodef{RF}[RF]{random forest}
+\acrodef{GP}[GP]{genetic programming}
 
 
 \begin{document}
@@ -85,8 +92,8 @@ Optimizing the search for Gravitational Waves using Machine Learning \\
 \normalfont\large
 Hunter Gabbard\\
 \vspace{2cm}
-%Submitted in fulfilment of the requirements for the\\
-%Degree of Doctor of Philosophy\\
+Submitted in fulfilment of the requirements for the\\
+Degree of Doctor of Philosophy\\
 \vspace{2cm}
 School of Physics and Astronomy\\
 College of Science and Engineering\\
@@ -96,21 +103,22 @@ University of Glasgow\\
 \\
 \vspace{1cm}
 % Insert month and year of date deposited with library for final version
-January 2021
+October 2021
 \end{titlepage}
 \frontmatter  % Turn off chapter numbering, use roman page numbers
 \include{abstract}
 \tableofcontents
-%\listoftables
-%\listoffigures
-%\include{acknowledgements}
-%\include{declaration}
+\listoftables
+\listoffigures
+\include{acknowledgements}
+\include{declaration}
 
 \mainmatter % Turn on chapter numbering, reset page numbers, use arabic
 \include{GW_background}
 \include{ML_background}
+\include{GW_ML_Overview}
 \include{matching_matched_filtering}
-\include{technical_matching}
+%\include{technical_matching}
 \include{vitamin}
 \include{technical_vitamin}
 \include{conclusions}

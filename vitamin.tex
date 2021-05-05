@@ -1,5 +1,9 @@
 \chapter{Variational Inference for GW Parameter Estimation}
 
+% Anything in red is extra stuff we didn't add to the published version of this paper
+
+% Will be trying to use this commit (https://github.com/hagabbar/VItamin_paper/blob/fe044c38a0fcced29d0496e8c2ea34f7bf2e8ae1/VItamin.tex) to get the pre-trimmed text.
+
 %
 % Introductory paragraph describing the content of the letter
 %
@@ -64,14 +68,15 @@ techniques.
 %
 % Intro to the detection era with the LVC
 %
-%With the overwhelmingly successful observation runs of O1 and O2 now complete,
-%\ac{LIGO} and Virgo have produced a large catalogue of \ac{GW} data covering
-%both \ac{BBH} and \ac{BNS} signals~\cite{1811.12907}. Over the next five years
-%we expect the number of detections to increase to be upwards of $\sim180$
-%\ac{BNS} and $\sim400$ BBH events per year~\cite{1304.0670,1811.12907}. This
-%large influx in the number of detections will put an increased amount of
-%pressure on the current \ac{GW} inference methods used for parameter
-%estimation.  
+\textcolor{red}{
+With the overwhelmingly successful observation runs of O1 and O2 now complete,
+\ac{LIGO} and Virgo have produced a large catalogue of \ac{GW} data covering
+both \ac{BBH} and \ac{BNS} signals~\cite{1811.12907}. Over the next five years
+we expect the number of detections to increase to be upwards of $\sim180$
+\ac{BNS} and $\sim400$ BBH events per year~\cite{1304.0670,1811.12907}. This
+large influx in the number of detections will put an increased amount of
+pressure on the current \ac{GW} inference methods used for parameter
+estimation.}  
 
 %
 % From GW detection, to parameter estimation
@@ -323,29 +328,50 @@ Fig.~\ref{fig:corner_plot} where the strong agreement between both
 %
 % mention the pp plot and KL distribution results
 %
-In Figs.~\ref{fig:pp_plot},\ref{fig:kl_results} (see the Methods section) we show
-the results of 2 statistical tests (the \ac{PP} plot test and \ac{KL}
-divergence tests) performed on the entire test dataset and between all
-samplers. In both cases the tests indicate that the \texttt{VItamin} sampler
-performs as well as any other sampler in comparison with the full set of
-samplers.
+
+\textcolor{red}{
+A standard test used within the \ac{GW} parameter estimation community is the
+production of so-called \ac{PP} plots which we show for our analysis in
+Fig.~\ref{fig:pp_plot}. The plot is constructed by computing a p-value for each
+output test posterior on a particular parameter evaluated at the true
+simulation parameter value (the fraction of posterior samples $>$ the
+simulation value). We then plot the cumulative distribution of these
+values~\cite{1409.7215}. Curves consistent with the black dashed diagonal line
+indicate that the 1-dimensional Bayesian probability distributions are
+consistent with the frequentist interpretation - that the truth will lie within
+an interval containing $X\%$ of the posterior probability with a frequency of
+$X\%$ of the time. It is clear to see that our new approach shows deviations
+from the diagonal that are entirely consistent with those observed in all
+benchmark samplers. In Fig.~\ref{fig:kl_results} (see Sec.~\ref{sec:methods})
+we also show distributions of the \ac{KL} divergence statistic between all
+samplers on the joint posterior distributions. It is also clear that the
+\ac{KL} divergences between \texttt{VItamin} and any other sampler are
+consistent with the distributions between any 2 existing benchmark samplers. 
+}
 
 %
 % discuss the speed of the analysis
 %
-The dominating computational cost of running \texttt{VItamin} lies in the
-training time, which can take of order several hours to complete. We stress
-that once trained, there is no need to retrain the network unless the user
-wishes to use different priors $p(x)$ or assume different noise
-characteristics. The speed at which posterior samples are generated for all
-samplers used, including \texttt{VItamin}, is shown in Table~\ref{Tab:speed}.
-Run-time for the benchmark samplers is defined as the time to complete their
-analyses when configured using their default parameters~\cite{1811.02042}. For
-\texttt{VItamin} this time is defined as the total time to produce $3000$
-samples. For our test case of \ac{BBH} signals \texttt{VItamin} produces
-samples from the posterior at a rate which is $\sim 6$---$7$ orders of
-magnitude faster than our benchmark analysis using current inference
-techniques. 
+The dominating computational cost of running \texttt{VItamin} lies in the \textcolor{red}{
+training time, which can take of order several hours to complete.  Completion
+is determined by comparing posteriors produced by the machine learning model
+and those of \texttt{Bilby} iteratively during training. We additionally assess
+whether the cost curves (Fig.~\ref{fig:loss_log}) have converged, such that 
+their slope is near-zero. We use a 
+single Nvidia Tesla V100 \acp{GPU} with $16/32$ Gb of RAM although consumer grade
+``gaming" \ac{GPU} cards are equally fast for this application. 
+
+We stress that
+once trained, there is no need to retrain the network unless the user wishes to
+use different priors $p(x)$ or assume different noise characteristics.   The
+speed at which posterior samples are generated for all samplers used, including
+\texttt{VItamin}, is shown in Table~\ref{Tab:speed}. Run-time for the benchmark
+samplers is defined as the time to complete their analyses when configured
+using their default parameters~\cite{1811.02042}. For \texttt{VItamin} this
+time is defined as the total time to produce $3000$ samples. For our test case
+of \ac{BBH} signals \texttt{VItamin} produces samples from the posterior at a
+rate which is $\sim 6$---$7$ orders of magnitude faster than our benchmark analysis 
+using current inference techniques, representing a dramatic speed-up in performance.}
 
 %\chris{One more thing to add, especially if the other KL, AD, and PP plots
 %aren't convincing, is a plot displaying 1D confidence bounds compared between
@@ -403,31 +429,40 @@ of the signal content in the data and is therefore constant for all test cases.}
 % recap and main result
 %
 \section{Conclusions}
-
-In this letter we have demonstrated that we are able to reproduce, to a high
-degree of accuracy, Bayesian posterior probability distributions generated
-through machine learning. This is accomplished using \acp{CVAE} trained on
-simulated \ac{GW} signals and does not require the input of precomputed
-posterior estimates. We have demonstrated that our neural network model which,
-when trained, can reproduce complete and accurate posterior estimates in
+\textcolor{red}{
+There are currently a variety of challenges within the field of \ac{GW}
+parameter estimation including, and not limited to, accounting for detector
+artefacts (non-Gaussian transient "glitches") in the data, time-dependent
+variations (non-stationarity) of the detector noise power spectrum density,
+systematic uncertainties in the waveform models themselves and decreasing the
+latency with which parameter estimates are produced~\cite{1409.7215}. In this
+letter we have demonstrated that we are able to reproduce, to a high degree of
+accuracy, Bayesian posterior probability distributions generated through
+machine learning. This is accomplished using \acp{CVAE} trained on simulated
+\ac{GW} signals and does not require the input of precomputed posterior
+estimates. We have demonstrated that our neural network model which, when
+trained, can reproduce complete and accurate posterior estimates in}
 $\mathcal{O}(1)$ millisecond, can achieve the same quality of results as the
 trusted benchmark analyses used within the LIGO-Virgo Collaboration.
 
 %
 % CBC implications and why this is a game-changer - speed for EM followup
 %
+\textcolor{red}{
 The significance of our results is most evident in the orders of magnitude
-increase in speed over existing approaches. Improved low-latency alerts will be
-especially pertinent for signals from \ac{BNS} mergers (e.g.
-GW170817~\cite{PhysRevLett.119.161101}) and \ac{NSBH} signals where parameter
-estimation speed will no longer be limiting factor\footnote{The complete
+increase in speed over existing approaches. This will help the
+LIGO-Virgo collaboration alert \ac{EM} follow-up partners with minimum latency, 
+enabling tightly coupled, closed-loop control of sensing resources, for maximum information gain.
+Improved low-latency alerts will be especially pertinent for signals from
+\ac{BNS} mergers (e.g. GW170817~\cite{PhysRevLett.119.161101}) and \ac{NSBH} signals where
+parameter estimation speed will no longer be limiting factor\footnote{The complete
 low-latency pipeline includes a number of steps. The process of \ac{GW} data
-acquisition is followed by the transfer of data. There is then the
-corresponding analysis and the subsequent communication of results to the
-\ac{EM} astronomy community after which there are physical aspects such as
-slewing observing instruments to the correct pointing.} in observing the prompt
-\ac{EM} emission expected on shorter time scales than is achievable with
-existing \ac{LVC} analysis tools such as Bayestar~\cite{2016PhRvD..93b4013S}.
+acquisition is followed by the transfer of data. There is then the corresponding
+analysis and the subsequent communication of results to the \ac{EM} astronomy
+community after which there are physical aspects such as slewing observing
+instruments to the correct pointing.} in observing the prompt \ac{EM} emission
+expected on shorter time scales than is achievable with existing \ac{LVC}
+analysis tools such as Bayestar~\cite{2016PhRvD..93b4013S}.}
 
 %
 % CBC implications and why this is a game-changer - faster, modular
@@ -465,18 +500,21 @@ estimation will be extended to sky localisation.
 %
 % Non gaussian noise and the final statement
 %
-In reality, \ac{GW} detectors are affected by non-Gaussian noise artefacts and
-time-dependent variation in the detector noise \ac{PSD}. Existing methods
-incorporate a parameterised \ac{PSD} estimation into their
-inference~\cite{2015PhRvD..91h4034L}. To account for these within our scheme,
-we would retrain our network at regular intervals using samples of real
-detector noise (preferably recent examples to best reflect the state of the
-detectors). Our work can naturally be extended to include the full range of
-\ac{CBC} signal types but also to any and all other parameterised \ac{GW}
+\textcolor{red}{
+In reality, \ac{GW} detectors are affected by non-Gaussian noise artefacts. To
+account for this noise within our scheme, we would train our network using
+samples of real detector noise (preferably recent examples to best reflect the
+state of the detectors). Our method has the added advantage of not being
+dependent on the choice of \ac{PSD} used for whitening, unlike current Bayesian
+methods. The whitening procedure applied to the training data for the \ac{CVAE}
+is simply to rescale the input to a scale more suitable to neural networks
+whereas for existing methods assumptions on the \ac{PSD} directly affect the
+posterior results. Our work can naturally be expanded to include the full range
+of \ac{CBC} signal types but also to any and all other parameterised \ac{GW}
 signals and to analyses of \ac{GW} data beyond that of ground based
 experiments. Given the abundant benefits of this method, we hope that a variant
-of this of approach will form the basis for future \ac{GW} parameter
-estimation.
+of this of approach will form the basis for all \ac{GW} parameter estimation
+over the next several decades to come.}
 %
 % word count ~620
 %

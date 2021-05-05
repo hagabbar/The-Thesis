@@ -1,0 +1,155 @@
+\chapter{Machine Learning in Gravitational wave Astronomy}
+% Brilliant catalogue of recent machine learning work
+% https://iphysresearch.github.io/Survey4GWML/
+
+
+%
+% Introducing the chapter
+%
+It is expected that in the coming years the \ac{LIGO} detectors will see in increase in sensitivity. With this increase in sensitivity also comes an increase in the number signals which will be detectable by the collaboration. The number of signals per year is expected to be anywhere on the order of 100s to 1000s (depending on the source type). As such, it is imperative that we develop new techniques to deal with this massive influx of detectable sources. In addition, with the increase in signals there is also added pressure to develop more accurate and precise methods for waveform modeling, as well as enhanced techniques for quickly identifying non-astrophysical/environmental noise transients.
+
+\ac{ML} has been proven to be an excellent resource for tackling the above mentioned problems. Over the past several years, the gravitational wave community has seen a boon in the use of machine learning methods across a variety of application in the detection, parameter estimation and detector characterization algorithms (among many other domains). This surge in applications has seen marked success not only in proof of principles studies, but even studies involving the use of realistic \ac{LIGO} data. Going forward, it is the hope of myself and other \ac{ML} \ac{GW} practitioners that these methods are eventually implemented in realtime during real observing runs in order to further enhance the capabilities of future gravitational astronomy research. In this chapter I will provide an overview of recent advances in \ac{ML} approaches in \ac{GW} astronomy in signal detection, parameter estimation and detector characterization.
+
+\section{ML for GW detection}
+
+Algorithms which search for \ac{GW}s are typically concerned with sources from three types of sources: \ac{CBC}, Burst and stochastic \ac{GW}s. \ac{CBC} sources being composed of \ac{BBH}, \ac{BNS} and \ac{NSBH} signals, Burst are unmoddeled/poorly modeled signals like supernova or even as yet unknown sources and stochastic \ac{GW}s result from left over remnants of the Big Bang along with poorly resolved \ac{CBC} signals from extreme distances. In this section I will outline several recent and seminal studies which use \ac{ML} to directly detect \ac{GW}s from a variety of the aforementioned sources listed above.
+
+%
+% Seminal GW detection papers
+%
+\subsection{CBC detection studies}
+
+\ac{ML} was first shown to perform to the same degree of accuracy as that of the standard approach used for signal detection (matched template filtering) by Gabbard et al. \cite{PhysRevLett.120.141103} and George\&Heurta \cite{PhysRevD.97.044039}. In Gabbard's work, we used simulated \ac{BBH} waveforms in Gaussian noise and Gaussian noise alone to perform a binary classification task. Gaussian noise was used because it is known that matched template filtering should be ideal under Gaussian noise conditions, so we should not ideally expect the \ac{ML} to do any better, but at a maximum match the accuracy of matched template filtering. Using a \ac{CNN}, Gabbard et al. were able to show for the first time that deep learning could match the efficiency of matched template filtering. In George\&Heurta, they also show that a similar \ac{CNN} approach (``deep filtering'') could reproduce predictions from matched template filtering. In addition to signal detection, they use a \ac{CNN} for the first time to do point-estimate parameter estimation on both \ac{BBH} and eccentric \ac{BBH} waveforms which closely match the best-fitting templates predicted by matched template filtering. They additionally compare their machine learning approach to other common \ac{ML} approaches including: K-nearest neighbor, support vector machines, logistic regression, etc. showing their \ac{CNN} to have superior results.
+
+
+%
+% Are CNNs a magic bullet Gebhardt paper
+%
+There have been numerous follow-up studies which have explored the \ac{ML} for \ac{CBC} detection landscape. Gebhardt et al. took a more critical approach and looked into the feasability of using \ac{CNN}s under more realistic conditions. They claim that \ac{CNN}s alone should not be used to claim a detection, but rather they are best suited as a realtime trigger generator which can be used to identify events of interest for later study. They support their claim by showing that a standard binary classification approach does not necessarily tell you where exactly to look in a time series window for an event and does not distinguish well between very loud and very quiet signals (high vs. low \ac{SNR}). In other words, the ``false alarm rate'' is directly tied to the training set. They propose a solution to this by utilizing a fully-convolutional approach. The fully-convolutional approach is ideal because it can take an input of any arbitrary size and outputs a value between 0 and 1 for each element in the time series. If a value in the output fully-convolutional time series is 1 that means that there is a \ac{GW} signal present at that location. They are successfully able to recover both real and simulated \ac{GW} events in real detector noise. 
+
+%
+% Gebhardt hypothetical signal discussion
+%
+Gebhardt et al. also perform tests of their approach where they try to fool the network into predicting the presence of a \ac{GW} signal when none is there. This is done by learning ``hypothetical signals'' by exploiting the differentialbility of their model to produce what the model ``believes'' is a \ac{GW}-like signal. They find that although many of these hypothetical signals do have chirp-like properties, there are a few concerning examples where the signals do not have any \ac{GW}-like properties and even incredibly unphysical properties such as having only negative strain values. As is mentioned in the manuscript, there is still much study left to be done as to whether or not the examples used are too contrived and not something we would realistically expect to see in the detectors\cite{1904.08693}.
+
+%
+% Harvard BNS paper
+% https://www.sciencedirect.com/science/article/pii/S0370269320301349?via%3Dihub
+
+It was first shown by Krastev et al. that using \ac{ANN}s one could accurately recover \ac{BNS} signals in Gaussian noise. The problem was posed as a trinary classification task where the \ac{ANN} was tasekd with distinguishing between \ac{BBH}, \ac{BNS} and Gaussian noise alone cases. The neural network was limited to a sliding window of $\sim10$s due to computational expense and was trained on more than 100,000 simulated training signals. Their results using ROC curves show that the \ac{ANN} performs more poorly on \ac{BNS} signals than on \ac{BBH} signals. This could be due to a number of reasons including: sliding window size, network architecture choice, signal complexity, etc. The authors do not compare their approach to any other existing currently used signal detection method such as matched template filtering\cite{KRASTEV2020135330}.
+
+%
+% Marlin BNS paper
+% https://journals.aps.org/prd/abstract/10.1103/PhysRevD.102.063015
+
+In Marlin et al., the authors perform a much more in depth study and use an improved neural network architecture. In order to reduce the overall complexity of the input space they deal with 32s long \ac{BNS} signals and vary the sample rate as a function of the different segments in time of the signal. For example, the first 16s are sampled at 128Hz, whereas the last second is sampled at 4096Hz. This is feasible because most of the \ac{SNR} of the signal is contained in the final few seconds. Using this varied sample rate reduces the size of input signal space by a factor of $\sim 9$ and allows their study to be more realistic and has the ability to reach false alarm rates of about 0.5 per month. In addition to this clever sampling rate scheme, the authors improve on previous architecture approaches by employing an inception modules, temporal convolutions for signal amplification and tailoring inception modules for each different sampled section of the input time series. Their results show a 400\% improvement over previous machine learning approaches, with a latency of $\sim10.2$s. The authors compare their results to both traditional techniques like matched template filtering and the PyCBC live event trigger generator and find that the machine learning approach is not quite as sensitive as traditional techniques (by $\sim 6$ times lower). The authors mention that some general improvements could be made to the latency of the \ac{ML} approach by reducing the complexity of the network, which may also improve the sensitivity \cite{PhysRevD.102.063015}.
+
+%
+% Burst detection papers
+%
+\subsection{Burst detection studies}
+
+%
+% First implementation of Burst machine learning paper
+% https://arxiv.org/pdf/1812.05363.pdf
+
+The first implementation of a machine learning algorithm for the purpose of identifying Burst-like signals was by Astone et al. in 2018. In their paper they build upon the already existing continuous wave Burst pipeline used by the \ac{LIGO} collaboration. Specifically, they are interested in searching for core-collapse supernovae events. Their method can be summarized in two steps. One, they prepare time-frequency images of detector data using the cwB event trigger generator which looks for times of excess power in the detectors. Once times of excess power have been identified, time-frequency spectrogram image is constructed for each active detector. In their case, they use three detectors and combine them in such a way that each detector essentially acts as a color channel in an red-green-blue (RBG) color scheme. The authors then use a standard \ac{CNN} to classify the identified time-frequency image into either noise or signal+noise. They test their network on a range of signals spanning \ac{SNR} values from 8 up to $\sim 40$. They show that their method is overall more efficient than the standard Burst detection pipeline (cwB) at a False Alarm Rate of around $7 \times 10^{-7}$. 
+
+%
+% CW detection papers
+%
+\subsection{CW detection studies}
+
+%
+% First CW ML paper
+% https://journals.aps.org/prd/pdf/10.1103/PhysRevD.100.044009
+
+For the \ac{CW} search, the standard amount of time it takes to perform an all-sky coherent search can take well over a month to complete. Dreissigacker et al. try to decrease this computational time with respect to standard \ac{CW} detection approaches using ResNet neural networks in the first application of deep learning for the \ac{CW} search. They frame the problem such that their training set consists of two types of input. One, being long $10^6$s signals and shorter $10^5$s signals. Rather than doing a search over the entire frequency range, they also limit their test cases to a discrete set of frequency bands at (20, 100, 200, 500 and 1000 Hz) due to computational feasibility. They compare their machine learning results to a ``gold standard'' \ac{CW} search method pipeline \texttt{WEAVE}. \texttt{WEAVE} sums coherent $F$-statistics over semicoherent segments on lattice-based \ac{GW} template banks, although their study employs the fully coherent search version of the code. % Might want to rephrase this sentence to be more human-readable  
+
+For the training set, they generate over 10,000 training waveforms in the frequency domain with half containing Gaussian noise and the other half containing \ac{CW}+noise. They found that using a set greater than 10,000 provided little gain in efficiency. After training the authors found that at a fixed false alarm rate, the deep learning approach appears to be competitive ($88 - 73\%$ detection rate) with the matched filtering search ($\sim90\%$) on short time scale inputs ($10^5$s), whereas when tasked with longer time scale inputs ($10^6$s) it performs a fair bit worse ($69-13\%$). The network did outperform the matched template search by an immense amount in terms of computational speed taking only on the order of a few milliseconds ($3 - 10$ms) as opposed to the $10^6 - 10^9$s of the matched filter method. As the authors state, there is much more work to be done in order to improve the efficiency of deep neural networks within this subject domain, but there is also much promise given the quality of results achieved thus far.
+
+\section{ML for GW Bayesian parameter estimation}
+
+%
+% Intro
+%
+
+For many, \ac{GW} parameter estimation was the ``holy grail'' of machine learning in the field of gravitational wave astronomy. Although prior to 2019 there were some attempts to compute point estimates for \ac{GW} source parameters directly, as well as to incorporate \ac{ANN}s directly into subsections of existing Bayesian inference algorithms \cite{10.1111/j.1365-2966.2011.20288.x}, there had yet up to that point been an end-to-end algorithm which went from strain to directly computing samples from the Bayesian posterior. In this subsection, I will outline some of the initial attempts to incorporate AI into existing pipelines, \ac{ML} for point estimate parameter estimation and finally \ac{ML} to directly compute samples from the Bayesian posterior.
+
+%
+% Beginnings BAMBI and point estimate PE
+% BAMBI: https://academic.oup.com/mnras/article/421/1/169/989639
+
+\ac{ML} was first used in the context of \ac{GW} parameter estimation by Graff et al. in their modified nested sampling algorithm \texttt{BAMBI}. In \texttt{BAMBI} the authors exploit the tenants of the universal approximation theorem, which implies that a properly optimized \ac{ANN} should be able to approximate any sufficiently complicated likelihood function. This is done by essentially replacing the likelihood calculation in the \texttt{MultiNest} nested sampling algorithm. After the nested sampling algorithm has produced a sufficient number of samples, their \ac{ANN} is trained on those samples. The input to the \ac{ANN} are the sample parameter values and the output is a single value which represents the likelihood values for each of those samples. The \ac{ANN} is then trained such that it's predictions for the likelihood values matches that produced by the nested sampling algorithm. In order to quantify when the \ac{ANN} has been trained sufficiently to fully replace the standard likelihood function, a tolerance level is calculated. The tolerance is defined as the standard deviation of the difference between the true log-likelihood values from nested sampling and the predicted values from the \ac{ANN}. The actual value of this tolerance level may be specified by the user. Once the network has reached an acceptable tolerance level of performance it then replaces the original likelihood function calculation. Periodic tolerance checks are made throughout the rest of the nested sampling iterations to ensure that the \ac{ANN} is still providing solid predictions.
+
+Generally speaking, the authors find that the algorithm preforms well across a variety of toy model cases (Gaussian shells, Rosenbrock functions, eggbox).  They also compare their approach (\texttt{BAMBI}) to \texttt{MultiNest} on a few real physics examples including trying to predict the posteriors of 8 cosmological parameters. The gain in speed goes from taking on the order of seconds per likelihood calculation, down to milliseconds, a three order of magnitude increase in computational performance with accurate evidence predictions and posterior probability distributions\cite{10.1111/j.1365-2966.2011.20288.x}.
+
+%
+% Alvin Chua paper
+% 
+
+Released at the same time as Gabbard et al., Chua et al. also aimed to show for the first time that machine learning methods could accurately approximate Bayesian \ac{GW} posteriors. Their method used fully-connected neural networks. Specifically, they represent their training waveforms in quite an interesting manner by training a neural network to predict coefficients which describe a reduced order framework in order to quickly produce training \ac{GW} waveforms. Technically, it's actually two networks which produce the real and imaginary components of the waveform separately. To produce posteriors, Chua et al. again use a fully-connected neural network which takes as input the low-latency training waveforms (in Gaussian noise) and outputs a histogram where each value of the histogram bins is predicted by the network. The loss function is the cross entropy between the natural log of the predicted network histogram bins and the training waveform source parameter values (all summed and minimised during training).
+
+% They may actually show predictions for more than just these two parameters. May want to check later if that is the case when editing this section.
+Chua test and train their model on binary black hole waveforms in Gaussian noise with masses ranging from $1.5 \times 10^5 - 10 \times 10^5$ with aligned spins between $-1$ and $1$. They then train their model to predict both the chirp mass and the symmetric mass ratio $\eta$. Their results show a good agreement between the histograms produced by their machine learning approach and traditional sampling approaches\cite{2019arXiv190905966C,PhysRevLett.122.211101}.
+
+%
+% Greeen 1st paper
+%
+
+Following on from Chua and Gabbard, Green wanted to tackle two outstanding problems which both Chua and Gabbard had yet to solve at the time. With Chua, the main drawback from their approach was the limited number of dimensions that their algorithm could produce as output predictions (no more than 2). For Gabbard, it was the difficulty of dealing with multi-modal posteriors (which was later rectified in subsequent updates to their paper). In Green's first paper, they implemented a new approach using a combination of \ac{MAF}s and \ac{CVAE}s. 
+
+A \ac{MAF} is a mechanism for mapping simple distributions to more complex distributions, while also retaining the property of being invertible. The complex distribution is dependent on an inverse Jacobian determinant and the simple distribution (usually represented as some form of a Gaussian distribution). A \ac{MAF} is normally represented as a neural network where the weights and biases are used to learn this invertible mapping. The simple distributions are typically represented as multivariate Gaussian conditional distributions. In their paper, Green et al. utilize three distinctly different models to model Bayesian posteriors: \ac{CVAE} alone, \ac{MAF} alone and a combination of a \ac{CVAE} and a \ac{MAF}. The combined \ac{CVAE}+\ac{MAF} network, is made by appending flows to the end of both encoders and the decoder network of the \ac{CVAE} in order to better model the sample space. The authors test their methods on 1s long \ac{BBH} signals in Gaussian noise sampled at 1024Hz and try to predict a 5 parameter case (m1, m2, phase, time of coalescence, distance) and an eight dimensional case (m1, m2, phase time of coalescence, distance, chi1, chi2, inclination angle). Prior to training, they perform a unique preprocessing step whereby they transform their input via principal component analysis into 100 principal components, thereby reducing the dimensionality of the input and vastly improving the overall computational cost of training/testing their network. They find that all three methods perform reasonably well, although the \ac{CVAE} alone method is not able to resolve the multi-modal source parameters such as phase \cite{PhysRevD.102.104057}. 
+
+%
+% Green second paper
+%
+
+In a subsequent paper, Green et al. did away entirely with their three model approach and went with a pure \ac{MAF} flow network with spline couplings. Training of their model is done in the standard way and interestingly, they test their model for the first time on a known \ac{GW} signal in Gaussian noise (GW150914). After training, they find that there approach is able to to closely match a standard Bayesian sampler (\texttt{Dynesty}) well with minor inaccuracies on the inclination angle where the \ac{ML} approach puts more likelihood on one of the two modes in the posterior space \cite{2008.03312}.  
+
+% Michael Williams Nessai
+
+Also using normalizing flows, Williams et al. where able to replace the likelihood calculation stage in an existing nested sampling algorithm with flows in an algorithm dubbed \texttt{NESSAI}. Specifically, the authors use coupling flows because of their computational cheapness, although with the added disadvantage of tending to be slightly less flexible than autoregressive flows. The flow is trained during the nested sampling process. Once properly trained, each time a new set of live points is required to be evolved, \texttt{NESSAI} can produce on-command a new set of live points almost instantaneously.
+
+\section{ML for detector characterization}
+
+%
+% Intro
+% Would be nice to have fig of glitch in here somewhere
+
+Nonastrophysical and environmental noise sources can affect the data quality of the detectors adversely. Poor data quality can not only be a source of confusion with doing data analysis, but can even entirely corrupt segments of data. It is the job of the detector characterization group to identify and mitigate such noise disturbances. If we are able to identify and prioritize classes of glitches, this is an important first step in mitigating such events. In this subsection I will describe some recent efforts to use \ac{ML} to identify and mitigate noise in the \ac{LIGO} detectors.
+
+%
+% Gravity spy
+%
+
+In order to better classify known and unknown classes of ``glitches'', Zevin et al. \cite{0264-9381-34-6-064003} use a unique combination of human learning and machine learning in a pipeline called \texttt{Gravity Spy}. In \texttt{Gravity Spy} a set of glitch triggers are chosen for training which occur in ``lock'' (meaning the detector was in a proper state to search for gravitational waves) and not during times of poor data quality. The glitches themselves are represented as Q-scans, which are essentially time-frequency tilings where Q represents a quality factor of a specific sine-Gaussian waveform. 
+
+%
+% Gravity spy training
+%
+The initial training set was generated from a set of $10^5$ Omicron glitch triggers, from which about $100$ glitches per class were identified by eye from trained detector characterization experts. These $100$ ``gold-standard'' glitches were then used to train a preliminary neural network (a basic deep \ac{CNN} model) to identify the remaining glitches in the rest of the $10^5$ Omicron triggers. These triggers are then uploaded to the Zooniverse website where volunteer citizen scientists are able to try classifying the trigger spectrograms by eye. Volunteers are initially trained on ``gold standard'' glitch images and other well known glitches which have a high probability of belonging to a specific class. After successive successful classifications by volunteers, the difficulty of glitches presented to the volunteers is ramped up quickly. If a glitch is identified enough times by both the machine learning algorithm and volunteers to a high degree of confidence, it is then ``retired'' whereby it is taken out of the volunteer glitch lookup pool and then added to the machine learning labeled training set to improve the accuracy of the machine learning model.
+
+%
+% Gravity results and take home message
+%
+
+Overall, \texttt{Gravity Spy} has been an incredibly successful use of \ac{ML} and a unique example of utilizing citizen scientists for great gain. Citizen scientists were able to identify more than $45,000$ glitches and several new glitch classes such as ``Paired Doves'' and ``Helix'' glitches. The ``Paired Doves'' class was a particularly useful identification as it closely resembled that of a company binary inspiral signals. 
+
+%
+% Intro to genetic algorithms
+%
+
+One of the downsides of many \ac{ML} algorithms (and a topic I'm personally very interested in) is the idea of interpretability. Many \ac{ML} models such as \ac{CNN}s, \ac{GAN}s, \ac{CVAE}s, etc. while powerful are composed of millions of hyperparameters which interact in complicated non-linear ways. Trying to interpret why a particular network configuration works over another is an active area of ongoing research in the \ac{ML} community. Genetic algorithms attempt to partially solve this issue. A genetic algorithm is similar to a decision tree, which is made up of mathematical operators and variable place holders. The algorithm can be trained to do both regression and classification tasks. It is trained by first creating an initial population of operands and operators which will be evolved during training. From the initial population some variables are chosen to remain unchanged, while others are chosen to be mutated (changed) based off of a user defined fitness score. There are a variety of methods by which variables may be mutated. Through training and evolution, the optimal set of variables of the tree is chosen and may be accessed post-training in order to see what parts of the input ended up in the tree. 
+
+%
+% What did they do in karoo gp
+%
+Genetic algorithms were first used in \ac{LIGO} by Cavaglia et al. in \cite{CiCP-25-963}. This was done by training a genetic algorithm over many auxiliary channel degrees of freedom in the detector during periods of observing data where there were known glitch classes (for comparison, a random forest algorithm was also run over the same dataset). They tested their algorithm on two glitch classes from both the first observing run and the second \ac{LIGO} observing run. The first set are EX magnetometer glitches from O2 and the second set or those from an air compressor seen in O1. Their training set consists of 2000 Omicron triggers (greater than SNR 5.5) and 749 auxiliary channels for the magnetometer glitches and 16 trigger s and 429 auxiliary channels for the compressor glitches both with a training/testing split of 2/3 and 1/3 respectively. When testing, the authors find that the genetic algorithm determines that 7/10 (9/10 for the random forest algorithm) of the most likelely auxiliary channels for the magnetometer gltiches result from the correct magnitometer \ac{LIGO} detector subsystem (ETX). Although a bit noiser than the magnitometer set (likely due to the lower number of training samples) both the GP and the RF algorithms are able to correctly identify the source of the most likely auxiliary channels for the air compressor glitches. 
+
+%
+% Some of my own thoughts on GP and how it relates to the current problem 
+% of ML interpretibility
+
+What the work of Cavaglia et al. show is that both \ac{RF} and \ac{GP} have the ability to work well with complex gravitational wave channel data to identify complicated relationships between gravitaitonal wave subsystems in a human readable fashion. The clear advantage of using such algorithms is in their intpretibility and non-black box-like behavior. The black box nature of many deep \ac{ML} algorithms is an outstanding problem not only in \ac{ML}, but also in terms of the acceptability of \ac{ML} in \ac{GW} astronomy. Going forward, I believe that more work will need to be done in order to understand what features \ac{ML} algorithms determine to be most important and in what instances an \ac{ML} algorithm may be fooled into returning false positives, which I believe algorithms like \ac{GP} will have an important role to play.
+
