@@ -190,6 +190,14 @@ gravitational wave events. Some common noise sources
 include anthropgenic noise, quantum shot noise, 
 seismic noise and thermal noise. 
 
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/aLIGO_noise_budget.pdf}
+    \caption{The theoretical design sensitivity noise budget curves for Advanced \ac{LIGO}. As can be seen in the illustration, lower frequencies are largely dominated by seismic motion, mid-range frequencies thermal Brownian motion on the mirrors and higher frequencies quantum vacuum shot noise. Plot was generated using the \texttt{pygwinc} computing package \cite{pygwinc}. }
+    \label{fig:gw_plus_cross}
+\end{figure}
+
+\subsubsection{Seismic noise}
 Seismic noise largely affects the sensitivity of 
 the detectors in the low frequency regime where 
 an earthquake produces sets of waves which travel both 
@@ -205,6 +213,7 @@ on a nearby highway.
 %
 % Not sure if this is right. 
 %
+\subsubsection{Thermal noise}
 Thermal noise results from the heat produced by 
 the lasers passing through large coated mirrors in 
 the interferometer. When laser photons pass through 
@@ -214,6 +223,7 @@ which make up the coating/lens material to behave in
 random Brownian motion, thus causing the photons to deviate from 
 their intended path.
 
+\subsubsection{Quantum shot noise}
 Quantum shot noise results from the wave packet-like 
 behavior of light as it travels through a medium. 
 Because of Poisson statistics, we know that the 
@@ -326,7 +336,7 @@ methods listed above put many different spins on this\cite{PhysRevD.90.042002}.
 
 \subsection{Burst search method}
 
-As mentioned previously, burst-like signals are typically not modeled due to the complicated nature of the event and the possibility of detecting as yet unknown signals. Because of the uncertainty in trying to search for this type of signal, we use an unmodelled search which essentially trying to distinguish between unknown signal and noise. Since the search is unmodelled we don't necessarily have a set of template waveforms which are exactly described by a deep knowledge of numerical relativity, post-Newtonian dynamics or general relativity. Rather, members of the \ac{LIGO} burst search team use template waveforms which roughly imitate events of varying statistical properties who have bursts of excess power for a short duration of time. Some of the signal template types include but are not limited to:
+As mentioned previously, burst-like signals are typically not modeled due to the complicated nature of the event and the possibility of detecting as yet unknown signals. Because of the uncertainty in trying to search for this type of signal, we use an unmodelled search which essentially trying to distinguish between unknown signal and noise. Since the search is unmodelled we don't necessarily have a set of template waveforms which are exactly described by a deep knowledge of numerical relativity, post-Newtonian dynamics or \ac{GR}. Rather, members of the \ac{LIGO} burst search team use template waveforms which roughly imitate events of varying statistical properties who have bursts of excess power for a short duration of time. Some of the signal template types include but are not limited to:
 
 \begin{itemize}
     \item White Nosie burst: A signal which is of zero value and then jumps up to a predefined value in a step-like fashion before sharply falling back down to zero in a step-like fashion.
@@ -568,3 +578,48 @@ We can explicitly evaluate the simplified evidence in Eq. \ref{eq:simple_evidenc
 %
 
 \subsubsection{Nuisance parameter marginalization}
+
+\section{Multi-Messenger Astronomy}
+
+After a \ac{GW} signal has been identified and posterior samples have 
+been obtained, an alert is sent out to other \ac{EM} partners around the 
+globe in order to perform follow-up analysis. Prompt follow-up analysis could 
+provide new insights into fundamental astrophysical processes such as 
+the neutron star equation of state and enhanced measurements on 
+the Hubble Constant. Astronomical partners include instruments which look across 
+the whole range of the \ac{EM} spectrum including: Radio, Microwave, 
+infrared, visible light, ultra-violet, X-ray and gamma ray. A full Bayesian 
+inference analysis is typically done on all viable \ac{GW} candidates, but 
+in order to produce low-latency parameter estimation products we also 
+use tools such as \texttt{Bayestar} \cite{2016PhRvD..93b4013S}. \texttt{Bayestar} operates under the 
+assumption that a large degree of the information contained in a \ac{GW} 
+signal is encapsulated within a small number of products produced by the 
+search matched template filtering process, namely: the time, amplitude 
+and phase of the signal. Using a simplified likelihood function and the 
+Fisher information matrix, \texttt{Bayestar} is able to produce posterior 
+samples on a limited number of source parameters (sky location, distance and orientation) 
+in under a few minutes which provides a good approximate of the full 
+Bayesian posterior.
+
+%
+% Example of GW170817 sky localization. Not sure if I'm allowed to use other people's figures
+%
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/GW170817_skymap.jpg}
+    \caption{Sky localization for the first confirmed detection of a \ac{BNS} merger by \ac{LIGO}. Areas shaded in green are the data products from \texttt{Bayestar} using both \ac{LIGO} alone and \ac{LIGO}/Virgo combined, dark blue are predictions from Fermi/GBM and light blue are predictions from IPN Fermi/INTEGRAL. Black and white images on right-hand side are visible light measurements of a bright event around the galaxy NGC 4993 thought to contain the afterglow of the \ac{BNS} event \cite{2017arXiv171005833L}. }
+    \label{fig:gw_plus_cross}
+\end{figure}
+
+\section{Summary}
+
+In this chapter we provided a brief introduction to Einstein's 
+Field Equations and how those field equations lead to the prediction 
+that \ac{GW}s exist. We described various sources which are 
+able to produce \ac{GW}s and how the \ac{LIGO} detectors physically operate 
+to detect such signals. We also described the search techniques for 
+all source signals and how we generate predictions on the underlying 
+source parameters of \ac{GW} signals. We finally end the chapter by 
+discussing multi-messenger astronomy.
+
