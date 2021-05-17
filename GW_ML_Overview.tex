@@ -111,6 +111,52 @@ In a subsequent paper, Green et al. did away entirely with their three model app
 
 Also using normalizing flows, Williams et al. where able to replace the likelihood calculation stage in an existing nested sampling algorithm with flows in an algorithm dubbed \texttt{NESSAI}. Specifically, the authors use coupling flows because of their computational cheapness, although with the added disadvantage of tending to be slightly less flexible than autoregressive flows. The flow is trained during the nested sampling process. Once properly trained, each time a new set of live points is required to be evolved, \texttt{NESSAI} can produce on-command a new set of live points almost instantaneously.
 
+\section{ML for population inference}
+
+%
+% Intro
+%
+Given the recent accumulation of \ac{GW} detections over the 
+past several \ac{LIGO} observation runs, we are now able to 
+perform more detailed studies across a population of \ac{GW} events. 
+It is also expected that as detector upgrades are made and new detectors 
+come online, that we will start to see hundreds to thousands of 
+\ac{GW} events per year.
+Such abundunce of signals will only enhance population studies which 
+aid us in understanding \ac{GW} 
+signal formation channels, the general properties of \ac{GW} 
+source parameters  (masses, redshifts, spins etc.), progenitor merger 
+rates, as well as modifications of \ac{GR} \cite{Abbott_2019}. In 
+order to constrain certain phenomenological models, it is common to 
+employ the use of Bayes factors between models with different parameters 
+under the same parameterization. Because the Bayes factor involves 
+the computationally costly calculation of marginal model likelihood 
+ratios, it can be intractable to perform some population studies 
+depending on the complexity of the population dataset used. % I don't know if this last statement is correct.
+
+%
+% Wong first normalizing flow paper
+%
+Wong et al. showed for the first time that a hybrid normalizing flow 
+and hierarchical Bayesian model framework were able to accurately 
+constrain \ac{GW} population models \cite{PhysRevD.100.083015}.
+Although other attempts at using forms of \ac{ML} to perform simulation-based 
+population inference have been employed \cite{PhysRevD.98.083017, PhysRevD.100.083015}, those approaches only worked well up 
+to a limited dataset dimensionality ($\sim2$ event parameters). Wong et al. show 
+that their technique performs well 
+over what were once considered highly intractable models. They compare their 
+results to simulations using an analytic phenomenological model. Although 
+the authors neglect to take into account event uncertainties and 
+selection bias, their \ac{ML} technique is shown to scale well up to 3000 \ac{GW} events 
+with 100 samples per posterior and 6 parameters in $\sim0.1$s. Given that their model 
+performs just as efficient as other analytic approaches in a fraction of 
+the time, it is likely that normalizing flows will play a crucial 
+role in testing different state of the art models and even families 
+of models in future \ac{GW} event catalogue releases. As is the case with most 
+\ac{ML} approaches, more data and greater \ac{ML} model complexity may 
+also improve results.
+
+
 \section{ML for detector characterization}
 
 %
