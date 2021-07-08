@@ -58,7 +58,7 @@ So, how do we build a machine learning algorithm? Before diving too deep, lets f
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/Perceptron_network.png}
-    \caption{A perceptron network whose inputs $x_1 ... x_N$ are each multiplied 
+    \caption[Perceptron network illustration]{A perceptron network whose inputs $x_1 ... x_N$ are each multiplied 
     by a learned set of corresponding weights $w_1 ... w_N$ and summed together in $z$. 
     The summed value is then passed through an activation function to get the final 
     output of the network.}
@@ -70,7 +70,7 @@ where $y_{p}$ is our predicted output (e.g. class label), $x$ is our given input
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/sigmoid_function.png}
-    \caption{A sigmoid activation function plotted over the input 
+    \caption[Sigmoid activation function illustration.]{A sigmoid activation function plotted over the input 
     range -10 to 10. Given an input over a pre-defined range, the 
     activation function will rescale the input to be between the range 
     of 0 to 1.}
@@ -82,7 +82,7 @@ We also apply a nonlinear activation function in order to allow our perceptron t
 \begin{figure}
     \centering
     \includegraphics[width=17cm,height=20cm,keepaspectratio]{figures/DeepFullyConnectedNetwork.png}
-    \caption{A deep fully-connected neural network. Inputs $x_1 ... x_N$ are given as input to the 
+    \caption[Deep fully-connected neural network illustration.]{A deep fully-connected neural network. Inputs $x_1 ... x_N$ are given as input to the 
     first layer of the neural network and are fully-connected to every node in that layer. The outputs 
     of each node are then passed on to the next set of nodes in the next layer and are also fully-
     connected. The final layer passes through a final single node which determines the class/value 
@@ -310,7 +310,7 @@ to overcome through added network complexity.
 \begin{figure}
     \centering
     \includegraphics[width=17cm,height=20cm,keepaspectratio]{figures/cnn_filter_illustration.png}
-    \caption{An illustration of a simple \ac{CNN} filter. The filter is a $2 \times 2$ filter randomly initalised with a set of weights for each dimension. Each filter weight is multiplied by the corresponding input dimension over which it is currently covering. All multiplied values are then summed together to produce the output of the filter. The filter slides over one element (if stride is set to 1) and the computation is done again until the whole input space has been covered.}
+    \caption[Convolutional neural network filter illustration.]{An illustration of a simple \ac{CNN} filter. The filter is a $2 \times 2$ filter randomly initalised with a set of weights for each dimension. Each filter weight is multiplied by the corresponding input dimension over which it is currently covering. All multiplied values are then summed together to produce the output of the filter. The filter slides over one element (if stride is set to 1) and the computation is done again until the whole input space has been covered.}
     \label{fig:cnn_filter_illustration}
 \end{figure}
 
@@ -406,7 +406,7 @@ through a loss function given as
 \begin{figure}
     \centering
     \includegraphics[width=19cm,height=20cm,keepaspectratio]{figures/autoencoder_diagram.png}
-    \caption{An autoencoder network composed of two neural networks defined as the encoder 
+    \caption[Simple autoencoder network illustration.]{An autoencoder network composed of two neural networks defined as the encoder 
     and the decoder networks. Here, both networks are represented as fully-connected networks, but could also be any number of other network architectures such \ac{CNN}s and \ac{LSTM} networks. The encoder network takes as input a set of data and compresses the data  
     through a bottleneck called the latent space. The latent space is then given as input to the decoder network which tries to reconstruct the given input $x_1 ... x_N$.}
     \label{fig:autoencoder_diagram}
@@ -464,7 +464,7 @@ as
 \begin{figure}
     \centering
     \includegraphics[width=16cm,height=20cm,keepaspectratio]{figures/simple_vae_diagram.png}
-    \caption{A simplified diragram of a variational autoencoder network. The input data $x$ is passed to the encoder neural network which produces predictions on the means $\mu$ and standard deviations $\sigma$ of multi-variate Gaussian distributions describing the latent space. Samples are drawn from the predicted distributions $z$ in order to get samples from the latent space. These latent space samples are then passed to the decoder network which attempts to reconstruct the given input $x$.}
+    \caption[Simple variational autoencoder network illustration]{A simplified diragram of a variational autoencoder network. The input data $x$ is passed to the encoder neural network which produces predictions on the means $\mu$ and standard deviations $\sigma$ of multi-variate Gaussian distributions describing the latent space. Samples are drawn from the predicted distributions $z$ in order to get samples from the latent space. These latent space samples are then passed to the decoder network which attempts to reconstruct the given input $x$.}
     \label{fig:simple_vae}
 \end{figure}
 
@@ -779,8 +779,18 @@ feed both as inputs to the decoder network.
 \begin{figure}
     \centering
     \includegraphics[width=16cm,height=20cm,keepaspectratio]{figures/simple_cvae_diagram.png}
-    \caption{A simple \ac{CVAE} diagram consisting of an encoder and decoder network. $x$ data is given as input to the encoder and latent space samples are given as input to the decoder as was the case with the \ac{VAE} diagram in Fig.\ref{fig:simple_vae}. However, now we additionally condition the encoder on the class of $x$ by appending the class label in numerical form to $x$. We also condition the decoder on class $c$ by appending it to the latent space samples $z$.}
+    \caption[Simple conditional variational autoencoder illustration.]{A simple \ac{CVAE} diagram consisting of an encoder and decoder network. $x$ data is given as input to the encoder and latent space samples are given as input to the decoder as was the case with the \ac{VAE} diagram in Fig.\ref{fig:simple_vae}. However, now we additionally condition the encoder on the class of $x$ by appending the class label in numerical form to $x$. We also condition the decoder on class $c$ by appending it to the latent space samples $z$.}
     \label{fig:simple_cvae}
 \end{figure}
 
 \section{Summary}
+
+In this chapter we introduced the concept of machine learning 
+starting from one of the simplest neural networks, a perceptron. We 
+then built on perceptrons discussed how perceptrons can be strung 
+together to make a neural network layer, and from there layers 
+can be stacked to form a multi-layer deep fully-connected neural network. 
+I also provided some best practices on hyperparameter optimisation and 
+training procedures. We introduce the concept of both a \ac{CNN} 
+and a \ac{CVAE}, two of the networks primarily used in the author's 
+thesis work.

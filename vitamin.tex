@@ -203,7 +203,8 @@ detailed in the methods section.
 
 \begin{figure}
     \includegraphics[width=\columnwidth]{network_setup.png}
-    \caption{\label{fig:network_config} The configuration of the \ac{CVAE}
+    \caption[The configuration of the \ac{CVAE} \texttt{VItamin}
+neural network.]{\label{fig:network_config} The configuration of the \ac{CVAE}
 neural network. During training (left-hand side), a training set of noisy
 \ac{GW} signals ($y$) and their corresponding true parameters ($x$) are given
 as input to encoder network $\textrm{E}_2$, while only $y$ is given to
@@ -292,7 +293,8 @@ itself, rather than after training.
 %
 \begin{figure*}
     \includegraphics[width=\textwidth]{corner_testcase0.png}
-    \caption{\label{fig:corner_plot} Corner plot showing 2 and 1-dimensional
+    \caption[Corner plot showing 2 and 1-dimensional
+marginalised posterior distributions for one example test dataset from \texttt{VItamin}.]{\label{fig:corner_plot} Corner plot showing 2 and 1-dimensional
 marginalised posterior distributions for one example test dataset. Filled (red)
 contours represent the posteriors obtained from the \ac{CVAE} approach and
 solid (blue) contours are the posteriors output from our baseline analysis
@@ -388,7 +390,8 @@ using current inference techniques, representing a dramatic speed-up in performa
 % 
 \begin{table}
 \centering
-\caption{Durations required to produce samples from each of
+\caption[Durations required to produce samples from each of
+the different posterior sampling approaches.]{Durations required to produce samples from each of
 the different posterior sampling approaches.}
 \begin{tabular}[t]{lcccc}
 \toprule
@@ -696,7 +699,7 @@ evaluated within the training procedure.
 %
 \begin{figure}
     \includegraphics[width=\columnwidth]{inv_losses_log.png}
-\caption{\label{fig:loss_log} The cost as a function of training iteration. We
+\caption[The \texttt{VItamin} cost as a function of training iteration.]{\label{fig:loss_log} The cost as a function of training iteration. We
 show the \ac{ELBO} cost function component (blue), the \ac{KL} divergence
 component (orange) and total cost (green). The total cost is simply a
 summation of the 2 components and one training iteration is defined as
@@ -708,7 +711,8 @@ training over one batch of signals.}
 %
 \begin{table}
 \centering
-\caption{The uniform prior boundaries and fixed parameter values used on the \ac{BBH} signal parameters for the benchmark
+\caption[The uniform prior boundaries and fixed parameter values used on the \ac{BBH} signal parameters for the benchmark
+and the \ac{CVAE} analyses.]{The uniform prior boundaries and fixed parameter values used on the \ac{BBH} signal parameters for the benchmark
 and the \ac{CVAE} analyses.}
 \begin{tabular}[t]{lcccc}
 \toprule
@@ -889,7 +893,8 @@ with the same input data (see Eq.~\ref{eq:latent_model}).
 %
 \begin{figure}
     \includegraphics[width=\columnwidth]{latest_pp_plot.png}
-    \caption{\label{fig:pp_plot} One-dimensional \ac{PP} plots for each
+    \caption[One-dimensional \ac{PP} plots for each
+parameter and each benchmark sampler and \texttt{VItamin}.]{\label{fig:pp_plot} One-dimensional \ac{PP} plots for each
 parameter and each benchmark sampler and \texttt{VItamin}.  The curves were
 constructed using the 256 test datasets. The dashed black diagonal line
 indicates the ideal result.
@@ -921,7 +926,8 @@ benchmark samplers.
 %
 \begin{figure}
     \includegraphics[width=\columnwidth]{hist-kl.png}
-    \caption{\label{fig:kl_results} Distributions of \ac{KL}-divergence values
+    \caption[Distributions of \ac{KL}-divergence values
+between posteriors produced by different samplers.]{\label{fig:kl_results} Distributions of \ac{KL}-divergence values
 between posteriors produced by different samplers. The \ac{KL} divergence is
 computed between all samplers with every other sampler over all 256 \ac{GW}
 test cases. The distributions of the resulting \ac{KL} divergence values are
@@ -950,3 +956,289 @@ Fig.~\ref{fig:kl_results} we show the distributions of these
 consistent with those produced when comparing between 2 different benchmark
 samplers.
 
+\section{Additional analysis}
+
+In the following section we will discuss additional analysis of the results 
+from \texttt{VItamin} including: analysis of the JS divergence using individual 
+source parameter values, training set \ac{SNR} distribution and it's 
+effect on the performance of \texttt{VItamin}, the structure and behavior 
+of the \ac{CVAE} latent space and it's effect on the predicted 
+posterior distributions, ...
+
+\subsection{JS divergence for individual source parameters}
+%
+% Individual source parameter JS divergences
+%
+
+We provide additional figures of merit in Fig. \ref{fig:JS_indi_par_cpnest}, 
+\ref{fig:JS_indi_par_dynesty}, \ref{fig:JS_indi_par_emcee}, \ref{fig:JS_indi_par_ptemcee} where 
+we plot the JS divergence values for each \ac{GW} source parameter across all Bayesian 
+sampler approaches. Each sampler method vs. another sampler method are 
+denoted as different colors. The lower and upper end of boxes represent the 
+25th and 75th credibility regions respectively. The lower and upper end of 
+the whiskers represent the 5th and 95th percent credibility regions. The 
+dashed red line represents optimal JS divergence value according to 
+sampler experts ($\sim 0.002$).
+
+%
+% Discuss Dynesty plot
+%
+
+In Fig. \ref{fig:JS_indi_par_dynesty}, it can be seen that \texttt{Dynesty}  vs. \texttt{VItamin} JS values closely 
+matches results from \texttt{Dynesty} vs. \texttt{Ptemcee} for nearly all parameters, with the exception of 
+$t_0$, $\theta_{jn}$, $\phi_{jl}$, $\alpha$ and $\delta$. \texttt{VItamin} predictions 
+have a slightly higher mismatch across all source parameters except for the spin
+parameters. \texttt{Dynesty} vs. CPNest seems to generally have similar JS 
+values to \texttt{Dynesty} vs. \texttt{Ptemcee} with the exception of having 
+broader credibility intervals on $t_0$, $\theta_{jn}$, $\phi_{jl}$, $\alpha$ 
+and $\delta$. \texttt{Dynesty} vs. \texttt{Emcee} generally has higher JS values 
+than all other methods, which is expected given the difficulty of 
+\texttt{Emcee} convergence.
+
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/JS_IndiPar_dynesty_nature_paper.png}
+    \caption[JS divergences of individual source parameters for \texttt{Dynesty} against all other approaches.]{\label{fig:JS_indi_par_dynesty} Shown are JS divergence values for all test samples as a function of test sample source parameter for \texttt{Dynesty} against every other sampling approach. Each JS value is a 1-dimensional JS statistic, rather than the full 14-dimensional JS statistics shown earlier. Each sampler method vs. another sampler method are denoted as different colors. The lower and upper end of boxes represent the 25th and 75th credibility regions respectively. The lower and upper end of the whiskers represent the 5th and 95th percent credibility regions. The dashed red line represents optimal JS divergence value according to sampler experts ($\sim 0.002$). The orange line is representative of the median JS value. We see here that \texttt{VItamin} performs to within the same degree of accuracy as other Bayesian samplers when looking at predictions on an individual source parameter basis.}
+\end{figure}
+
+%
+% Discuss CPNest plot
+%
+
+In Fig. \ref{fig:JS_indi_par_cpnest}, \texttt{CPNest} is highlighted against 
+all other sampler approaches (including \texttt{VItamin}). It can be seen 
+that both \texttt{CPnest} vs. \texttt{Dynesty} and \texttt{CPnest} vs. 
+\texttt{Ptemcee} are in strong agreement with each other (although with broad 
+credibility regions on $t_0$, $\theta_{jn}$, $\alpha$, $\delta$). \texttt{CPNest} 
+vs. \texttt{VItamin} is also in strong agreement with \texttt{CPnest} vs. \texttt{Dynesty} and \texttt{CPnest} vs. \texttt{Ptemcee}, but it does show some 
+disagreement on $m_1$, $m_2$ and $\psi$. \texttt{CPNest} vs. \texttt{Emcee} is 
+generally in disagreement with all other approaches.
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/JS_IndiPar_cpnest_nature_paper.png}
+    \caption[JS divergences of individual source parameters for \texttt{CPNest} against all other approaches.]{\label{fig:JS_indi_par_cpnest} Shown are JS divergence values for all test samples as a function of test sample source parameter for \texttt{CPNest} against every other sampling approach. Each JS value is a 1-dimensional JS statistic, rather than the full 14-dimensional JS statistics shown earlier. Each sampler method vs. another sampler method are denoted as different colors. The lower and upper end of boxes represent the 25th and 75th credibility regions respectively. The lower and upper end of the whiskers represent the 5th and 95th percent credibility regions. The dashed red line represents optimal JS divergence value according to sampler experts ($\sim 0.002$). The orange line is representative of the median JS value. We see here that \texttt{VItamin} performs to within the same degree of accuracy as other Bayesian samplers when looking at predictions on an individual source parameter basis.}
+\end{figure}
+
+%
+% Discuss Emcee JS indi par plot
+%
+
+Fig. \ref{fig:JS_indi_par_emcee} highlights the \texttt{Emcee} sampler 
+vs. all other approaches including \texttt{VItamin}. In Fig. 
+\ref{fig:JS_indi_par_emcee} it can be seen that \texttt{Emcee} has equal 
+overlap against all other sampler approaches. Given the high JS values 
+of \texttt{Emcee} vs. all other approaches, this indicates that \texttt{Emcee} 
+has found difficulty converging on many of the test sample cases. This is 
+expected given that it is well known that \texttt{Emcee} generally difficult 
+to tune for proper convergence.
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/JS_IndiPar_emcee_nature_paper.png}
+    \caption[JS divergences of individual source parameters for \texttt{Emcee} against all other approaches.]{\label{fig:JS_indi_par_emcee} Shown are JS divergence values for all test samples as a function of test sample source parameter for \texttt{Emcee} against every other sampling approach. Each JS value is a 1-dimensional JS statistic, rather than the full 14-dimensional JS statistics shown earlier. Each sampler method vs. another sampler method are denoted as different colors. The lower and upper end of boxes represent the 25th and 75th credibility regions respectively. The lower and upper end of the whiskers represent the 5th and 95th percent credibility regions. The dashed red line represents optimal JS divergence value according to sampler experts ($\sim 0.002$). The orange line is representative of the median JS value. We see here that \texttt{VItamin} performs to within the same degree of accuracy as other Bayesian samplers when looking at predictions on an individual source parameter basis.}
+\end{figure}
+
+%
+% Discuss Ptemcee JS indi par plot
+%
+
+Fig. \ref{fig:JS_indi_par_ptemcee} highlights \texttt{Ptemcee} vs. all 
+other sampler approaches. In Fig. \ref{fig:JS_indi_par_ptemcee} we see 
+that \texttt{Ptemcee} vs. \texttt{Dynesty} and \texttt{Ptemcee} vs. 
+\texttt{CPNest} closely match each other with the exception of slight 
+disagreement on $t_0$, $\theta_{jn}$ and $\phi_{jl}$ (with broader credibility regions on \texttt{Ptemcee} 
+vs. \texttt{CPNest}). \texttt{Ptemcee} vs. \texttt{VItamin} in dark green 
+also closely matches the \texttt{Ptemcee} vs. \texttt{Dynesty} and \texttt{Ptemcee} vs. \texttt{CPNest} results with slightl higher JS values 
+accross all source parameter values other than the spin parameters. 
+\texttt{Emcee} is in strong misalignment with all other approaches.
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/JS_IndiPar_ptemcee_nature_paper.png}
+    \caption[JS divergences of individual source parameters for \texttt{Ptemcee} against all other approaches.]{\label{fig:JS_indi_par_ptemcee} Shown are JS divergence values for all test samples as a function of test sample source parameter for \texttt{Ptemcee} against every other sampling approach. Each JS value is a 1-dimensional JS statistic, rather than the full 14-dimensional JS statistics shown earlier. Each sampler method vs. another sampler method are denoted as different colors. The lower and upper end of boxes represent the 25th and 75th credibility regions respectively. The lower and upper end of the whiskers represent the 5th and 95th percent credibility regions. The dashed red line represents optimal JS divergence value according to sampler experts ($\sim 0.002$). The orange line is representative of the median JS value. We see here that \texttt{VItamin} performs to within the same degree of accuracy as other Bayesian samplers when looking at predictions on an individual source parameter basis.}
+\end{figure}
+
+It is evident in Fig's \ref{fig:JS_indi_par_cpnest}, 
+\ref{fig:JS_indi_par_dynesty}, \ref{fig:JS_indi_par_emcee}, \ref{fig:JS_indi_par_ptemcee} that JS values for individual source 
+parameters of \texttt{VItamin} against all other sampler is generally 
+consistent with all other samplers against themselves. This is an important 
+point because it indicates that our machine learning approach is able 
+to produce Bayesian posteriors to within an accuracy which is at a similar 
+level of other Bayesian samplers, using the same individual source 
+parameter figure of merit used for other comparison studies in the Bayesian 
+\ac{GW} parameter estimation literature \cite{1811.02042,2008.03312,PhysRevD.102.104057}. What is also 
+interesting to note is the level of disagreement of other Bayesian samplers 
+with themselves. This disagreement is especially prominent with regards 
+to source parameters $t_0$, $\theta_{jn}$, $\phi_{jl}$, $\alpha$, and $\delta$.
+Although \texttt{Emcee} results are fairly poor in comparison with other 
+approaches, they are a useful benchmark for indicating underperformance. 
+
+
+%
+% JS as a function of SNR
+%
+
+\subsection{JS divergence as a function of SNR}
+
+Over the course of this project there was some discussion on the possibility 
+that \ac{SNR} might be a limiting factor with regards to the performance 
+of the neural network model. It was originally hypothesized that due to the 
+low number of high \ac{SNR} signals in our training set (as seen in 
+Fig. \ref{fig:VItamin_TrainingSet_SNR_Dist}), that the network would perform worse on high \ac{SNR} signals. 
+This hypothesis is supported by the well known understanding in 
+machine learning literature that less available 
+data in specific regions of the parameter space can cause a neural network
+model to underfit to those regions \cite{everitt2010cambridge}. As a test, 
+we have plotted in Fig. \ref{fig:JS_vs_SNR_dynesty} the JS divergence for 
+individual test sample cases of \texttt{VItamin} vs. \texttt{Dynesty} 
+as a function of \ac{SNR}. Each plus sign is representative of indivudal test 
+cases and different colors correspond to each interferometer. 
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/TrainingSetSNR_distribution.png}
+    \caption[VItamin SNR training set distribution.]{\label{fig:VItamin_TrainingSet_SNR_Dist} Shown is a histogram of the \ac{SNR} values of the \texttt{VItamin} training set. There is a peak of signals centered around an \ac{SNR} value of 8 which drops off quickly to zero on the left-hand side. There is a tail on the right-hand side which drops off more gradually up to a maximum \ac{SNR} value of $\sim 70$. The peak location and general distribution of the \ac{SNR} values is heavily dependent on both the chosen source parameter priors and the \ac{PSD}.}
+\end{figure}
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/JS_vs_SNR_nature_paper.png}
+    \caption[JS divergences of \texttt{Dynesty} vs. \texttt{VItamin} as a function of \ac{SNR}.]{\label{fig:JS_vs_SNR_dynesty} Shown are JS divergence values of \texttt{Dynesty} vs. \texttt{VItamin} as a function of \ac{SNR}. Different colors are representative of each of the 3 detectors (H1, L1, V1) used in the analysis. Each ``plus'' symbol represents a different test \ac{GW} case. As can be seen, there does not appear to be a strong positive correlation with \ac{SNR}. One could argue there is in fact a small negative correlation with network performance and \ac{SNR} value, but this is not clear. }
+\end{figure}
+
+We see in Fig. \ref{fig:JS_vs_SNR_dynesty} that there is little to no 
+positive correlation between \ac{SNR} and JS divergence. In fact, there 
+may be a slight negative correlation. This shows that there would be 
+marginal benefit gained from augmenting the training set to more strongly 
+emphasize high \ac{SNR} signals. Even if there were a positive correlation 
+it is unlikely that simply including more high \ac{SNR} signals would be 
+beneficially to the statistical results of the network model as a 
+whole because there are fewer test signals at high \ac{SNR} anyways due 
+to the priors used.
+
+\subsection{VItamin latent space analysis}
+
+%
+% Subsection intro
+%
+In this section I will introduce diagnostic plots we have used 
+in order to gauge the performance of our neural network model with 
+respect to the latent space. I will also provide the posterior predictions 
+for context for each test sample discussed.
+
+%
+% Discuss the corner plot for test case 184.
+%
+For context, we will first examine a test case at a median network \ac{SNR} 
+value of $\sim 14.33$. As seen in Fig. \ref{fig:comp_post_184}, this 
+median \ac{SNR} event exhibits complex multi-modal behavior in across 
+several dimensions including: $t_0$, $\psi$, $\alpha$ and $\delta$. 
+There also appears to some disagreement between Bayesian samplers, 
+particularly on the $\phi_{jl}$, $\phi_{12}$ and $a_1$ parameters. 
+The sky plot in the upper right-hand corner of Fig. \ref{fig:comp_post_184} 
+is also multi-modal and spans a large region of the sky. We will discuss 
+in the following paragraphs how latent space predictions translate to 
+posterior predctions.
+
+%
+% Discuss the latent space corner plots
+%
+
+There is no hard rule for determining the number of latent space 
+dimensions to use when deciding on the architecture for a \ac{CVAE}. 
+That being said, our primary motivation for choosing a latent space size 
+of 15 is directly related to the total number of source parameter posteriors 
+we are trying to get the neural network model to learn. Our hope was that 
+each dimension of the latent space would encode information corresponding 
+to each dimension of the posterior space. However, as can be seen 
+in Fig. \ref{fig:latent_corner_184}, there are some indications that 
+this may not be the case of what's actually happening underneath the 
+hood. 
+
+In Fig. \ref{fig:latent_corner_184} we plot $8000$ latent space samples 
+drawn from predictions made by both the $q$ (blue) and $r_1$ (red) encoder networks. If a dimension of the latent space is being used, we would expect 
+that the corresponding 1-D histogram for that latent space dimension 
+along the diagonal of the corner plot to show some level of disagreement 
+between the predictions from both encoder networks. The reasoning behind 
+this statement is that the $q$ network is given a different level 
+of information with respect to the $r_1$ network. Specifically, the 
+$q$ network is given not only the \ac{GW} time series, but also 
+the true values of the source parameters themselves, whereas the 
+$r_1$ network is given the \ac{GW} time series by itself. If a latent space 
+dimension is not being used it means that there is no additional 
+amount of information that can be gleamed from that dimension, so 
+both encoder networks will simply return mean zero unit variate Gaussian 
+distributions, which contribute nothing to the loss function. Nothing is 
+contributed to the loss function during training because the KL 
+divergence between two Gaussian distributions is zero. Since the KL 
+component of the loss is zero for this dimension, weights will not 
+be updated during the backpropogation process which encourage this 
+dimension to be used. 
+
+From Fig. \ref{fig:latent_corner_184} we see that 6 of the 15 latent 
+space dimensions are not being used for this test case. It also appears 
+that the $r_1$ encoder network (which is capable of producing multi-modal 
+distributions) is in fact choosing to, on the whole, produce latent space 
+samples which are representative of uni-modal distributions. What this 
+implies is that the multi-modality clearly seen in the final posteriors 
+of Fig. \ref{fig:comp_post_184} is entirely handled by the $r_2$ decoder 
+network which is apprently choosing what level of likelihood to 
+assign to each mode in the posterior space. 
+
+This could indicate that the decoder network could have a 
+higher level of capacity than what may be needed and is just bypassing 
+the Gaussian Mixture Model in the $r_1$ encoder network.
+
+%
+% Test set sample 184 corner plot
+%
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/comp_posterior_pub_plot_event_184.png}
+    \caption[Posterior predictions from \texttt{VItamin}, \texttt{Dynesty} and \texttt{Ptemcee} for the 184th test sample in the \texttt{VItamin} paper training set.]{\label{fig:comp_post_184} Corner plot showing 2 and 1-dimensional marginalised posterior distributions for 184th test dataset sample. Filled (red) contours represent the posteriors obtained from the \ac{CVAE} approach and solid (blue) contours are the posteriors output from our baseline analysis (\texttt{Bilby} using the \texttt{Dynesty} sampler). In each case, the contour boundaries enclose $68,90$ and $95\%$ probability. One dimensional histograms of the posterior distribution for each parameter from both methods are plotted along the diagonal. Blue and red vertical lines represent the $5$---$95\%$ symmetric confidence bounds for \texttt{Bilby} and variational inference respectively. Black crosses and vertical black lines denote the true parameter values of the simulated signal. The original whitened noisy timeseries $y$ and the noise-free signal are plotted in blue and cyan respectively in the upper right hand panel. The test signal was simulated with network optimal signal-to-noise ratio of 14.33.}
+\end{figure}
+
+%
+% Test sample 184 log weights histogram
+%
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/latent_logweight_pub_plot_event_184.png}
+    \caption[Latent space log weight plot for the 184th test sample in the \texttt{VItamin} paper training set.]{\label{fig:log_weight_184} Plotted are the predicted log'd weight values for the zeroth posterior sample of the 184th test sample as a function of mode latent space dimension number. Mode weights are predicted for each posterior sample by the $r_1$ encoder network.}
+\end{figure}
+
+%
+% Test sample 184 latent space samples corner plot
+%
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/latent_pub_plot_event_184.png}
+    \caption[Latent space samples corner plot for the 184th test sample in the \texttt{VItamin} paper training set.]{\label{fig:latent_corner_184} Shown are $8000$ latent space samples from all latent space dimensions of both 
+    the $q$ encoder network (blue) and the $r_1$ encoder network (red). Each square point is representative of the predicted mean values for each latent space dimension (15). Each dimension on the x and y axis represents a different latent space dimension. 1-d histograms of latent space samples for each dimension are plotted along the diagonal. Contours represent the $68, 90, 95\%$ credibility intervals. Blue and red vertical lines denote the $5 - 95\%$ symmetric confidence bounds for the $q$ and $r_1$ networks respectively.}
+\end{figure}
+
+%
+% Test sample 184 weights histogram
+%
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/latent_weight_pub_plot_event_184.png}
+    \caption[Latent space weight plot for the 184th test sample in the \texttt{VItamin} paper training set.]{\label{fig:log_weight_184} Plotted are the unlogged predicted weight values from the $r_1$ encoder network for the zeroth posterior sample of the 184th test case as a function of latent space mode dimension number. Each value is normalised to be betweeen 0 and 1 where 1 is representative of the network model assigning a high likelihood of sampling from that particular mode.}
+\end{figure}
+
+
+\subsection{Dynesty vs. Dynesty JS Divergence}
+
+Here we provide some discussion on what the absolute best JS values we 
+could hope for from \texttt{VItamin} by comparing two independent Dynesty 
+runs on all $250$ test sample cases for both the full 14-dimensional JS 
+divergence and the 1-dimensional JS divergence.
+%
+% Dynesty vs. Dynesty Full JS
+%
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/dynesty-dynesty_fullJS.png}
+    \caption[Dynesty vs. Dynesty full 14-D JS divergence histogram plot.]{\label{fig:dyn_vs_dyn_ful14D_JS} A histogram of JS divergence values for \texttt{Dynesty} vs. another independent run of \texttt{Dynesty}. The mean JS divergence has a value of $0.05$. We do note that since since the JS statistic is calculated using the \texttt{universal-divergence} code-base, that there are some negative values which are not shown here.}
+\end{figure}
+
+%
+% Dynesty vs. Dynesty 1D JS
+%
+
+\begin{figure}
+    \includegraphics[width=\columnwidth]{figures/dynesty-dynesty_indiJS.png}
+    \caption[Dynesty vs. Dynesty full 1-D JS divergence histogram plot.]{\label{fig:dyn_vs_dyn_ful14D_JS} Shown are histograms of 1-dimensional JS divergence values for \texttt{Dynesty} vs. another independent run of \texttt{Dynesty}. Different colors represent JS values with respect to individual source parameter posterior \texttt{Dynesty} predictions. Mean JS values for each source parameter are given as: $m_1 \sim 0.00139$, $m_2 \sim 0.00143$, $d_l \sim 0.00142$, $t_0 \sim 0.00358$, $\theta_{jn} \sim 0.00192$, $\psi \sim 0.00134$, $a_1 \sim 0.00101$, $a_2 \sim 0.00088$, $\Theta_1 \sim 0.00143$, $\Theta_2 \sim 0.00123$, $\phi_{12} \sim 0.00080$, $\phi_{jl} \sim 0.00136$, $\alpha \sim 0.00538$, $\delta \sim 0.00401$. JS values are calculated using the \texttt{scipy} JS divergence code-base. }
+\end{figure}

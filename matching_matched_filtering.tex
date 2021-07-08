@@ -1,4 +1,4 @@
-\chapter{Matching matched template filtering using deep networks for gravitational wave astronomy}
+\chapter[Matching matched template filtering]{Matching matched template filtering using deep networks for gravitational wave astronomy}
 
 \section{Introduction}
 %
@@ -32,9 +32,6 @@ used are complex, sophisticated processes computed over a large parameter space
 using advanced signal processing techniques. The computational cost to run the
 search analysis is due to the large parameter space, as well as analysis of the high frequency components 
 of the waveform where high data sample rates are required. 
-%the increasing cost of
-%analysing longer duration waveforms as the low frequency sensitivity of the
-%detectors improves. 
 Distinguishing noise from signal in these search pipelines
 is acheived, in part, using a technique known as template based matched-filtering. 
 
@@ -102,10 +99,6 @@ low-latency to achieve the same sensitivity as established matched-filtering
 techniques. 
 
 %
-% Try to be clear, e.g. use heuristic explanations. But making a strong case
-% for the result takes precedence. You can submit Supplementary Material or,
-% better, an accompanying longer paper.
-%
 \section{Simulation details}
 %
 % describe the simulations
@@ -148,15 +141,6 @@ inclination is uniform on the range $[-1,1]$. The waveforms are then randomly
 placed within the time series such that the peak amplitude of each waveform is
 randomly positioned within the fractional range $[0.75,0.95]$ of the
 timeseries. 
-
-%\fergus{Instead ``The simulated time series were chosen to be 2s in duration.
-%The waveforms were then placed within the timeseries such that the peak of each
-%waveform are in the interval [1.25, 1.45]s, such that the waveform
-%approximately lies within the middle 1s. The time series is sampled at 8,192
-%Hz.'', or something like that , replacing the previous sentence and some that
-%follow. We would then have to alter the next paragraph to account for the
-%network only receiving the middle 1s, and the timeseries being cut with the
-%tukey window, straddling the middle 1s for the matched filter}. 
 
 %
 % Define the optimal SNR
@@ -227,23 +211,23 @@ pixel proportional to the gravitational-wave amplitude.
 %
 % explain the distinction on how the masses are distributed 
 %
-%We will only use the training set to teach the deep neural network about the
-%signals that we wish to classify. For this reason we have chosen to distribute
-%the masses of the training set according to the density of templates one would
-%use in a matched-filtering approach derived from~\cite{0264-9381-23-18-002}.
-%The idealized density of templates is expected to be somewhat different
-%\cite{PhysRevD.91.124042}.  It is logical to place waveforms closer in regions
-%where the waveforms change rapidly and hence we distribute the masses according
-%to the total mass $M\sim M^{10/3}$ and the symmetric mass ratio $\eta\sim
-%\eta^{-3}$ where $M=m_{1}+m_{2}$ and $\eta=m_{1}m_{2}/M^{2}$. The validation,
-%and crucially the testing set must be drawn from distributions that one would
-%expect to see in nature and we therefore draw those masses from astrophysically
-%motivated distributions where we assume $m_{1,2}\sim \log{m_{1,2}}$.   
+We will only use the training set to teach the deep neural network about the
+signals that we wish to classify. For this reason we have chosen to distribute
+the masses of the training set according to the density of templates one would
+use in a matched-filtering approach derived from~\cite{0264-9381-23-18-002}.
+The idealized density of templates is expected to be somewhat different
+\cite{PhysRevD.91.124042}.  It is logical to place waveforms closer in regions
+where the waveforms change rapidly and hence we distribute the masses according
+to the total mass $M\sim M^{10/3}$ and the symmetric mass ratio $\eta\sim
+\eta^{-3}$ where $M=m_{1}+m_{2}$ and $\eta=m_{1}m_{2}/M^{2}$. The validation,
+and crucially the testing set must be drawn from distributions that one would
+expect to see in nature and we therefore draw those masses from astrophysically
+motivated distributions where we assume $m_{1,2}\sim \log{m_{1,2}}$.   
 
 
 \begin{figure} 
 \includegraphics[width=\columnwidth]{figures/waveform.pdf}
-\caption{A whitened noise-free timeseries of a \ac{BBH} signal with component
+\caption[Whitened noise-free timeseries of a \ac{BBH} signal]{A whitened noise-free timeseries of a \ac{BBH} signal with component
 masses $m_{1}=41.86\mathrm{M}_{\odot}$ and $m_{2}=6.65\mathrm{M}_{\odot}$ with
 optimal \ac{SNR} $\optsnr=8$ (cyan). The dark blue timeseries shows the same
 gravitational-wave signal with additive whitened Gaussian noise of unit
@@ -305,18 +289,18 @@ tests and tunings of hyperparameters by means of trial and error.
 %
 % go into more detail about what we tried in network design
 %
-%Within our optimization process we experimented with rescaling the input data
-%which we found to have minimal effect on the network performance. The reason
-%for this is that our input data is whitened and our signals are buried beneath
-%the noise. Therefore our data is effectively prescaled on a range
-%$\pm\mathcal{O}(1)$ due to the natural variation of Gaussian noise. We also
-%experimented with using transfer learning~\cite{5288526} where networks
-%pre-trained on high \ac{SNR} datasets are used as starting points for
-%application to successively lower \ac{SNR} datasets. We found that there were
-%no performance benefits in using this approach compared to training the network
-%solely on each \ac{SNR} dataset seperately. The network depth was adjusted
-%between 2 and 10 convolutional layers. The inclusion of dropout was used within
-%the final 2 hidden layers as a form of regularization to avoid overfitting.
+Within our optimization process we experimented with rescaling the input data
+which we found to have minimal effect on the network performance. The reason
+for this is that our input data is whitened and our signals are buried beneath
+the noise. Therefore our data is effectively prescaled on a range
+$\pm\mathcal{O}(1)$ due to the natural variation of Gaussian noise. We also
+experimented with using transfer learning~\cite{5288526} where networks
+pre-trained on high \ac{SNR} datasets are used as starting points for
+application to successively lower \ac{SNR} datasets. We found that there were
+no performance benefits in using this approach compared to training the network
+solely on each \ac{SNR} dataset separately. The network depth was adjusted
+between 2 and 10 convolutional layers. The inclusion of dropout was used within
+the final 2 hidden layers as a form of regularization to avoid overfitting.
 
 %
 % describe how the training itself works to optimise the weights and biases
@@ -327,18 +311,22 @@ attempting to minimize that loss function. The errors are then propagated back
 through the network while also updating the weight and bias terms
 accordingly.  Back propagation is done over multiple iterations called epochs.
 We use adaptive moment estimation with incorporated Nesterov
-momentum~\cite{dozat2016incorporating} with a learning rate of $0.002$,
+momentum~\cite{dozat2016incorporating} 
+
+\begin{equation} \label{eq:nesterov1}
+v_{i+1} = \mu v_{i} - \epsilon \nabla f(\theta_{i} + \mu v_{i}),
+\end{equation}
+
+\begin{equation} \label{eq:nesterov2}
+\theta_{i+1} = \theta_{i} + v_{i+1},
+\end{equation} \\
+
+where $\theta_i$ are the parameters of the neural network from the previous layer, $\theta_{i+1}$ are the parameters of the current layer of the network, $v_{i+1}$ is the momentum for the current layer, $\mu$ is a scalar constant term which determines the amount of momentum to apply per gradient update (the higher the number, the more momentum), $v_i$ is the momentum term from the previous layer, $\epsilon$ is the learning rate, $\nabla f(\theta_{i} + \mu v_{i})$ is the gradient of the model parameters with respect to the previous layer (including the momentum term from the previous layer ($\mu v_{i}$)). 
+
+We also use a learning rate of $0.002$,
 $\beta_{1}=0.9$, $\beta_{2}=0.999$, $\epsilon = 10^{-8}$ and a momentum
 schedule of $0.004$. We outline the structure of the final neural network
 architecture in Table~\ref{table:network}.
-
-%\begin{equation} \label{eq:nesterov1}
-%v_{i+1} = \mu v_{i} - \epsilon \nabla f(\theta_{i} + \mu v_{i}),
-%\end{equation}
-
-%\begin{equation} \label{eq:nesterov2}
-%\theta_{i+1} = \theta_{i} + v_{i+1},
-%\end{equation} \\
 
 %
 % the CNN ranking statistic
@@ -353,27 +341,20 @@ applying the trained network to all $25,000$ 1 s test data samples also using a
 single GPU. Therefore at the point of data taking this particular analysis can
 be run at ~$10^{4}$ times faster than real-time.
 
-% 
-% I am commenting this figure out for now
-%
-%\begin{figure} 
-%\includegraphics[width=\columnwidth]{figures/loss.pdf}
-%\caption{\label{fig:loss_curve} \hunter{Not sure if we stil need this figure? I'd still like to keep it though} The
-%loss, accuracy and learning rate~\chris{in the main text none of these
-%quantities seem to be defined. This is a problem!} plots (shown above)
-%illustrate how the network's performance is defined as a function of the number
-%of training epochs. The goal is
-%to minimize the loss function, which will in turn maximize the accuracy of the
-%classifier. The first initial epochs see an exponential decrease in the loss
-%function and then a slowly falling monotonic curve to follow. This indicates
-%that the longer our network is trained, a limit with respect to the accuracy is
-%approached. In our case, we cyclically adjust the learning rate to oscilate
-%between $5 \times 10^{-4}$ and $1 \times 10^{-3}$ at a constant frequency.
-%Studies have shown that this policy of learning rate adjustement.~\chris{Also
-%define exactly what run this was run on, what accuracy and loss were achieved
-%and make sure that you show the typical number of epochs used in the analysis.
-%Maybe use log-scale on the y-axis of the loss plot.}} 
-%\end{figure}
+\begin{figure} 
+\includegraphics[width=\columnwidth]{figures/matching_matched_filtering_loss.pdf}
+\caption[CNN loss, detection probability (accuracy) and learning rate plots illustrate how the network's performance is defined as a function of the number of training epochs.]{\label{fig:loss_curve} The
+loss, detection probability (accuracy) and learning rate plots (shown above)
+illustrate how the network's performance is defined as a function of the number
+of training epochs. The goal is
+to minimize the loss function, which will in turn maximize the accuracy of the
+classifier. The first initial epochs see an exponential decrease in the loss
+function and then a slowly falling monotonic curve to follow. This indicates
+that the longer our network is trained, a limit with respect to the accuracy is
+approached. In our case, we cyclically adjust the learning rate to oscillate
+between $5 \times 10^{-4}$ and $1 \times 10^{-3}$ at a constant frequency.
+The detection probability on training samples is represented by the purple curve, validation detection probability as the orange, and testing detection probability as the blue curve.}
+\end{figure}
 
 \begin{table}[]
 \begin{tabular}{lccccccccc}
@@ -391,7 +372,8 @@ Drop out  & 0 & 0 & 0 & 0 & 0 & 0 & 0.5 & 0.5 & 0 \\
 Act. Func. & Elu & Elu & Elu & Elu & Elu & Elu & Elu & Elu & SMax \\
 \hline
 \end{tabular}
-\caption{The optimised network consisting of 6 convolutional layers (C),
+\caption[CNN optimised network configuration consisting of 6 convolutional layers (C),
+followed by 3 hidden layers (H).]{The optimised network consisting of 6 convolutional layers (C),
 followed by 3 hidden layers (H). Max-pooling is performed on the first, fifth,
 and eighth layer, whereas dropout is only performed on the two hidden layers.
 Each layer uses an exponential linear unit (Elu) activation function (with
@@ -457,17 +439,7 @@ from the testing dataset to compute the matched-filter ranking statistic.
 %
 % Describe the main results of the study
 %
-%
-% introduce the confusion matrix results
-%
-%A standard method for displaying the accuracy of a classifier is through a
-%confusion matrix in which the number of samples of each true class identified
-%as every possible class are listed in a square matrix. A fully diagonal matrix
-%would imply no incorrectly classified samples and a uniform matrix would imply
-%no classification power. In Figure~\ref{fig:confusion} we show results for the
-%\ac{CNN} approach from which we highlight the overall accuracy (the ratio of
-%incorrectly identified samples to the total number of samples) of
-%\cnnsnreight\% at $\rho_{\mathrm{opt}}=8$.
+
 
 %
 % a description of the main results
@@ -484,21 +456,34 @@ approaches, and having knowledge of the true class associated with each sample,
 we may now construct \ac{ROC} curves. 
 
 %
+% introduce the confusion matrix results
+%
+A standard method for displaying the accuracy of a classifier is through a
+confusion matrix in which the number of samples of each true class identified
+as every possible class are listed in a square matrix. A fully diagonal matrix
+would imply no incorrectly classified samples and a uniform matrix would imply
+no classification power. In Figure~\ref{fig:confusion} we show results for the
+\ac{CNN} approach from which we highlight the overall accuracy (the ratio of
+incorrectly identified samples to the total number of samples) of
+\cnnsnreight\% at $\rho_{\mathrm{opt}}=8$.
+
+%
 % confusion matrix plot
 %
-%\begin{figure}[]
-%\includegraphics[width=\columnwidth] {figures/confusion_matrix.pdf}
-%\caption{Confusion matrices for testing datasets containing signals with
-%optimal SNR $\rho_{\mathrm{opt}}=2,4,6,8,10,12$.  Numbers superimposed within
-%matrix elements are the number of samples corresponding to samples that were of
-%true class indicated by the y-axis label but identified as the corresponding
-%x-axis label. For our 2 class system these are equivalent to the numbers of
-%true alarm, true dismissal, false dismissal, or false alarm. The accuracy
-%percentages for all injection SNR values are listed as follows: $51.86\%$ at
-%$\optsnr=2$, $65.51\%$ at $\optsnr=4$, $85.63\%$ at $\optsnr=6$, $96.66\%$ at
-%$\optsnr=8$, $99.41\%$ at $\optsnr=10$ and $99.99\%$ at
-%$\optsnr=12$.\label{fig:confusion}}
-%\end{figure}
+\begin{figure}[]
+\includegraphics[width=\columnwidth] {figures/confusion_matrix.pdf}
+\caption[Confusion matrices for testing datasets containing signals with
+optimal SNR $\rho_{\mathrm{opt}}=2,4,6,8,10,12$]{Confusion matrices for testing datasets containing signals with
+optimal SNR $\rho_{\mathrm{opt}}=2,4,6,8,10,12$.  Numbers superimposed within
+matrix elements are the number of samples corresponding to samples that were of
+true class indicated by the y-axis label but identified as the corresponding
+x-axis label. For our 2 class system these are equivalent to the numbers of
+true alarm, true dismissal, false dismissal, or false alarm. The accuracy
+percentages for all injection SNR values are listed as follows: $51.86\%$ at
+$\optsnr=2$, $65.51\%$ at $\optsnr=4$, $85.63\%$ at $\optsnr=6$, $96.66\%$ at
+$\optsnr=8$, $99.41\%$ at $\optsnr=10$ and $99.99\%$ at
+$\optsnr=12$.\label{fig:confusion}}
+\end{figure}
 
 %
 % describe ROC curves
@@ -514,14 +499,22 @@ it achieves a higher detection probability. Our results show that the \ac{CNN}
 approach closely matches the sensitivity of matched-filtering for all test
 datasets across the range of false alarm probabilities explored in this
 analysis\footnote{We are limited to a minimal false alarm probability of $\sim
-10^{-4}$ due to the limited number of testing samples used.}.
+10^{-4}$ due to the limited number of testing samples used.}. It is not surprising to see that the matched-filtering
+method using the optimal template consistently performs better than both the
+nominal match-filtering method and our deep learning classifier.  However, what
+is considerable is the comparison between the nominal matched filtering and the
+deep learning classifier detection probability curves. It can clearly be seen
+that our classifier exceeds the performance of the nominal matched-filtering
+method at \ac{SNR} 2, 4 and 6. This is a promising result and certainly merits
+further investigation.
 
 %
 % show ROC curves
 %
 \begin{figure}[]
 \includegraphics[width=\columnwidth] {figures/ROC_curves.pdf}
-\caption{The \ac{ROC} curves for test datasets containing signals with optimal
+\caption[Reciever operating characteristic curves for test datasets containing signals with optimal
+signal to noise ratio, $\rho_{\mathrm{opt}}=2,4,6$]{The \ac{ROC} curves for test datasets containing signals with optimal
 \ac{SNR}, $\rho_{\mathrm{opt}}=2,4,6$. We plot the true alarm probability
 versus the false alarm probability estimated from the output of the \ac{CNN}
 (purple) and matched-filtering (cyan) approaches. Uncertainties in the true
@@ -545,23 +538,14 @@ exceeds the \ac{CNN} at high \ac{SNR} and low false alarm probability. This
 latter discrepancy could be mitigated by increasing the number of training
 samples.
 
-%We compare the results of
-%%all three methods at various injection SNR values in figure
-%\ref{fig:ROC_curves}. It is not surprising to see that the matched-filtering
-%method using the optimal template consistently performs better than both the
-%nominal match-filtering method and our deep learning classifier.  However, what
-%is considerable is the comparison between the nominal matched filtering and the
-%deep learning classifier detection probability curves. It can clearly be seen
-%that our classifier exceeds the performance of the nominal matched-filtering
-%method at SNR 2, 4 and 6. This is a promising result and certainly merits
-%further investigation.
-
 %
 % show efficiency curve
 %
 \begin{figure}[]
 \includegraphics[width=\columnwidth] {figures/efficiency.pdf}
-\caption{Efficiency curves comparing the performance of the \ac{CNN} and
+\caption[Efficiency curves comparing the performance of the CNNs and
+matched-filtering approaches for false alarm probabilities $10^{-1}$ (solid),
+$10^{-2}$ (dashed), $10^{-3}$ (dot-dashed).]{Efficiency curves comparing the performance of the \ac{CNN} and
 matched-filtering approaches for false alarm probabilities $10^{-1}$ (solid),
 $10^{-2}$ (dashed), $10^{-3}$ (dot-dashed). The true alarm probability is
 plotted as a function of the optimal \ac{SNR} for the \ac{CNN} (purple) and the

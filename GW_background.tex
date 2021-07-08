@@ -1,4 +1,4 @@
-\chapter{Gravitational waves}
+\chapter[Introduction to Gravitational waves]{An Introduction to Gravitational waves, Search Methods and Parameter Estimation Techniques}
 
 \section{Gravitational Waves}
 
@@ -58,15 +58,16 @@ where $A_{\mu\nu}$ is the amplitude, $k_{\alpha}$ is the wavevector and $x^{\alp
 \end{pmatrix},
 \end{equation}
 
-where we can clearly see that a \ac{GW} signal is composed of both ``plus'' and ``cross'' polarizations orthogonal to each other. The effect that a passing \ac{GW} has on a set of freely floating test particles is illustrated in Figure \ref{fig:gw_plus_cross}. This effect on freely floating test masses is what we try to measure with the \ac{LIGO} \ac{GW} detectors. In the following subsection, I will talk about how the detectors function and detect such signals.
+where we can clearly see that a \ac{GW} signal is composed of both ``plus'' and ``cross'' polarizations orthogonal to one-another. The effect that a passing \ac{GW} has on a set of freely floating test particles is illustrated in Figure \ref{fig:gw_plus_cross}. This effect on freely floating test masses is what we try to measure with the \ac{LIGO} \ac{GW} detectors. For a full derivation on how \ac{GW} signals are generated, I refer the reader to \cite{Flanagan_2005}. 
 
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/GW_polarizations_thesis_figure.png}
-    \caption{An illustration of the $h_+$ and $h_\times$ polarizations of a \ac{GW} signal impinging on a set of freely floating test masses as a function of phase $\phi$ from $0$ to $2\pi$.}
+    \caption[$h_+$ and $h_\times$ polarization illustration]{An illustration of the $h_+$ and $h_\times$ polarizations of a \ac{GW} signal impinging on a set of freely floating test masses as a function of phase $\phi$ from $0$ to $2\pi$.}
     \label{fig:gw_plus_cross}
 \end{figure}
 
+In the following subsection, I will talk about how the detectors function and detect such signals.
 
 \section{Weber Bar Detector}
 
@@ -86,6 +87,31 @@ other independent studies were disappointing
 Weber's work encouraged many others to build their own improved experiments with 
 breakthrough technological developments at the time and 
 kick-started the subsequent field of \ac{GW} detection \cite{1009.1138}.
+
+\section{The Hulse-Taylor Pulsar}
+
+In 1975, Russell Hulse and Joseph Taylor made the first direct observation 
+of a binary pulsar, which subsequently won them the 1993 Nobel Prize in 
+Physics \cite{1975ApJ...195L..51H}. Importantly, this was also one of the 
+first pieces of indirect observational evidence for the existence of 
+\ac{GW}s. This indirect evidence can be attributed to the observation 
+made by both Hulse and Taylor that the period of the binary pulsar 
+appeared to experience orbital decay as a function of time. The orbital 
+decay was thought to likely be attributed to a loss of energy in the 
+system due to \ac{GW} radiation predicted by \ac{GR}. The observed period 
+decay as a function of time (in years) is represented
+in Fig. \ref{fig:hulse_taylor_decay}. As can be seen in Fig. \ref{fig:hulse_taylor_decay}, there is a striking level of agreement 
+between the theoretical decay curve predicted by Einstein's \ac{GR} and 
+the observations made by Hulse and Taylor.
+
+\begin{figure}
+    \centering
+    \includegraphics[width=\linewidth]{figures/Hulse_taylor_pulsar.png}
+    \caption[Hulse-Taylor binary pulsar decay.]{This figure shows Hulse 
+    and Taylor's observations of binary pulsar \texttt{PSR B1913+16} 
+    orbital decay as a function of time in years. The orbital decay is quantified by the total cumulative amount the binary system has been offset from it's first observation in 1975 with respect to the binary's perihelion point (black dots). The solid black curve is representative of the theoretical decay curve predicted by \ac{GR}. \texttt{This figure was produced by the authors of} \cite{1975ApJ...195L..51H}. }
+    \label{fig:hulse_taylor_decay}
+\end{figure}
 
 \section{LIGO Detectors}
 
@@ -132,7 +158,7 @@ arms.
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/Interferometer_sketch_figure.png}
-    \caption{An illustration of the \ac{LIGO} detectors. A 1064nm laser beam is emited from a laser on the left-hand side, it then passes through a phase modulator (PMOD) and enters the power recycling cavity (PRM), this effectively boosts the power of the signal. The laser then passes through a beam splitter (BS), which splits the laser beam path into two seperate parts. Each part travels through an input test mass and hits end test masses at the end of both interferometer arms. The beams are then caught in a Fabry-Perot cavity which acts to extend the distance traveled of the beams, as well as the power. In other words, the cavity ``stores'' the photons for a long period ($\sim1$ ms) which allows a potential \ac{GW} signal more time to interact with the photons, thus increasing the sensitivity of the interferometer at low frequencies. Some laser light escapes back down both arms and recombines at the BS where the recombined beam passes through a signal recycling mirror (SRM). Finally, the beam hits a set of photodiodes (PD) which produce the interferometer readout which we use to determine whether or not a \ac{GW} signal is present.}
+    \caption[Illustration of the \ac{LIGO} detectors.]{An illustration of the \ac{LIGO} detectors. A 1064nm laser beam is emited from a laser on the left-hand side, it then passes through a phase modulator (PMOD) and enters the power recycling cavity (PRM), this effectively boosts the power of the signal. The laser then passes through a beam splitter (BS), which splits the laser beam path into two seperate parts. Each part travels through an input test mass and hits end test masses at the end of both interferometer arms. The beams are then caught in a Fabry-Perot cavity which acts to extend the distance traveled of the beams, as well as the power. In other words, the cavity ``stores'' the photons for a long period ($\sim1$ ms) which allows a potential \ac{GW} signal more time to interact with the photons, thus increasing the sensitivity of the interferometer at low frequencies. Some laser light escapes back down both arms and recombines at the BS where the recombined beam passes through a signal recycling mirror (SRM). Finally, the beam hits a set of photodiodes (PD) which produce the interferometer readout which we use to determine whether or not a \ac{GW} signal is present.}
     \label{fig:gw_plus_cross}
 \end{figure}
 
@@ -160,27 +186,59 @@ between the two light signals is scaled by the
 length of the interferometer arms $L$. Because the 
 detectors are tuned such that the photons arriving 
 back at the beam splitter act to destructively 
-interfere with each other, there should theoretically 
+interfere with each other (i.e. a dark fringe), there should theoretically 
 be no signal hitting the photodiodes in nominal operating times. When a \ac{GW} 
 impinges on the detector, it will compress one arm 
 while stretching the other arm. There will then be a 
-noticeable difference in phase between the light traveling 
+detectable difference in phase between the light traveling 
 down both arms. Because of this difference in phase, the 
 light recombining at the beam splitter will no longer 
-destructively interfere and a signal will appear 
+destructively interfere and a detectable signal will appear 
 on the photodetectors.
 
 % LIGO antenna patterns
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/peanut.png}
-    \caption{An illustration of the \ac{LIGO} antenna patterns for both the $h_\times$ and $h_+$ \ac{GW} polarizations. The detector itself would lie in the x-y plane with one arm along the x-axis and the other along the y-axis.}
+    \caption[Illustration of the \ac{LIGO} antenna patterns for both the $h_\times$ and $h_+$ \ac{GW} polarizations]{An illustration of the \ac{LIGO} antenna patterns for both the $h_\times$ and $h_+$ \ac{GW} polarizations. The detector itself would lie in the x-y plane with one arm along the x-axis and the other along the y-axis.}
     \label{fig:gw_plus_cross}
 \end{figure}
 
+\subsection{Detector Response}
+
+The \ac{LIGO} detectors are not equally sensitive to all parts of 
+the sky. This is in large part due to their antenna patterns. 
+The antenna pattern of a detector is dependent upon the orientation 
+of the \ac{GW} source with respect to the detector (with the assumption that it 
+is located at the center of a celestial sphere) given by the expression 
+
+\begin{equation}
+    \mathrm{F}_{+} = \frac{(1+\mathrm{cos}^2 \theta) \mathrm{cos}(2\phi) \mathrm{cos}(2\psi) - \mathrm{cos}(\theta)\mathrm{sin}(2\phi)\mathrm{sin}(\psi)}{2}
+\end{equation}
+
+\begin{equation}
+    \mathrm{F}_{\times} = \frac{(1+\mathrm{cos}^2 \theta) \mathrm{cos}(2\phi) \mathrm{sin}(2\psi) + \mathrm{cos}(\theta)\mathrm{sin}(2\phi)\mathrm{cos}(\psi)}{2}
+\end{equation}
+
+where $\theta$ is the azimuthal angle, $\phi$ is the polar angle and $\psi$ 
+is the polarization angle. This is also illustrated pictorially in Fig. \ref{fig:gw_plus_cross}.
+
+Measured \ac{GW} strain can be expressed as a summation of $h_{\times}$ 
+and $h_{+}$ attenuated by antenna patterns $\mathrm{F}_{\times}$ and $\mathrm{F}_{+}$ 
+given by
+
+\begin{equation}
+    h = \mathrm{F}_{\times}(\theta,\psi,\phi)h_{\times} + \mathrm{F}_{+}(\theta,\psi,\phi)h_{+} \label{eq:measured_strain}
+\end{equation}
+
+where $h_{+}$ and $h_{\times}$ are the plus and cross polarizations of 
+the \ac{GW} signal respectively. As can be seen in e.q. \ref{eq:measured_strain}
+, changes in the antenna pattern have a direct impact on the 
+amount of strain measured by the \ac{LIGO} detectors.
+
 \subsection{Detector noise}
 
-Although this change in phase between 
+Although a change in phase between 
 the two detector arms can be measured through 
 photon counting, the detectors are 
 also sensitive to non-astrophysical noise 
@@ -193,8 +251,8 @@ seismic noise and thermal noise.
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/aLIGO_noise_budget.pdf}
-    \caption{The theoretical design sensitivity noise budget curves for Advanced \ac{LIGO}. As can be seen in the illustration, lower frequencies are largely dominated by seismic motion, mid-range frequencies thermal Brownian motion on the mirrors and higher frequencies quantum vacuum shot noise. Plot was generated using the \texttt{pygwinc} computing package \cite{pygwinc}. }
-    \label{fig:gw_plus_cross}
+    \caption[Theoretical design sensitivity noise budget curves for Advanced \ac{LIGO}.]{The theoretical design sensitivity noise budget curves for Advanced \ac{LIGO}. As can be seen in the illustration, lower frequencies are largely dominated by seismic motion, mid-range frequencies thermal Brownian motion on the mirrors and higher frequencies quantum vacuum shot noise. Plot was generated using the \texttt{pygwinc} computing package \cite{pygwinc}. }
+    \label{fig:aligo_noise_budget}
 \end{figure}
 
 \subsubsection{Seismic noise}
@@ -223,8 +281,14 @@ which make up the coating/lens material to behave in
 random Brownian motion, thus causing the photons to deviate from 
 their intended path.
 
-\subsubsection{Quantum shot noise}
-Quantum shot noise results from the wave packet-like 
+\subsubsection{Quantum noise sources}
+
+%
+% Intro and quantum shot noise
+%
+There are basically two sources of quantum noise
+in the detectors. The first being quantum shot noise 
+which results from the wave packet-like 
 behavior of light as it travels through a medium. 
 Because of Poisson statistics, we know that the 
 uncertainty on the number of photons that we 
@@ -233,7 +297,41 @@ after recombination at the beam splitter is
 proportional to the expected number of photons 
 arriving each second. The greater the power 
 of the laser, the greater the quantum shot 
-noise at higher photon frequencies.
+noise at higher photon frequencies. Shot noise increases 
+by the square root of the optical power of the detector. 
+Shot noise can be expressed mathematically as a limit 
+on the strain sensitivity of the detectors $h(f)_{\mathrm{S}}$ given 
+by 
+
+\begin{equation}
+    h(f)_{\mathrm{S}} = \frac{1}{L} \sqrt{\frac{\hslash c \lambda}{2\pi P}},
+\end{equation}
+
+where $L$ is the arm length of the interferometer, $\hslash$ is 
+Planck's constant, $\lambda$ is the laser light wavelength, 
+$P$ is the power of the laser and $c$ is the speed of light.
+
+%
+% Quantum radiation pressure noise
+%
+
+The second type of noise source is quantum 
+radiation pressure noise. Radiation pressure noise 
+arises from the effect of photon momentum transfer 
+onto the test mass mirrors of the detector. When 
+a photon from the detector laser hits a mirror, it 
+transfers some momentum to that mirror. Because all photons 
+do not hit the mirror at the exact same time, there is 
+some variability of pressure exherted on the mirror as 
+a function of time. This can again be mathematically expressed 
+as a limit on the detector strain sensitivity $h(f)_{\mathrm{R}}$ by 
+
+\begin{equation}
+    h(f)_{\mathrm{R}} = \frac{1}{Lmf^2}  \sqrt{\frac{\hslash P}{2\pi^3 c\lambda}},
+\end{equation}
+
+where $m$ is the mass of the mirror and $f$ is the frequency of the laser. 
+For a more detailed description of shot noise, see \cite{Hild2014}.
 
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%% 
@@ -321,18 +419,32 @@ is typically defined by
 where $I_{zz}$ is the moment of intertia around the z-axis of the 
 neutron star, $f$ is the \ac{GW} frequency (roughly proportional to 
 the star spin frequency) and $\epsilon$ is the elipticity. In a targetted 
-search, we generally assume that the sky position, frequency, spin and 
+search, it is generally assumed that the sky position, frequency, spin and 
 other parameters are well known. There is also a middle-ground option of 
 performing a directed search where we only assume to know the sky location 
 very well. Nominally, a \ac{FFT} is first performed on the 
 data afterwhich a transformation of some sort is then applied (
 frequency-Hough, ``stack-slide'', PowerFlux) in order to 
 map the observed data to source properties. After this mapping performed, 
-we essentially then try to look for excesses in power above 
-a pre-defined threshold over a large number of frequency bins. The 
-methods listed above put many different spins on this\cite{PhysRevD.90.042002}.
+periods of excesses power above 
+a pre-defined threshold are identified over a large number of frequency bins. There are of course many different variations on the methods listed above cited here \cite{PhysRevD.90.042002}.
 
 \subsubsection{All-sky search}
+
+In contrast to both a targeted and a directed search, all-sky searches 
+impose the least amount of constraints on the observable parameter space. 
+Generally speaking, an all-sky search is performed by first breaking up 
+an observed piece of time series data to be analysed into many smaller 
+time segments. These time segments are then analysed coherently, after which 
+the results for each time segment may be recombined in an incoherent manner. 
+This is otherwise known as a semi-coherent search.
+
+In order to combine results from coherent segments incoherently, there 
+are many methods which have been developed over the past several years. 
+Such methods include: stack-slide, time-domain $F$-statistic, frequency-Hough, 
+Viterbi, and Powerflux. For a full description of these and other methods for 
+combining coherent segments, I refer the reader to the following 
+manuscript \cite{PhysRevD.94.124010}.
 
 \subsection{Burst search method}
 
@@ -386,7 +498,7 @@ where $h(t)$ is the combined strain from a gravitational wave induced on the int
 
 Assuming Gaussian noise, our problem then becomes, how does one distinguish noise from actual signal? Fortunately, the problem of extracting low \ac{SNR} signals from the background is not uncommon in physics and the field of statistics and may be accomplished through a technique known as matched template filtering.
 
-\subsection{Matched template filtering}
+\subsubsection{Matched template filtering}
 
 Given the current level of sensitivity of the detectors, we will be dealing within a regime where the \ac{GW} signal we are trying to detect will often be burried far below the overall background of the detector noise. Within the context of \ac{CBC} signals, it is known that as two compact objects inspiral in towards each other that both the frequency and strength of the resultant \ac{GW} signal increases with time. We can take advantage of the fact that we generally have a good understanding of the form of $h(t)$. If we know exactly the form of $h(t)$, we may construct a simple filtering technique whereby we multiply the output of the detector $s(t)$ by $h(t)$ and integrate over some observation time. We can describe the noise contribution to the noise-free signal $h(t)$ as 
 
@@ -436,7 +548,7 @@ Furthermore, we need to ensure that events which we observe in one detector are 
 % Not sure if I'm describing time slides correctly here.
 Now that we have a detection statistic in the form of the weighted quadrature summed \ac{SNR} across multiple detectors described above, we would like a method for determining the statistical significance of this statistic. This can be done by determining the false alarm rate of the detectors as a function of the weighted detection statistic. Because we don't necessarily know how the noise of the detector is going to be distributed due to the varied non-Gaussian nature of the detectors, we have to experimentally measure the false alarm rate. We can measure this through the use of time slides. Time slides are applied by computing the number of detected triggers outside of the light travel time coincidence window (15 milliseconds) for a pre determined number of observation windows. The triggers are calculated using the best matching template for the original candidate event. The time slide windows used with the best matching template, the more sensitive the estimate on the false alarm rate. The false alarm rate is then used in order to assign a p-value to the candidate \ac{GW} event.
 
-\subsection{Bayesian gravitational wave parameter estimation}
+\section{Bayesian Inference}
 
 %
 % Use this reference: https://www.cambridge.org/core/journals/publications-of-the-astronomical-society-of-australia/article/an-introduction-to-bayesian-inference-in-gravitationalwave-astronomy-parameter-estimation-model-selection-and-hierarchical-models/D459F61D8C37F0BEF86D60F42A418304
@@ -445,7 +557,30 @@ Now that we have a detection statistic in the form of the weighted quadrature su
 %
 % Introduce Bayes theorem
 %
-It is not only important that we detect a \ac{GW} event, but also that we infer the underlying properties of that event in the form of its source parameters (i.e. component mass, distance, sky location, etc.). In \ac{LIGO}, the tried and true method for inferring source parameters is done through Bayes theorem. Bayes theorem was first used by Reverand Thomas Bayes in the 18th century and in it he proposed a new paradigm for thinking about the laws of conditional probability. To describe succinctly, Bayes theorem says that one can infer the limits on an unknown parameter by computing the likelihood of a given observation and our prior belief on the distribution of the unknown parameter. To put it in the context of \ac{GW} astronomy, given an observed gravitational wave event and some prior assumptions, we would like to infer the source parameter values of that signal while also taking into account the uncertainty added by the signal being burried in noise. We call the inferred source parameters with uncertainty the posterior 
+It is not only important that we detect a \ac{GW} event, but also that we infer the underlying properties of that event in the form of its source parameters (i.e. component mass, distance, sky location, etc.). In \ac{LIGO}, the tried and true method for inferring source parameters is done through Bayes inference. Bayesian inference is itself derived from Bayes theorem. Bayes theorem was first proposed by Reverend Thomas Bayes in the 18th century and in it he formulated a new paradigm for thinking about the laws of conditional probability. 
+
+%
+% Difference between frequentist and Bayesian inference
+%
+Bayesian probability, is a fundamentally different way of interpreting 
+statistics from the more traditional frequentist approach. For a frequentist, 
+an unknown parameter of interest $\theta$ is often considered to be a fixed quantity. 
+A frequentist would determine the value of $\theta$ through sampling of 
+observational data until enough observational data had been accumulated to 
+form a distribution. From this distribution, a frequentist would then be 
+able to determine confidence intervals on their estimate of $\theta$. 
+On the other hand, 
+a Bayesian does not consider the unknown parameter to be a fixed value, 
+but rather a random variable which is described by a probability distribution.
+$\theta$ may then be inferred through direct application of Bayes theorem.
+I will describe Bayes theorem in detail and refer the reader to \cite{10.2307/91337} for 
+a more detailed description on frequentist inference.
+
+%
+% Intro to Bayes theorem
+%
+To describe succinctly, Bayes theorem states that one can infer the distribution of an unknown parameter by computing the likelihood of a given observation, scaled by our prior belief on the distribution of the unknown parameter. To put it in the context of \ac{GW} astronomy, given an observed gravitational wave event and some prior assumptions, the posterior can be describes the source parameter values of that signal while also taking into account the uncertainty added by the signal being burried in noise. The posterior can be expressed 
+as
 
 %
 % Introduce posterior
@@ -469,18 +604,26 @@ According to Bayes theorem, we can write the posterior as
 % Show Bayes theorem
 %
 \begin{equation}
-    p(\theta | d) = \frac{p(d|\theta)p(\theta)}{p(d)},
-\end{equation}
+    p(\theta | d) = \frac{p(d|\theta)p(\theta)}{p(d)}.
+\end{equation}\label{eq:intro_bayes_theorem}
 
 %
 % Discussion on priors
 %
-where $p(d|\theta)$ is the likelihood of our observable $d$ given source parameters $\theta$, $p(\theta$) is our prior assumptions on the distribution of the source parameters $\theta$ and $p(d)$ is a normalisation factor called the evidence. The prior $p(\theta)$ is largely informed by our understanding on the formation channels of \ac{GW} sources and our level of understanding on the general physics which govern events. For example, we would intuitively think that the mass of an object should always be positive, so will set the priors such that the component masses of a \ac{GW} source must always lie between two positive values. However, if we aren't as knowledgeable about a particular parameter $\theta$, we might try choosing a relatively uninformative prior by employing something like a broad uniform distribution. Choice of prior can also be incredibly influential on the conclusions drawn on some \ac{GW} parameters such as spin. For further interesting discussions on prior choices see Salvatore et al. \cite{PhysRevLett.119.251103}.
+Where each term in Eq. \ref{eq:intro_bayes_theorem} can be described as 
+
+\begin{itemize}
+    \item $p(d|\theta)$: The likelihood of our observable $d$ given source parameters $\theta$.
+    \item $p(\theta)$: Our prior belief on the distribution of source parameters $\theta$.
+    \item $p(d)$: A normalisation factor called the evidence which is integrated over all possible parameters $\theta$.
+\end{itemize}
+
+The prior $p(\theta)$ is largely informed by our understanding on the formation channels of \ac{GW} sources and our level of understanding on the general physics which govern events. For example, we would intuitively think that the mass of an object should always be positive, so will set the priors such that the component masses of a \ac{GW} source must always lie between two positive values. However, if we aren't as knowledgeable about a particular parameter $\theta$, we might try choosing a relatively uninformative prior by employing something like a broad uniform distribution. Choice of prior can also be incredibly influential on the conclusions drawn on some \ac{GW} parameters such as spin. For further interesting discussions on prior choices see Salvatore et al. \cite{PhysRevLett.119.251103}.
 
 %
 % Discussion on likelihood
 %
-The way in which we define the likelihood $p(d|\theta)$ (our certainty on the observed data) is essentially up to the practitioner. For \ac{GW} astronomy, we define a likelihood which assumes that the detectors operate under Gaussian noise-like conditions. The Gaussian-noise likelihood function can written as 
+The way in which we define the likelihood $p(d|\theta)$ (our certainty on the observed data) is essentially up to the practitioner. For \ac{GW} astronomy, we typically define a likelihood which assumes that the detectors operate under Gaussian noise-like conditions. The Gaussian-noise likelihood function can written as 
 
 \begin{equation}
     p(d|\theta) = \frac{1}{\sqrt{2\pi \sigma^2}} \textrm{exp}\left(-\frac{1}{2} 
@@ -499,18 +642,27 @@ The evidence $p(d)$ can be defined as
     \label{eq:evidence}
 \end{equation}
 
-The evidence is usually referred to as the marginal likelihood. Because we are marginalising over all parameters $\theta$ in Eq. \ref{eq:evidence}, we can think of the evidence as essentially a normalising factor. Since the evidence is just simply a normalising factor and it is prohibitively expensive to compute this factor, most Bayesian practitioners will ignore Eq. \ref{eq:evidence} and rewrite Bayes theorem in the simpler form 
+The evidence is usually referred to as the marginal likelihood. Because we are marginalising over all parameters $\theta$, we can think of the evidence as essentially a normalising factor. Since the evidence is just simply a normalising factor and it is prohibitively expensive to compute this factor (because we are integrating over the whole parameter space of $\theta$), most Bayesian practitioners will ignore Eq. \ref{eq:evidence} and rewrite Bayes theorem in the simpler form 
 
 \begin{equation}
     p(\theta | d) \propto p(d | \theta) p(\theta).
 \end{equation}
+
+%
+% Breifly mention model selection 
+%
+Exceptions to to this concern model selection where the evidence is required 
+in order to calculate a Bayes factor which computes the liklihood of 
+one model vs. another. In the following subsections I will describe 
+methods for sampling from the posterior $p(\theta|d)$, such as \ac{MCMC} and 
+Nested Sampling.
 
 \subsubsection{Markov Chain Monte Carlo}
 
 %
 % Intro and Monte Carlo sampling
 % Great video on this: https://www.youtube.com/watch?v=OTO1DygELpY&ab_channel=StataCorpLLC
-\ac{MCMC} is usually used when we would like to try and sample from some distribution $p$, or approximate the expectation value of some function $f(x)$ which is of a high dimension/complexity. Where $p$ is so complicated that trying to sample from $p$ analytically would be prohibitively expensive. The Monte Carlo portion of \ac{MCMC} refers to a technique known as Monte Carlo sampling. Monte Carlo sampling means to randomly sample from some distribution. For example, I could choose to randomly sample from a normal distribution $N(0,1)$ or from uniform distribution between -1 and 1. We would define the normal or the uniform distribution that I'm sampling from the proposal distribution. We should see if we randomly sample from the proposal distribution enough times, that a histogram of the resulting samples should resemble that of the original proposal distribution. 
+\ac{MCMC} is usually used when we would like to try and sample from some distribution $p$, or approximate the expectation value of some function $f(x)$ which is of a high dimension/complexity. Where $p$ is so complicated that trying to sample from $p$ analytically would be prohibitively expensive. The Monte Carlo portion of \ac{MCMC} refers to a technique known as Monte Carlo sampling. Monte Carlo sampling means to randomly sample from some distribution. For example, I could choose to randomly sample from a normal distribution $N(0,1)$ or from uniform distribution between -1 and 1. We would define the normal or the uniform distribution that I'm sampling from the proposal distribution. If we randomly sample from the proposal distribution enough times a histogram of the resulting samples should resemble that of the original proposal distribution. 
 
 %
 % Markov Chain
@@ -521,12 +673,20 @@ Markov Chain refers to how we are going to go about sampling from that space. Sp
 % How to accept/reject proposals
 %
 
-We can use a variety of algorithms to go about deciding how exactly accept or reject new samples drawn from the proposal distribution. One common algorithm for doing so is the Metropolis-Hastings algorithm. This algorithms works by first calculating the likelihood value for the new proposed sample, as well as the likelihood value of the previously proposed sample, and then computes the ratio of these two values. If the likelihood value of the new proposed sample is greater than the old value, then we will always accept the new value. If however, the new value is not greater than the old value, then we will not necessarily discard the old value. Instead, we can treat the new proposed likelihood value as an acceptance probability. In order to determine acceptance in this case, we can draw a uniform random number between 0 and 1 and keep the new value if it's likelihood is greater than the randomly drawn number.
+We can use a variety of algorithms to determine how to accept or reject new samples drawn from the proposal distribution. One common algorithm for doing so is the Metropolis-Hastings algorithm. This algorithms works by first calculating the posterior probability value $p(\theta_i|d)$, in other words the height of the posterior, for the new proposed sample, as well as the posterior probability value of the previous sample $p(\theta_{i-1}|d)$ in the Markov Chain. We then compute the ratio of these two values $\frac{p(\theta_i|d)}{p(\theta_{i-1}|d)}$. If this ratio is greater than $1$, then we always accept the new proposed sample. If however, the ratio less than $1$, then we will not necessarily discard the old posterior probability value. Instead, we determine an acceptance probability based on the ratio. In order to determine whether or not to accept, we draw a uniform random number between 0 and 1 and keep the new proposed sample if the previously calculated ratio value is greater than the randomly drawn number. Mathematically, the probability of acceptance ($\alpha$) of a new sample in the Markov Chain can be expressed as
+
+% Probability of acceptance equaiton
+\begin{equation} \label{eq:MCMC_acceptance}
+    \alpha = \begin{cases}
+  \frac{p(\theta_i|d)}{p(\theta_{i-1}|d)} & \text{if } p(\theta_i|d) < p(\theta_{i-1}|d)\\    
+  1 & \text{if } p(\theta_i|d) \ge p(\theta_{i-1}|d).       
+  \end{cases}
+\end{equation}
 
 %
 % Issues with Metropolis Hastings
 %
-Unfortunately there are a few downsides to using the Metropolis Hastings algorithm. One them being that we have to choose a starting point for the random walk, which is initially liable to be far from the true posterior. Thus it may take some iterations for the algorithm to walk its way towards areas of high likelihood. We can avoid this issue by discarding an arbitrary number of samples at the beginning of the walk such that the remaining represent a point after which the algorithm has reached a stable equilibrium. We call the discarded samples the burn-in period. Another issue relates to something known as autocorrelation. Predictions on parameters $\theta$ are known to be somewhat correlated with each other due to the fact that they are all generated from the same Markov process. The fact that this correlation exists is fine, but excessive correlation can mean that there are issues with the model being used. A helpful method for tempering such correlations can be through the process of thinning. Thinning involves generating a large amount of samples from the proposal distribution, but only keeping every $N^{\textrm{th}}$ sample from that large sample set. 
+There are a few downsides to using the Metropolis Hastings algorithm. One of those downsides being that we have to choose a starting point for the random walk, which is initially liable to be far from the true posterior. Thus it may take some iterations for the algorithm to walk its way towards areas of high likelihood. We can avoid this issue by discarding an arbitrary number of samples at the beginning of the walk such that the remaining represent a point after which the algorithm has reached a stable equilibrium. We call the discarded samples the burn-in period. Another issue relates to something known as autocorrelation. Predictions on parameters $\theta$ are known to be somewhat correlated with each other due to the fact that they are all generated from the same Markov process. The fact that this correlation exists is fine, but excessive correlation can mean that there are issues with the model being used. A helpful method for tempering such correlations can be through the process of thinning. Thinning involves generating a large amount of samples from the proposal distribution, but only keeping every $N^{\textrm{th}}$ sample from that large sample set. 
 
 %
 % Could be useful to make a trace plot here.
@@ -537,33 +697,55 @@ Unfortunately there are a few downsides to using the Metropolis Hastings algorit
 % see: http://www.inference.org.uk/bayesys/nest.pdf
 \subsubsection{Nested Sampling}
 
-Nested sampling is another method which can be used in order to explicitly sample from the posterior. However, that wasn't the primary goal in mind when the method was first developed and the posterior is only really obtained as a byproduct. An additional motivation for nested sampling relates to the fact that \ac{MCMC} can have issues when trying to deal with complex multi-modal and degenerate distributions, so an improved method that handles such issues was needed at the time. Nested sampling was first introduced by Skilling in 2004 because he wanted a way to go about computing the evidence (sometimes known as the marginal likelihood) in a feasible way in order to compare different models effectively. The evidence can be described as
+Nested sampling is another method which can be used in order to sample from the posterior. However, that wasn't the primary goal in mind when the method was first developed and the posterior is only really obtained as a byproduct (
+unlike \ac{MCMC} which \textit{directly} samples from the posterior). An additional motivation for nested sampling relates to the fact that \ac{MCMC} can have issues when trying to deal with widely spaced multi-modal and degenerate distributions, so an improved method that handles such issues was needed at the time. Nested sampling was first introduced by Skilling in 2004 (later expanded upon in 2006) because he wanted a way to go about computing the evidence (sometimes known as the marginal likelihood) in a feasible way in order to compare different models effectively. The evidence can be described as
 
 \begin{equation}
     Z = \int p(\theta) L(\theta) d\theta \label{eq:evidence}
 \end{equation}
 
-where $p(\theta)$ is the prior distribution and $L(\theta)$ is the likelihood function. Samples from the posterior can then be obtained as a byproduct following the evaluation of the evidence $Z$. One might naively assume that it would be easy to evaluate this integral by directly computing the expression for each parameter $\theta$. Unfortunately, this procedure can get computationally expensive quickly as the number of inferred parameters $\theta$ increases. Rather than integrating over the whole space of parameters $\theta$ explicitly, it would be advantageous to redefine Eq. \ref{eq:evidence} so that it was only dependent on a single parameter and an approximate method for computing the integral could be found. The fundamental idea that a complex high-dimensional problem with many inferred parameters implies a representation in a 1-dimensional form is one of the key ideas of nested sampling. This then begs the question, how do we go about computing the evidence in a 1-dimensional way?
+where $p(\theta)$ is the prior distribution and $L(\theta)$ is the likelihood function. Samples from the posterior can then be obtained as a byproduct following the evaluation of the evidence $Z$. One might naively assume that it would be easy to evaluate this integral by directly computing the expression for each parameter $\theta$. Unfortunately, this procedure can get computationally expensive quickly as the number of inferred parameters $\theta$ increases. Rather than integrating over the whole space of parameters $\theta$ explicitly, it would be advantageous to redefine Eq. \ref{eq:evidence} so that it was only dependent on a single parameter and an approximate method for computing the integral could be found. The fundamental idea that a complex high-dimensional problem with many inferred parameters may be represented in a simplified 1-dimensional form is one of the key ideas of nested sampling. This then begs the question, how do we go about computing the evidence in a simpler 1-dimensional way? I will describe 
+the details of such an algorithm in the subsequent text.
 
-We can start by generating a finite lattice of points sampled stochastically from the prior distribution. These random points are colloquially known as ``live'' points. Next, we would like to design an algorithm which evolves the ``live'' points to explore the likelihood space to find the global (or at least close to global) point of maximum likelihood. Ideally we would like to draw from a prior which also decreases in size as we move into regions of the likelihood space which dominates the posterior. Theoretically, the point with the highest likelihood would have a very small region of the prior space to sample from and the point of lowest likelihood would have nearly the whole prior space to sample from. Because the prior is by definition normalised to be between $0$ and $1$ if we framed the problem such that it was likelihood as a function of prior space being sampled from, we would have a nicely behaved, smooth, monotonically decreasing function which could be integrated easily. We can start by expressing Eq. \ref{eq:evidence} as 
+The nested sampling algorithm can be breifly described as taking the following
+small steps: dividing the posterior up into more manageable distributions, 
+sampling from each of those distributions, and then subsequently combining the 
+results from each sampling step into a final product. We can start by generating a finite lattice of points sampled stochastically from the prior distribution. These random points are colloquially known as ``live'' points. Next, we would like to design an algorithm which evolves the ``live'' points to explore the likelihood space to find the global (or at least close to global) point of maximum likelihood. Ideally we would like to draw from a prior which also decreases in size as we move into regions of the likelihood space which dominates the posterior. Theoretically, the point with the highest likelihood would have a very small region of the prior space to sample from and the point of lowest likelihood would have nearly the whole prior space to sample from.
+
+
+%
+% This kind of comes out of nowhere (why is it norm between zero and one?
+%
+Because prior volume is by definition normalised to be between $0$ and $1$,
+if we framed the problem such that it was likelihood as a function of 
+prior volume being sampled from, we would have a nicely behaved, 
+smooth, monotonically decreasing function which could be integrated easily. 
+We can start by approximating the evidence integral as a series of $N$ 
+steps given as 
 
 \begin{equation}
     Z = \sum_{i=1}^{N} L_i w_i,
 \end{equation}
 
-$L_i$ is the corresponding likelihood value of the $i$th sample and $w_i$ is a weighting term defined as
+where $L_i$ is the lowest likelihood value out of all current ``live points''
+and $w_i$ is a weighting term of that lowest likelihood point defined as 
 
 \begin{equation}
     w_i = p(\theta_i) d\theta.
 \end{equation}
 
-This weight can be thought of as the subset of the prior distribution which is represented by the $\theta_i$th sample. The total prior mass can be defined as
+This weight can be thought of as the subset of the prior distribution 
+which is represented by the $\theta_i$th sample. The total prior volume 
+above the current lowest likelihood point can be defined as
 
 \begin{equation}
     X(\lambda) = \int_{L(\theta) > \lambda} p(\theta) d\theta,
 \end{equation}
 
-where $X(\lambda)$ is the prior mass distribution (a summation over the prior $p(\theta)$) and $\lambda$ is an arbitrary cutoff value. We see that as $\lambda$ increases, the enclosed prior mass $X(\lambda)$ will then decrease. Because $X(\lambda)$ must lie between 0 and 1 and is a smooth continuous function, we can rewrite the evidence integral in terms of a single variable expression which is far easier to compute than Eq. \ref{eq:evidence}
+where $X(\lambda)$ is the prior volume (a summation over the prior $p(\theta)$) and $\lambda$ is the likelihood cutoff value defined by the lowest likelihood 
+point. We see that as $\lambda$ increases, the enclosed prior volume
+$X(\lambda)$ will then decrease, thus making the integral more tractable 
+as $i$ increases. Because $X(\lambda)$ must lie between 0 and 1 and is a smooth continuous function, we can rewrite the evidence integral in terms of a single variable expression which is far easier to compute than Eq. \ref{eq:evidence}
 
 \begin{equation}
     Z = \int_{0}^{1} L dX. \label{eq:simple_evidence}
@@ -571,51 +753,102 @@ where $X(\lambda)$ is the prior mass distribution (a summation over the prior $p
 
 The likelihood $L$ is fairly easy to evaluate for any one sample within the enclosed likelihood space $L$ 
 
-We can explicitly evaluate the simplified evidence in Eq. \ref{eq:simple_evidence} by first drawing $N$ random points from the prior distribution $p(\theta)$. We then iterate over a pre-determined number of iterations. For each iteration we compute the likelihood of all sampled points and determine the point with the minimum likelihood value. We then compute an estimate on the difference between the amount of prior mass covered by the the current samples above and up to the minimum likelihood value sample. We call this estimate the weight $w_i$ and we increment the evidence $Z$ by $L_i w_i$. Finally, we replace the lowest likelihood point $L_i$ with a new point which is sampled through a process like \ac{MCMC}. We only need to generate one new point because we can simply reuse the remaining $N-1$ surviving points since they are all better than the lowest likelihood point. We can generate a new sample by making a copy of one of the remaining samples and then evolving that sample through an \ac{MCMC} process. Alternatively, one can also generate a new point by genetic mixing of survivor point coordinates \cite{skilling2006}.
+We can explicitly evaluate the simplified evidence in Eq. \ref{eq:simple_evidence} by first drawing $M$ random points from the prior distribution $p(\theta)$. We then iterate over a pre-determined number of iterations $N$. For each iteration $i$ we compute the likelihood of all sampled points and determine the point with the lowest likelihood value. We then compute an estimate on the difference between the amount of prior mass covered by the the current samples above and up to the minimum likelihood value sample. We call this estimate the weight $w_i$ and we increment the evidence $Z$ by $L_i w_i$. Finally, we replace the lowest likelihood point $L_i$ with a new point which is sampled randomly through a process like \ac{MCMC} (subject to the constraint that the 
+new point has a liklihood which is greater than the lowest liklihood point among all current live points). We only need to generate one new point because we can simply reuse the remaining $M-1$ surviving points since they are all better than the lowest likelihood point. Alternatively, one could also generate a new point by genetic mixing of survivor point coordinates \cite{skilling2006}.
 
 %
-% Intro to nested sampling
+% How to get the posterior from the evidence.
 %
 
-\subsubsection{Nuisance parameter marginalization}
+Now that we have a computationally tractable method for computing the 
+evidence integral (e.q. \ref{eq:simple_evidence}), we can use this 
+to compute posterior samples. Posterior samples are computed by 
+taking the saved discarded minimum likelihood parameter sample weights $w_i$ from 
+the $N$ steps of the nested sampling algorithm and performing 
+a summation over weights $w_i$ expressed as
+
+\begin{equation}
+    p(\theta) \approx \frac{\sum_{i=0}^{N}w_i\delta( \theta_i)}{\sum_{i=0}^{N} w_i}
+    \label{eq:nested_posterior}
+\end{equation}
+
+where $\delta(\theta_i)$ is the Dirac delta function of parameter 
+$\theta_i$ at the 
+$i$th parameter sample. Since both summations in the numerator and 
+denominator of e.q. \ref{eq:nested_posterior} cancel out, we are then 
+left with a set of Dirac delta functions which can be histogrammed 
+in order to compute the probability density function of the posterior.
 
 \section{GW detections}
 
 %
-% Intro
+% O1 detections
 %
 
 Since it's inception, \ac{LIGO} has had several observing runs. 
-During the first observing run, \ac{LIGO} detected a total of $3$ binary 
-black hole mergers. During the second observing run \ac{LIGO} detected an 
-additional $7$ binary black holes and made the very first detection of a 
-\ac{BNS} event. During the third observing run the collaboration made an 
-additional $39$ confirmed \ac{GW} event detections. Of those $39$, there were 
-some which could not be determined whether or not they were from a \ac{BBH} 
-or \ac{BNS} \cite{1811.12907, 2010.14527}. 
+Initial operations ran from 2002 to 2010, but no \ac{GW}s were 
+detected during this time period.
+During the first observing (September 2015 - January 2016), 
+\ac{LIGO} detected a total of $3$ binary 
+black hole mergers including: GW150914, GW151226 and GW151012. GW150914 was 
+the very first detected binary black hole which had an unusually high 
+\ac{SNR}. GW151012 was originally labeled as a potential GW event due to 
+its high false alarm rate, but was subsequently upgraded to a confirmed 
+\ac{GW} event in the GWTC-1 catalogue \cite{1811.12907} because its 
+false alarm rate was less than 1 per 30 days (a threshold determined 
+by the \ac{LIGO} collaboration). 
 
 %
-% Mention expected rate of detections
+% O2 detections
+%
+During the second observing run (November 2016 - August 2017) 
+\ac{LIGO} detected an 
+additional $7$ binary black holes with total masses between 
+$\sim 18.6 M_\odot$ and $\sim 85.1 M_\odot$. The second observation run 
+excitingly also saw the very first detection of a \ac{BNS} event. 
+The \ac{BNS} event had the highest network \ac{SNR} of 
+any event over all of O1 and O2. Interestingly, there was also 
+a large non-astrophysical noise transient which overlapped 
+with a portion of the \ac{BNS} event in the \ac{LIGO} Livingston 
+detector. This noise transient was successfully mitigated through an 
+excising technique known as time-domain gating \cite{PhysRevLett.119.161101}.
+
+%
+% O3a detections
+%
+Most recently, during the first half of the third observing run 
+(April 2019 - March 2020) the collaboration made an 
+additional $39$ confirmed \ac{GW} event detections. Of those $39$, 
+3 could be either from a \ac{BBH} 
+or \ac{BNS} \cite{1811.12907, 2010.14527}, which may contain the first 
+\ac{NSBH} signals detected. The increase in number of 
+detections can largely be attributed to higher sensitivities of the 
+detectors during this observation run over previous runs, with a \ac{BNS} range 
+of $108 \mathrm{Mpc}$, $135 \mathrm{Mpc}$ and $45 \mathrm{Mpc}$ 
+for Hanford, Livingston and Virgo respectively \cite{2010.14527}. The 
+GWTC-2 catalogue contains signals with component masses lower and higher 
+than the lowest and highest component masses contained in all of 
+GWTC-1. The most up-to-date merger rate constraints according to GWTC-2 were 
+also updated to be $\sim 23.9 \mathrm{Gpc}^{-3} \mathrm{yr}^{-1}$ for 
+\ac{BBH}s and $\sim 320 \mathrm{Gpc}^{-3} \mathrm{yr}^{-1}$ for 
+\ac{BNS}s.
+
+%
+% Science implications of BNS event
 %
 
-Going forward, as the detectors continue to be upgraded using 
-the latest cryogenic and quantum squeezing technologies, it is expected 
-that the sensitivity of the detectors will increase and thus also the 
-rate of \ac{GW} detection. The expected rate of detection is 
+
 
 \section{Multi-Messenger Astronomy}
 
 After a \ac{GW} signal has been identified and posterior samples have 
 been obtained, an alert is sent out to other \ac{EM} partners around the 
-globe in order to perform follow-up analysis. Prompt follow-up analysis could 
-provide new insights into fundamental astrophysical processes such as 
-the neutron star equation of state and enhanced measurements on 
-the Hubble Constant. Astronomical partners include instruments which look across 
+globe in order to perform follow-up analysis. Astronomical partners include instruments which look across 
 the whole range of the \ac{EM} spectrum including: Radio, Microwave, 
 infrared, visible light, ultra-violet, X-ray and gamma ray. A full Bayesian 
-inference analysis is typically done on all viable \ac{GW} candidates, but 
-in order to produce low-latency parameter estimation products we also 
-use tools such as \texttt{Bayestar} \cite{2016PhRvD..93b4013S}. \texttt{Bayestar} operates under the 
+inference analysis is typically done on all viable \ac{GW} candidates. In 
+addition to the full Bayesian analysis, the collaboration is also able 
+to produce low-latency parameter estimation products using tools such as \texttt{Bayestar} \cite{2016PhRvD..93b4013S}. \texttt{Bayestar} operates under the 
 assumption that a large degree of the information contained in a \ac{GW} 
 signal is encapsulated within a small number of products produced by the 
 search matched template filtering process, namely: the time, amplitude 
@@ -625,6 +858,43 @@ samples on a limited number of source parameters (sky location, distance and ori
 in under a few minutes which provides a good approximate of the full 
 Bayesian posterior.
 
+Prompt follow-up analysis using tools like \texttt{Bayestar} and 
+\texttt{Bilby} along with observations from \ac{EM} partners can 
+provide new insights into fundamental astrophysical processes. For 
+example, as \ac{BNS} signals reach the final stages of the inspiral 
+phase of the merger, the internal structure of the sources has more 
+of a pronounced effect on the resulting \ac{GW} signal. 
+Information on the tidal deformability and equation 
+of state of the neutron stars may be gleamed from this part of the 
+\ac{GW} signal. Tidal deformability is also highly correlated with the 
+predicted masses and spins of the signal \cite{PhysRevLett.119.161101}. 
+\ac{EM} follow-up analysis can also be used in tandem with Bayesian 
+analysis in order to produce inferences on the Hubble constant. This can 
+be done by getting accurate estimates on the luminsity distance directly 
+from the \ac{GW} signal through Bayesian inference and using \ac{EM} 
+partners to identify a likely host galaxy. For GW170817, \ac{LIGO} 
+and \ac{EM} partners were able to infer a Huble constant value 
+of $\sim 70 \mathrm{km s^{-1} Mpc^{-1}}$ \cite{PhysRevLett.119.161101}. 
+ 
+%
+% Tests of general relavity
+%
+The arrival time (along with an accurate 
+estimation of the luminosity distance) of a \ac{GW} event 
+can be compared to the observation time of the gamma ray burst from a 
+\ac{BNS} merger counterpart in order to test the effect gravitational 
+potentials have on \ac{BNS} \ac{EM} radiation and \ac{BNS} \ac{GW}s 
+(equivalence principle), as well as the speed of 
+gravity \cite{2017arXiv171005834L}. In addition, using best-matching 
+waveform templates for detected \ac{GW} signals, we can perform 
+tests on the accuracy of general relativity itself by doing residual 
+noise waveform subtraction tests and insprial-merger-ringdown consistency 
+tests. Depending on the length and \ac{SNR} of the signal, accurate 
+constraints may be placed on the graviton Compton wavelength and 
+non-\ac{GR} polarization states. Other tests of \ac{GR} are 
+listed in great detail by \cite{PhysRevLett.116.221101}.
+
+
 %
 % Example of GW170817 sky localization. Not sure if I'm allowed to use other people's figures
 %
@@ -632,8 +902,8 @@ Bayesian posterior.
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/GW170817_skymap.jpg}
-    \caption{Sky localization for the first confirmed detection of a \ac{BNS} merger by \ac{LIGO}. Areas shaded in green are the data products from \texttt{Bayestar} using both \ac{LIGO} alone and \ac{LIGO}/Virgo combined, dark blue are predictions from Fermi/GBM and light blue are predictions from IPN Fermi/INTEGRAL. Black and white images on right-hand side are visible light measurements of a bright event around the galaxy NGC 4993 thought to contain the afterglow of the \ac{BNS} event. \texttt{This figure is was produced by the authors of the following article} \cite{2017arXiv171005833L}. }
-    \label{fig:gw_plus_cross}
+    \caption[Sky localization for the first confirmed detection of a \ac{BNS} merger by \ac{LIGO}.]{Sky localization for the first confirmed detection of a \ac{BNS} merger by \ac{LIGO}. Areas shaded in green are the data products from \texttt{Bayestar} using both \ac{LIGO} alone and \ac{LIGO}/Virgo combined, dark blue are predictions from Fermi/GBM and light blue are predictions from IPN Fermi/INTEGRAL. Black and white images on right-hand side are visible light measurements of a bright event around the galaxy NGC 4993 thought to contain the afterglow of the \ac{BNS} event. \texttt{This figure was produced by the authors of} \cite{2017arXiv171005833L}. }
+    \label{fig:GW170817_skylocalization}
 \end{figure}
 
 \section{Summary}
