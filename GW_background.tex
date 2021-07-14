@@ -2,29 +2,29 @@
 
 \section{Gravitational Waves}
 
-Gravitational waves were predicted by Einstein in his theory of \ac{GR} well over 100 years ago \cite{GR_Einstein_paper}. In his theory, Einstein shows that the more massive an object is, the greater a curvature in spacetime that object creates. This curvature can then have an effect on the motion of objects which encounter it. This is summarized succinctly by John Archibald Wheeler where he states that ``Spacetime tells matter how to move; matter tells spacetime how to curve''. Einstein formalises the relationship between matter/energy and the curvature of space-time in his field equations as
+Gravitational waves were predicted by Einstein in his theory of \ac{GR} well over 100 years ago \cite{GR_Einstein_paper}~\chris{Slightly cliched start. Also, why does this appear as reference 40? It should be in order of citation so should be reference 1}. In his theory, Einstein shows that the more massive an object is, the greater a curvature in spacetime that object creates. This curvature can then have an effect on the motion of objects which encounter it. This is summarized succinctly by John Archibald Wheeler where he states that ``Spacetime tells matter how to move; matter tells spacetime how to curve''. Einstein formalises the relationship between matter/energy and the curvature of space-time in his field equations as~\chris{don't leave line spaces between the text and the equations - this is a choice of formatting and makes each equation and the following text into a new paragraph. You do not want that}
 
 \begin{equation}\label{eqn:FieldEquations}
     G_{\mu \nu} + \Lambda g_{\mu \nu} = \frac{8 \pi G}{c^{4}} T_{\mu \nu},
 \end{equation}{}
 
-where $\Lambda$ is the cosmological constant (scalar measurement describing the energy density of space), $g_{\mu \nu}$ is the metric which describes the geometric structure of space-time, $G$ is Newton's gravitational constant, $c$ is the speed of light, $T_{\mu \nu}$ is the stress energy tensor which describes the density, direction, flow of energy in space-time and $G_{\mu \nu}$ is the Einstein tensor defined as
+where $\Lambda$ is the cosmological constant (scalar measurement describing the energy density of space), $g_{\mu \nu}$ is the metric which describes the geometric structure of space-time, $G$ is Newton's gravitational constant, $c$ is the speed of light, $T_{\mu \nu}$ is the stress energy tensor which describes the density, direction, \chris{and} flow of energy in space-time\chris{,} and $G_{\mu \nu}$ is the Einstein tensor defined as
 
 \begin{equation}
     G_{\mu \nu} = R_{\mu \nu} - \frac{1}{2} R g_{\mu \nu}
 \end{equation}
 
-where $R_{\mu \nu}$ is the Rici curvature tensor which determines the degree to which matter will tend to change as a function of time (trace of the Riemann tensor) and $R$ is a real valued scalar number describing the degree of curvature. 
+where $R_{\mu \nu}$ is the Rici curvature tensor which determines the degree to which matter will tend to change~\chris{matter will change? what does this mean} as a function of time (trace of the Riemann tensor) and $R$ is a real valued scalar number describing the degree of curvature~\chris{of what?}. 
 
 %
 % Transition towards discussing GWs as small purturbations on the flat spacetime metric
 %
-The Einstein field equations described by e.q. \ref{eqn:FieldEquations} unfortunately can only be solved exactly in a limited number of situations. These situations include the Schwartzchild solution for a non-spinning singularity and the Kerr solution for a spinning singularity. If we would like to explore the behavior of more non-linear, time-dependent systems in terms of Einstein's field equations we need to put his equations into a more linear form. This can be done by describing the spacetime metric $g_{\mu\nu}$ in terms of an easy computable known solution in flat spacetime with the addition of some small perturbation.
+The Einstein field equations described by e.q. \ref{eqn:FieldEquations}~\chris{try to use the style Eq.~X throughout and use the hyperref package to make these links} unfortunately can only be solved exactly~\chris{I think you mean exactly analytically} in a limited number of situations. Some solutions include the Schwartzchild~\chris{spelling Schwarzschild} solution for a non-spinning singularity~\chris{what's a singularity?} and the Kerr solution for a spinning singularity. If we would like to explore the behavior of more non-linear, time-dependent systems in terms of Einstein's field equations we need to put his equations into a more linear form. This can be done by describing the spacetime metric $g_{\mu\nu}$ in terms of an easily computable known solution in flat spacetime with the addition of some small perturbation.~\chris{the linearised expansion of these equations is only relevant for small perturbations and not for non-linear time dependent systems in general.}
 
 %
 % Introduce g_munu
 %
-It turns out that gravitational waves may be defined as small perturbations over the curved background spacetime metric $g_{\mu \nu}$. In Euclidean space, the metric (which is what allows us to compute distances or dot products between two point mass objects), is generally described by the identity matrix in Cartessian coordinates. However, in \ac{GR} we have to add the time dimension and in flat spacetime this can be described by the Minkowski metric $\bar{g}_{\mu \nu}$ (sometimes also denoted $\eta_{\mu \nu}$) as
+Gravitational waves may be defined as small perturbations over the curved background spacetime metric $g_{\mu \nu}$. In Euclidean space, the metric (which is what allows us to compute distances or dot products between two point mass objects), is generally described by the identity matrix in Cartessian~\chris{spelling Cartesian} coordinates. However, in \ac{GR} we have to add the time dimension and in flat spacetime this can be described by the Minkowski metric $\bar{g}_{\mu \nu}$ (sometimes also denoted $\eta_{\mu \nu}$) as~\chris{which rows and columns belong to which parameters? Why does the time dimension have a negative value? Why is it diagonal? Lots of things you could discuss.}
 
 \begin{equation}
   \bar{g}_{\mu \nu} =   \begin{pmatrix}
@@ -35,19 +35,28 @@ It turns out that gravitational waves may be defined as small perturbations over
 \end{pmatrix}.
 \end{equation}
 
-Since a gravitational wave is a perturbation (or an additional curvature to the flat spacetime Minkoski metric), we can write the metric with a \ac{GW} present as  
+Since a gravitational wave~\chris{sometimes you use gravitational wave and sometimes GW. Pick one and be consistent.} is a perturbation (or an additional curvature~\chris{just stick with perturbation - curvature has different meanings} to the flat spacetime Minkoski metric), we can write the metric with a \ac{GW} present as  
 
 \begin{equation}
     g_{\mu \nu} = \bar{g}_{\mu \nu}(x) + h_{\mu \nu}(x),
 \end{equation}{}
 
-where $h_{\mu \nu}(x)$ is the gravitational wave perturbation. After taking the derivative of $g_{\mu\nu}$, we then arrive at the plane wave solution for \ac{GW}s written as
-
+where $h_{\mu \nu}(x)$ is the gravitational wave perturbation ($|h_{\mu \nu}(x) << 1|$)~\chris{what is $x$ and why is the LHS not a function of it? Is it a scalar, vector, or tensor? Also, use $\ll$ not $<<$}. After applying a Lorenz~\chris{Lorentz} transformation~\chris{what is this and why do you apply it?} and choosing a suitable Gauge~\chris{what is this and why do you apply it?}, we  arrive at the plane wave solution for \ac{GW}s~\chris{use acp for plural acronyms} written as
+%
 \begin{equation}\label{eq:gw_plane_solution}
     h_{\mu\nu} = \textrm{Re}[A_{\mu\nu} e^{(ik_{\alpha}x^{\alpha})}],
 \end{equation}{}
-
-where $A_{\mu\nu}$ is the amplitude, $k_{\alpha}$ is the wavevector and $x^{\alpha}$ is position in spacetime. Equation \ref{eq:gw_plane_solution} can be seen to have properties similar to that of an \ac{EM} wave which is typically generated by accelerating charges. However, some major differences are that a \ac{GW} is generated by accelerating masses which produce higher order quadropole (or multipole) moments and that they are naturally signficantly weaker than \ac{EM} waves (by 36 orders of magnitude). If we shift equation \ref{eq:gw_plane_solution} to the Transverse Traceless gauge we arrive at the \ac{GW} perturbation metric
+%
+~\chris{no need for brackets around the exp argument}
+where $A_{\mu\nu}$ is the amplitude~\chris{tensor}, $k_{\alpha}$ is the \chris{covariant} wavevector and $x^{\alpha}$ is 
+position in spacetime~\chris{$x$ should have been defined when first used}. Equation~\ref{eq:gw_plane_solution} can be seen to have 
+properties similar to that of an \ac{EM} wave which is typically generated by 
+accelerating charges~\chris{not really. It's just a plane wave equation. The similarities come from the fact that it is a solution to the wave equation where for GR the speed of the wave is also $c$.}. A \ac{GW} is generated by accelerating masses which produce 
+higher order quadropole~\chris{spelling quadrupole} (or multipole) moments and that they are naturally significantly 
+weaker than \ac{EM} waves (by 36 orders of magnitude)~\chris{yes, but what does strength or weakness mean in this context, and why do they have different strengths?}. If we shift 
+equation \ref{eq:gw_plane_solution}~\chris{Eq. X} to the Transverse Traceless gauge 
+we arrive at the \ac{GW} perturbation metric for a \ac{GW} wave traveling in the 
+$z$ direction
 
 \begin{equation}
   h_{\mu \nu} =   \begin{pmatrix}
@@ -55,19 +64,28 @@ where $A_{\mu\nu}$ is the amplitude, $k_{\alpha}$ is the wavevector and $x^{\alp
 0 & h_{+}e^{ic(z-t)} & h_{\times}e^{ic(z-t)} & 0\\
 0 & h_{\times}e^{ic(z-t)} & -h_{+}e^{ic(z-t)} & 0\\
 0 & 0 & 0 & 0
-\end{pmatrix},
+\end{pmatrix}.
 \end{equation}
-
-where we can clearly see that a \ac{GW} signal is composed of both ``plus'' and ``cross'' polarizations orthogonal to one-another. The effect that a passing \ac{GW} has on a set of freely floating test particles is illustrated in Figure \ref{fig:gw_plus_cross}. This effect on freely floating test masses is what we try to measure with the \ac{LIGO} \ac{GW} detectors. For a full derivation on how \ac{GW} signals are generated, I refer the reader to \cite{Flanagan_2005}. 
+\chris{looks like $z$ and $t$ both have the same dimensions here of one over speed. Where's the frequency? You've also moved from $c=G=1$ units to explicitly stating them, why? You've also written this as if $h_{+} and h_{\times}$ are constant amplitudes. The figure shows that they change over phase. Fix this.}
+This implies that \ac{GW}s are transverse waves composed of ``plus'' and ``cross'' 
+polarization states which are orthogonal to one-another~\chris{how does this imply orthogonality?}. The effect that a passing 
+\ac{GW} waveform has on a set of freely floating test particles is 
+illustrated in Figure \ref{fig:gw_plus_cross}~\chris{Use Fig. unless it's the start of a sentence}. This effect on freely floating test masses is what we try to measure with the \ac{LIGO} \ac{GW} detectors. 
+For a full derivation on how \ac{GW} signals are generated, I refer 
+the reader to \cite{Flanagan_2005}.
 
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/GW_polarizations_thesis_figure.png}
-    \caption[$h_+$ and $h_\times$ polarization illustration]{An illustration of the $h_+$ and $h_\times$ polarizations of a \ac{GW} signal impinging on a set of freely floating test masses as a function of phase $\phi$ from $0$ to $2\pi$.}
+    \caption[$h_+$ and $h_\times$ polarization illustration]{An illustration of the $h_+$ and $h_\times$ polarizations of a \ac{GW} signal impinging on a set of freely floating test masses as a function of phase $\phi$ from $0$ to $2\pi$.~\chris{I dont understand this. Why is the rest state at phase pi/2 and where has $phi$ been defined? What is $phi$ in reference to the maths in the text?}}
     \label{fig:gw_plus_cross}
 \end{figure}
 
 In the following subsection, I will talk about how the detectors function and detect such signals.
+
+\chris{General comments: It's hard to not say too much without explaining important things. This section comes across as "here's how it's happening" but I'm not going to tell you why (plus there are a few mistakes). I don't think you should add more mathematics BUT you need to explain in words what is happening and why. For example, don't just say that we do a Lorentz transformation and change Gauge. Say that but also say why this is done. When you arrive at the perturbation $h_{\mu\nu}$ don't just say "here it is". Mention the constraints that allowed it to be simplified to 2 independent components and why that means that we get 2 polarisations.}
+
+\chris{I also don't necessarily think that this should be your opening section. It might be better to open with something far more relevant to your thesis content and then we bring this in afterwards once you've outlined what the thesis is going to be about.}
 
 \section{Weber Bar Detector}
 
@@ -75,32 +93,30 @@ By the early 1950s technology had progressed enough such that serious
 attempts at experimentally verifying the existence of \ac{GW}s by Einstein were possible. 
 One of the earliest and most well-known attempts at doing so was by 
 Joseph Weber at the University of Maryland where he used an instrument 
-known as a resonant-mass detector (Weber Bar Detector) \cite{PhysRevLett.18.498}. The Weber Bar 
+known as a resonant-mass detector (Weber Bar Detector) \cite{PhysRevLett.18.498}~\chris{last statement about the reference ordering - it looks quite wrong.}. The Weber Bar 
 operates on the principle that when a \ac{GW} impinges on the bar (usually 
-made of some type of metal alloy, in this case high Q aluminium) it will cause 
-the bar to stretch and squeeze. If the frequency of the \ac{GW} is equivalent 
+made of some type of metal alloy, in this case high Q~\chris{what is high Q?} aluminium) it will cause 
+the bar to stretch and squeeze~\chris{well OK yes, but can you link this back to the previous GW discussion - before you were talking about freely floating masses but this is a single piece of metal. What's actually going on?}. If the frequency of the \ac{GW} is equivalent 
 to the resonant frequency of the bar, a \ac{GW} would theoretically be detectable up to a strain 
-sensitivity of $h\sim10^{-16}$. Weber made the claim in 1968 that there was 
-``good evidence'' for several detections made by his experiment, but unfortunately 
-no others were able to reproduce his results. Although follow-up results from 
+sensitivity of $h\sim10^{-16}$~\chris{slow down. What's strain sensitivity? In fact, what's strain? You should introduce this in the previous section}. Weber made the claim in 1968 that there was 
+``good evidence'' for several detections made by his experiment~\chris{reference?}, but unfortunately 
+no others were able to reproduce his results~\chris{also, at this strain would we have expected any astrophysical sources to have been detected?}. Although follow-up results from 
 other independent studies were disappointing 
 Weber's work encouraged many others to build their own improved experiments with 
 breakthrough technological developments at the time and 
 kick-started the subsequent field of \ac{GW} detection \cite{1009.1138}.
 
+\chris{A whole chapter section on this? It's only a single paragraph.}
+
 \section{The Hulse-Taylor Pulsar}
 
-In 1975, Russell Hulse and Joseph Taylor made the first direct observation 
-of a binary pulsar, which subsequently won them the 1993 Nobel Prize in 
-Physics \cite{1975ApJ...195L..51H}. Importantly, this was also one of the 
-first pieces of indirect observational evidence for the existence of 
-\ac{GW}s. This indirect evidence can be attributed to the observation 
+In 1975, Russell Hulse and Joseph Taylor made the first direct observation  of a binary pulsar, which subsequently won them the 1993 Nobel Prize in Physics~\cite{1975ApJ...195L..51H}. Importantly, this was also one of the first pieces of indirect observational evidence for the existence of \ac{GW}s. This indirect evidence can be attributed to the observation 
 made by both Hulse and Taylor that the period of the binary pulsar 
 appeared to experience orbital decay as a function of time. The orbital 
 decay was thought to likely be attributed to a loss of energy in the 
 system due to \ac{GW} radiation predicted by \ac{GR}. The observed period 
 decay as a function of time (in years) is represented
-in Fig. \ref{fig:hulse_taylor_decay}. As can be seen in Fig. \ref{fig:hulse_taylor_decay}, there is a striking level of agreement 
+in Fig. \ref{fig:hulse_taylor_decay}. As can be seen in Fig. \ref{fig:hulse_taylor_decay}~\chris{ugly repeated reference to the figure}, there is a striking level of agreement 
 between the theoretical decay curve predicted by Einstein's \ac{GR} and 
 the observations made by Hulse and Taylor.
 
@@ -109,16 +125,18 @@ the observations made by Hulse and Taylor.
     \includegraphics[width=\linewidth]{figures/Hulse_taylor_pulsar.png}
     \caption[Hulse-Taylor binary pulsar decay.]{This figure shows Hulse 
     and Taylor's observations of binary pulsar \texttt{PSR B1913+16} 
-    orbital decay as a function of time in years. The orbital decay is quantified by the total cumulative amount the binary system has been offset from it's first observation in 1975 with respect to the binary's perihelion point (black dots). The solid black curve is representative of the theoretical decay curve predicted by \ac{GR}. \texttt{This figure was produced by the authors of} \cite{1975ApJ...195L..51H}. }
+    orbital decay as a function of time in years. The orbital decay is quantified by the total cumulative amount the binary system has been offset from it's first observation in 1975 with respect to the binary's perihelion point (black dots). The solid black curve is representative of the theoretical decay curve predicted by \ac{GR}. \texttt{This figure was produced by the authors of} \cite{1975ApJ...195L..51H}. }~\chris{why the strange font here?}
     \label{fig:hulse_taylor_decay}
 \end{figure}
 
-\section{LIGO Detectors}
+\chris{again, this is a single paragraph that stands alone and doesn't seem connected to the rest of the text. It should go somewhere but doesn't deserve it's own section and needs to be placed in context with the rest of the introduction.}
+
+\section{LIGO Detectors~\chris{Isn't Virgo equally important? Your primary analysis simulates LIGO and Virgo data.}}
 
 %
 % Could provide a bit of an introduction here, seems a bit jarring.
 %
-
+\chris{I agree with your commented out comment. Each section I've seen just goes straight to the point without any introduction.}
 The \ac{LIGO} gravitational wave detectors are composed of 
 two detectors, one in Hanford, Washington State and the 
 other in Livingston, Louisiana. There are also other ground-based detectors 
@@ -126,44 +144,42 @@ in Hannover, Germany (GEO), Pisa, Italy (Virgo) and Kamioka, Japan
 (KAGRA). In addition to ground-based detectors there are eventual plans 
 to build a space-based observatory called the \ac{LISA} which 
 will search for super massive binary black holes (among other 
-sources). Each detector can be thought 
+sources)~\chris{please provide references for ALL of these detectors.}. Each detector can be thought 
 of as a large-scale Michelson-Morley Interferometer composed 
-of two arms orthogonal to each other. Each arm of 
-the detectors is 4km in length. The strain a \ac{GW} induces on two free point masses 
-can be expressed as 
+of two arms orthogonal to each other~\chris{but not LISA which is the last thing you mentioned here.}. Each arm of 
+the detectors is 4km in length~\chris{OK yes, for LIGO but not for the others. Also a strangely shrt sentence.}. The strain a \ac{GW} induces on two free point masses can be expressed as 
 
 \begin{equation}
     h(t) = \frac{2 \Delta L}{L},
 \end{equation}
 
-where $h(t)$ is the strain amplitude of the \ac{GW} 
+where $h(t)$ is the strain amplitude~\chris{here's the first definition of strain but you talked about strain in the previous sections} of the \ac{GW} 
 as a function of time, $\Delta L$ is 
-the relative change in length induced by the \ac{GW} on the two 
-point masses and $L$ is the baseline length between the point 
+the relative~\chris{no, this is the absolute change - the strain is the relative change (modulo a factor of 2)} change in length induced by the \ac{GW} on the two 
+point masses~\chris{what point masses?} and $L$ is the baseline length~\chris{be careful. Length has multiple definitions so what exactly do you mean?} between the point 
 masses without a \ac{GW} present. 
 
 We record the change in length 
 on the two point masses through the use of a ND:Yag 20W 
-laser and large mirrors. Photons emited from the laser pass through a beam 
-splitter and down the two arms of the detectors. The 
-photons then hit end test mass mirrors at both ends 
+laser and large mirrors~\chris{Overly simple statement but also overly detailed - "large mirrors" vs "ND:Yag 20W laser"?}. Photons emitted from the laser pass through a beam 
+splitter and down the two arms of the detectors~\chris{what 2 arms?}. The photons then hit end test mass mirrors at both ends~\chris{repeated "end"} 
 and are then caught in a Fabry-Perot signal recylcing 
 cavity in order to effectively increase the baseline 
-length of the arms. Eventually, some photons are released 
+length of the arms~\chris{reference and/or explain in simple terms what this means.}. Eventually, some photons~\chris{too relaxed, "eventually", "some" - be more scientific.} are released 
 from the Fabry-Perot cavities and return to the beam splitter 
 and are recorded on a set of photodiodes which measure 
 the phase difference between photons from both 
-arms.
+arms~\chris{well yes, but what about the important physics concept of interference?}.
 
 \begin{figure}
     \centering
     \includegraphics[width=\linewidth]{figures/Interferometer_sketch_figure.png}
-    \caption[Illustration of the \ac{LIGO} detectors.]{An illustration of the \ac{LIGO} detectors. A 1064nm laser beam is emited from a laser on the left-hand side, it then passes through a phase modulator (PMOD) and enters the power recycling cavity (PRM), this effectively boosts the power of the signal. The laser then passes through a beam splitter (BS), which splits the laser beam path into two seperate parts. Each part travels through an input test mass and hits end test masses at the end of both interferometer arms. The beams are then caught in a Fabry-Perot cavity which acts to extend the distance traveled of the beams, as well as the power. In other words, the cavity ``stores'' the photons for a long period ($\sim1$ ms) which allows a potential \ac{GW} signal more time to interact with the photons, thus increasing the sensitivity of the interferometer at low frequencies. Some laser light escapes back down both arms and recombines at the BS where the recombined beam passes through a signal recycling mirror (SRM). Finally, the beam hits a set of photodiodes (PD) which produce the interferometer readout which we use to determine whether or not a \ac{GW} signal is present.}
+    \caption[Illustration of the \ac{LIGO} detectors.]{An illustration of the \ac{LIGO} detectors. A 1064nm laser beam is emitted from a laser on the left-hand side, it then passes through a phase modulator (PMOD) and enters the power recycling cavity (PRM), this effectively boosts the power of the signal. The laser then passes through a beam splitter (BS), which splits the laser beam path into two seperate parts. Each part travels through an input test mass and hits end test masses at the end of both interferometer arms. The beams are then caught in a Fabry-Perot cavity which acts to extend the distance traveled of the beams, as well as the power. In other words, the cavity ``stores'' the photons for a long period ($\sim1$ ms) which allows a potential \ac{GW} signal more time to interact with the photons, thus increasing the sensitivity of the interferometer at low frequencies. Some laser light escapes back down both arms and recombines at the BS where the recombined beam passes through a signal recycling mirror (SRM). Finally, the beam hits a set of photodiodes (PD) which produce the interferometer readout which we use to determine whether or not a \ac{GW} signal is present.~\chris{lots of physics here that should be in the text rather than in the caption. Also, you need to reference the authors of this image unless you made it yourself. The latex figure label looks wrong here too.}}
     \label{fig:gw_plus_cross}
 \end{figure}
 
 
-Through some algebraic manipulation we can get an estimate on the 
+Through some algebraic manipulation~\chris{fine but based on what equations?} we can get an estimate on the 
 light travel time difference between the two interferometer 
 arms as 
 
@@ -187,14 +203,16 @@ length of the interferometer arms $L$. Because the
 detectors are tuned such that the photons arriving 
 back at the beam splitter act to destructively 
 interfere with each other (i.e. a dark fringe), there should theoretically 
-be no signal hitting the photodiodes in nominal operating times. When a \ac{GW} 
+be no signal hitting the photodiodes in nominal operating times~\chris{meaning when there is no GW present OR are you referring to the technical aspect where the control system maintains the dark fringe and the GW is recorded in the feedback signal?}. When a \ac{GW} 
 impinges on the detector, it will compress one arm 
-while stretching the other arm. There will then be a 
+while stretching the other arm~\chris{not always. This depends on the sky position relative to the detector and the polarisation state of the wave.}. There will then be a 
 detectable difference in phase between the light traveling 
 down both arms. Because of this difference in phase, the 
 light recombining at the beam splitter will no longer 
 destructively interfere and a detectable signal will appear 
 on the photodetectors.
+
+\subsection{Detector Response}
 
 % LIGO antenna patterns
 \begin{figure}
@@ -203,8 +221,6 @@ on the photodetectors.
     \caption[Illustration of the \ac{LIGO} antenna patterns for both the $h_\times$ and $h_+$ \ac{GW} polarizations]{An illustration of the \ac{LIGO} antenna patterns for both the $h_\times$ and $h_+$ \ac{GW} polarizations. The detector itself would lie in the x-y plane with one arm along the x-axis and the other along the y-axis.}
     \label{fig:gw_plus_cross}
 \end{figure}
-
-\subsection{Detector Response}
 
 The \ac{LIGO} detectors are not equally sensitive to all parts of 
 the sky. This is in large part due to their antenna patterns. 
@@ -333,6 +349,19 @@ as a limit on the detector strain sensitivity $h(f)_{\mathrm{R}}$ by
 where $m$ is the mass of the mirror and $f$ is the frequency of the laser. 
 For a more detailed description of shot noise, see \cite{Hild2014}.
 
+\subsubsection{Gravity-gradient noise}
+
+Gravity-gradient noise is noise which results from small stochastic 
+perturbations to the gravitational field background in and around 
+the \ac{LIGO} test masses. These small perturbations can cause the 
+test masses to move in a stochastic fashion due to mass-density fluctuations 
+in the local gravitational field around the test mass, mimicking 
+that of a stochastic 
+gravitational-wave background. Some sources of gravity gradient noise 
+include: ambient Rayleigh seismic waves, atmospheric fluctuations 
+and anthropogenic motion near test masses 
+\cite{PhysRevD.58.122002}.  
+
 %%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%% 
 %%%%%%%%%%%%%%% 
@@ -351,21 +380,51 @@ produced from them.
 \ac{CBC} signals arise from the collision of massive compact 
 objects moving at high relativistic speeds. Such systems can 
 include binary black holes, neutron star - black hole pairs, binary 
-neutron stars and super massive black hole encounter events. 
+neutron stars and super massive black hole encounter events.
+These signals are composed of three parts: the inspiral, merger 
+and ringdown phase and can be approximated using a combination 
+of post-Newtonian theory~\cite{PhysRevD.84.049901,PhysRevD.80.084043,Blanchet2014,PhysRevD.93.084054},
+the effective-one-body formalism~\cite{PhysRevD.59.084006}, and numerical
+relativity simulations~\cite{PhysRevLett.95.121101}.
 
 As the two objects rotate about each other, energy is radiated away in the 
 form of \ac{GW}s due to the asymmetric motion of the heavy objects. 
-Over the course of millions of years, the two objects will 
-inspiral in towards each other. In so doing the objects will 
-orbit faster, peturbing spacetime to a greater degree and 
+Over the course of long periods of time, the two objects will 
+inspiral in towards each other. As the orbital radius decreases, 
+the objects will move faster, perturbing spacetime to a greater degree and 
 thus releasing more energy in the form \ac{GW}s. In the final few 
-seconds prior to merger the objects will release a large amount of 
+seconds prior to merging the objects will release a large amount of 
 \ac{GW} energy collide. If the objects are binary black holes, they 
-will coalesce into a single black hole which will ``ring'' for a 
+will coalesce into a single black hole which will ``ringdown'' for a 
 short amount of time. If the objects are binary neutron stars they will 
 typically collide and then produce a large supernovoe event, emiting 
 a large amount of \ac{EM} light in the process (which importantly 
-can be measured by other telescopes across the spectrum on Earth). 
+can be measured by other \ac{EM} telescopes across the spectrum). 
+
+% f_ISCO explanation
+The frequency near when the two objects will merge is related to the  
+innermost stable circular orbit $R_{\mathrm{ISCO}}$. This radius is the 
+distance between two compact objects in orbit at which their motion 
+becomes unstable and the two objects rapidly decrease their radial 
+distance between each other. The radius at which this occurs may be defined as 
+
+\begin{equation}
+    R_{\mathrm{ISCO}} = \frac{6GM}{c^2},
+\end{equation}
+
+where $G$ is the gravitational constant, $M$ is the total mass of 
+the system, and $c$ is the speed of light.
+The frequency at which the orbit becomes unstable may 
+be estimated using Kepler's third law and can be expressed as 
+
+\begin{equation}
+    f_{\mathrm{ISCO}} = \frac{1}{T} \lesssim 
+    \sqrt{\frac{GM}{4\pi^2R^3_{\mathrm{ISCO}}}} \sim 2200 \mathrm{Hz}\frac{M_\odot}{M} ,
+\end{equation}
+
+where $f_{\mathrm{ISCO}}$ is the frequency of the innermost stable circular 
+orbit, $T$ is the period of the orbit and $M$ is the total mass of the system
+\cite{Maggiore:2007ulw}.
 
 \subsection{Continuous Waves}
 
@@ -586,16 +645,17 @@ as
 % Introduce posterior
 %
 \begin{equation}
-    p(\theta | d),
+    p(\theta | d, I),
 \end{equation}
 
-where $p(\theta | d)$ is the probability of the source parameters of the signal ($\theta$ being a continuous variable), given some observed data (in the form of a time/frequency series). We assume that the integral over the total posterior is normalised such that 
+where $p(\theta | d, I)$ is the probability of the source parameters of the signal ($\theta$ being a continuous variable), given some observed data (in the form of a time/frequency series) and 
+a model $I$. We assume that the integral over the total posterior is normalised such that 
 
 %
 % State that posterior is normalised such it integrates to 1
 %
 \begin{equation}
-    \int d\theta p(\theta | d) = 1.
+    \int d\theta p(\theta | d, I) = 1.
 \end{equation}
 
 According to Bayes theorem, we can write the posterior as 
@@ -604,7 +664,7 @@ According to Bayes theorem, we can write the posterior as
 % Show Bayes theorem
 %
 \begin{equation}
-    p(\theta | d) = \frac{p(d|\theta)p(\theta)}{p(d)}.
+    p(\theta | d, I) = \frac{p(d|\theta, I)p(\theta|I)}{p(d|I)}.
 \end{equation}\label{eq:intro_bayes_theorem}
 
 %
@@ -613,20 +673,22 @@ According to Bayes theorem, we can write the posterior as
 Where each term in Eq. \ref{eq:intro_bayes_theorem} can be described as 
 
 \begin{itemize}
-    \item $p(d|\theta)$: The likelihood of our observable $d$ given source parameters $\theta$.
-    \item $p(\theta)$: Our prior belief on the distribution of source parameters $\theta$.
-    \item $p(d)$: A normalisation factor called the evidence which is integrated over all possible parameters $\theta$.
+    \item $p(d|\theta, I)$: The likelihood of our observable $d$ given source parameters $\theta$ 
+    and model $I$.
+    \item $p(\theta|I)$: Our prior belief on the distribution of source parameters $\theta$ given model 
+    $I$.
+    \item $p(d|I)$: A normalisation factor called the evidence which is integrated over all possible parameters $\theta$ given model $I$.
 \end{itemize}
 
-The prior $p(\theta)$ is largely informed by our understanding on the formation channels of \ac{GW} sources and our level of understanding on the general physics which govern events. For example, we would intuitively think that the mass of an object should always be positive, so will set the priors such that the component masses of a \ac{GW} source must always lie between two positive values. However, if we aren't as knowledgeable about a particular parameter $\theta$, we might try choosing a relatively uninformative prior by employing something like a broad uniform distribution. Choice of prior can also be incredibly influential on the conclusions drawn on some \ac{GW} parameters such as spin. For further interesting discussions on prior choices see Salvatore et al. \cite{PhysRevLett.119.251103}.
+The prior $p(\theta|I)$ is largely informed by our understanding on the formation channels of \ac{GW} sources and our level of understanding on the general physics which govern events. For example, we would intuitively think that the mass of an object should always be positive, so will set the priors such that the component masses of a \ac{GW} source must always lie between two positive values. However, if we aren't as knowledgeable about a particular parameter $\theta$, we might try choosing a relatively uninformative prior by employing something like a broad uniform distribution. Choice of prior can also be incredibly influential on the conclusions drawn on some \ac{GW} parameters such as spin. For further interesting discussions on prior choices see Salvatore et al. \cite{PhysRevLett.119.251103}.
 
 %
 % Discussion on likelihood
 %
-The way in which we define the likelihood $p(d|\theta)$ (our certainty on the observed data) is essentially up to the practitioner. For \ac{GW} astronomy, we typically define a likelihood which assumes that the detectors operate under Gaussian noise-like conditions. The Gaussian-noise likelihood function can written as 
+The way in which we define the likelihood $p(d|\theta, I)$ (our certainty on the observed data) is essentially up to the practitioner. For \ac{GW} astronomy, we typically define a likelihood which assumes that the detectors operate under Gaussian noise-like conditions. The Gaussian-noise likelihood function can written as 
 
 \begin{equation}
-    p(d|\theta) = \frac{1}{\sqrt{2\pi \sigma^2}} \textrm{exp}\left(-\frac{1}{2} 
+    p(d|\theta, I) = \frac{1}{\sqrt{2\pi \sigma^2}} \textrm{exp}\left(-\frac{1}{2} 
     \frac{(d - \mu)^2}{\sigma^2}\right),
 \end{equation}
 
@@ -635,17 +697,17 @@ where $\sigma$ is the detector noise, $d$ is the observed data and $\mu$ is a te
 %
 % Discussion on the evidence
 %
-The evidence $p(d)$ can be defined as 
+The evidence $p(d|I)$ can be defined as 
 
 \begin{equation}
-    p(d) = \int p(d|\theta) p(\theta) d\theta.
-    \label{eq:evidence}
+    p(d|I) = \int p(d|\theta,I) p(\theta|I) d\theta.
+    \label{eq:bayes_evidence}
 \end{equation}
 
-The evidence is usually referred to as the marginal likelihood. Because we are marginalising over all parameters $\theta$, we can think of the evidence as essentially a normalising factor. Since the evidence is just simply a normalising factor and it is prohibitively expensive to compute this factor (because we are integrating over the whole parameter space of $\theta$), most Bayesian practitioners will ignore Eq. \ref{eq:evidence} and rewrite Bayes theorem in the simpler form 
+The evidence is usually referred to as the marginal likelihood. Because we are marginalising over all parameters $\theta$, we can think of the evidence as essentially a normalising factor. Since the evidence is just simply a normalising factor and it is prohibitively expensive to compute this factor (because we are integrating over the whole parameter space of $\theta$), most Bayesian practitioners will ignore Eq. \ref{eq:bayes_evidence} and rewrite Bayes theorem in the simpler form 
 
 \begin{equation}
-    p(\theta | d) \propto p(d | \theta) p(\theta).
+    p(\theta | d, I) \propto p(d | \theta,I) p(\theta|I).
 \end{equation}
 
 %
@@ -654,7 +716,7 @@ The evidence is usually referred to as the marginal likelihood. Because we are m
 Exceptions to to this concern model selection where the evidence is required 
 in order to calculate a Bayes factor which computes the liklihood of 
 one model vs. another. In the following subsections I will describe 
-methods for sampling from the posterior $p(\theta|d)$, such as \ac{MCMC} and 
+methods for sampling from the posterior $p(\theta|d,I)$, such as \ac{MCMC} and 
 Nested Sampling.
 
 \subsubsection{Markov Chain Monte Carlo}
@@ -915,5 +977,7 @@ able to produce \ac{GW}s and how the \ac{LIGO} detectors physically operate
 to detect such signals. We also described the search techniques for 
 all source signals and how we generate predictions on the underlying 
 source parameters of \ac{GW} signals. We finally end the chapter by 
-discussing multi-messenger astronomy.
+discussing the detections made by the \ac{LVC} in the past 3 observation 
+runs and how those detections have been used to further our understanding
+of cosmology, astrophysics and gravitational wave astronomy.
 

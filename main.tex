@@ -4,8 +4,9 @@
 % You may want to include more packages, particularly for heavy mathematics
 % Please let me know if you find any errors or wish to suggest improvements
 
-\documentclass[12pt,titlepage,oneside]{book}
+\documentclass[12pt,titlepage,oneside,nofootinbib,aps,prl,reprint,floatfix,showpacs]{book}
 \usepackage[T1]{fontenc} % modern encoding
+
 % Comment out the next three lines of LaTeX if you wish to use Computer Modern fonts
 %   (this is the default for LaTeX)
 % Make sure that your TeX installation can produce good pdf with these fonts.
@@ -33,6 +34,8 @@
 \usepackage{multirow}
 \usepackage{tabularx}
 \usepackage{hyperref}
+\usepackage{mathtools}
+\usepackage{diagbox}
 
 \hypersetup{
 %--- fill inside borders ---
@@ -80,6 +83,7 @@
 \acrodef{GAN}[GAN]{generative adversarial network}
 \acrodef{RF}[RF]{random forest}
 \acrodef{GP}[GP]{genetic programming}
+\acrodef{JS}[JS]{Jensen–-Shannon}
 
 
 \begin{document}
@@ -101,7 +105,7 @@ University of Glasgow\\
 \vspace{1cm}
 \includegraphics[scale=0.125]{GlaLogo.pdf}
 \\
-\vspace{1cm}
+%\vspace{1cm}
 % Insert month and year of date deposited with library for final version
 October 2021
 \end{titlepage}
@@ -120,7 +124,7 @@ October 2021
 \include{matching_matched_filtering}
 %\include{technical_matching}
 \include{vitamin}
-\include{technical_vitamin}
+%\include{technical_vitamin}
 \include{conclusions}
 
 %\include{ThesisOutline}
@@ -130,7 +134,8 @@ October 2021
 % Change the file if you use bibtex or something like that.
 %\include{bibliography}
 
-\bibliographystyle{abbrv}
+%\bibliographystyle{abbrv}
+\bibliographystyle{unsrt}
 \bibliography{references}
 
 \end{document}
