@@ -1,5 +1,255 @@
-\chapter{Conclusions and Future Work}
+\chapter{Conclusions and Future Work}\label{ch:chap_6}
 
-\section{Conclusions}
+In this thesis it was shown for the first time how machine learning may 
+be used for both \ac{GW} signal detection and parameter estimation. 
+Whilst current state-of-the-art algorithms used by the \ac{LVK} are 
+optimal to a certain degree for both 
+the detection and parameter estimation of \acp{GW} (matched filtering 
+and Bayesian inference respectively), the number of signals we expect to 
+see in future observation runs will dwarf the computational 
+resources needed for continued use of such techniques. The 
+work in this thesis has shown several first of its kind proof-of-principal 
+studies which illustrate that \ac{ML} techniques are a powerful and accurate tool for signal detection and parameter estimation.
 
-\section{Future Work}
+%
+% Summarize each chapter
+%
+
+% Chapter 1 and 2
+In Ch.~\ref{ch:chap_1} I introduced the basic concepts of 
+\ac{GR} and how \acp{GW} arise from said concepts.  
+I discussed standard techniques for \ac{GW} detection and parameter 
+estimation (matched template filtering and Bayesian inference respectively). 
+I showed how the \ac{LIGO}/Virgo detectors detect \acp{GW}, as well as account 
+for 
+various noise sources during operation. We also discussed that while matched 
+filtering and Bayesian parameter estimation are generally efficient and 
+reliable, they can also be computationally expensive. We then provided an 
+overview of \ac{GW} detections made by the \ac{LVK} up to the present day and 
+how future observation runs will produce an abundance of \ac{GW} signals. 
+Given the expected number of signals in future observing runs, 
+it was made clear in this 
+introductory chapter that there is a need for efficient low-latency signal 
+detection and parameter estimation methods.  
+
+% Chapter 2
+In Ch.~\ref{ch:chap_2} we start by introducing the simple concept of 
+a perceptron neural network. From there, I showed how the concept of a 
+perceptron may be expanded to include multiple perceptrons in a layer and multiple 
+layers of perceptrons into a deep neural network. It was also discussed how 
+a deep neural network is trained and how one may then construct other 
+neural network types, such as \acp{CNN}, \acp{AE}, \acp{VAE} and \acp{CVAE}. 
+With the broad range of introductory \ac{ML} material covered in this chapter, 
+I was then able to discuss how many of these concepts have been (and continue 
+to be) applied several domains within the field of \ac{GW} astronomy in the 
+following chapter (Ch.~\ref{ch:chap_3}).
+
+% Chapter 3
+In Ch.~\ref{ch:chap_3} I performed a survey of various \ac{ML} 
+techniques employed in \ac{GW} astronomy. It was seen that \ac{ML} has 
+had a surge in use in only the recent past and has been applied 
+to a variety of tasks including glitch classification, 
+\ac{GW} population analysis, \ac{GW} Bayesian parameter 
+estimation and point estimate parameter estimation, 
+signal detection and \ac{PSD} estimation. Given the wide scope of tasks 
+in which neural networks have been applied across the whole of \ac{GW} 
+astronomy, it is perhaps an indication that \ac{ML} will play an 
+increasingly pivotal role in the \ac{LVK} over the coming years.
+
+% Chapter 4
+In Ch.~\ref{ch:chap_4} I presented my study in which I used \acp{CNN} to 
+perform \ac{GW} signal detection. Given that the expected number 
+of detections made by the \ac{LVK} is expected to increase dramatically 
+in the coming years, there is an urgent need for faster signal detection 
+techniques. A \ac{CNN}, is one such technique which is able to 
+produce predictions on signal classes in low-latency. In my study I trained
+a \ac{CNN} model on 
+\ac{BBH} signals buried in whitened Gaussian noise. The 
+results from the \ac{CNN} model were compared to those from the standard 
+signal detection method used in the \ac{LVC} (matched filtering). 
+Results between both the \ac{ML} approach and the matched filtering
+were seen to be in strong agreement with each other. These results 
+showed for the first time that deep learning could match the efficiency 
+of exisiting signal detection 
+techniques and as such contributed to an increased level 
+of confidence within the \ac{GW} astronomy community 
+that deep learning could be a powerful tool. 
+
+% Chapter 5
+In Ch.~\ref{ch:chap_5} I presented my study in which I used \acp{CVAE} to 
+produce Bayesian posteriors on 15 \ac{BBH} parameters. Our \ac{CVAE} 
+model (\texttt{VItamin}) was trained on whitened \ac{BBH} signals 
+injected in Gaussian noise. We also produced benchmark results 
+using known and trusted Bayesian nested sampling and \ac{MCMC} 
+samplers (\texttt{Dynesty}, \texttt{Ptemcee}, \texttt{CPNest}, 
+\texttt{Emcee}). Results from both \texttt{VItamin} and Bayesian samplers 
+were compared against each other using many different figures of merit such 
+as the \ac{JS}-divergence between posteriors and \ac{PP} plots. It was 
+shown that results from the \ac{ML} approach had similar levels 
+of agreement as those between Bayesian samplers against other Bayesian 
+samplers. It was also shown that the speed of \texttt{VItamin} 
+was $\sim 6$ orders of magnitude greater than those of the Bayesian 
+samplers, producing posteriors in less than 1~s. Given the speed gains 
+from this approach and the accuracy of \acp{CVAE} with respect traditional 
+samplers, it is evident that \acp{CVAE} may be useful for low-latency
+\ac{EM} follow-up analyses. The low-latency data products from \acp{CVAE} 
+will allow for the observation of prompt \ac{EM} emission on timescales 
+which are far shorter than exisiting Bayesian sampling techniques. 
+It was also stated in this chapter that the \ac{ML} model used may 
+be extended to a variety of other source types and may also in future work 
+be trained/tested using real non-Gaussian detector noise.
+
+%
+% Future work
+%
+\ac{ML} has been used in countless applications across a wide 
+variety of fields including: 
+economics~\cite{Alexakis2021,Babaei2021,Bouri2021},
+biology~\cite{10.3389/fgene.2019.00214,Xu2019,10.1371/journal.pcbi.0030116}
+, chemistry~\cite{Tkatchenko2020,Deringer2020,Margraf2021} 
+and physics~\cite{Manzhos_2020,2002.09405,50295}. \ac{GW} astronomy has 
+only in the past several years seen an increase in the number of studies 
+which apply \ac{ML} to a wide variety of applications including: \ac{GW} 
+signal detection, \ac{GW} parameter estimation, and many other 
+studies (See Ch.~\ref{ch:chap_3}). I have shown in this thesis several first proof-of-principal studies which show that \ac{ML} can match the accuracy of standard trusted techniques currently used in the collaboration for both signal detection and parameter estimation. Going forward, there are many future directions we could take with this work. 
+
+%
+% signal detection future work
+%
+At the time of publication for our signal detection
+paper~\cite{PhysRevLett.120.141103}, we mentioned that one could 
+apply our method (or similar \ac{ML} models) to sources 
+other than \ac{BBH} signals including: \ac{BNS}, \ac{NSBH}, 
+\ac{CW} and stochastic \ac{GW} events. In the subsequent 
+years, there have been many follow-up studies which have 
+demonstrated success using a variety of \ac{ML} algorithms for 
+\ac{BNS} signal detection \cite{PhysRevD.102.063015,
+KRASTEV2020135330,Lin2019}, 
+\ac{BNS} early-warning signal detection \cite{WEI2021136185}, 
+\ac{CW} detection \cite{PhysRevD.100.044009, PhysRevD.102.083024}, 
+and stochastic background detection \cite{9461904}. Moreover, 
+it has been shown that unmodelled \ac{ML} approaches may also 
+be used to detect bust-like signals~\cite{Cavagli__2020,PhysRevD.102.043022}.
+Given the success of many of the aforementioned studies, there is 
+still much work left to be done in the regime of testing such 
+algorithms on real data in real noise (including our own work). 
+There is also much interest in the community with regards to \acp{FAR} 
+of such algorithms and there should be more studies done concerning what 
+classes of spurious non-astrophysical signals may ``trick'' 
+\ac{ML} models into outputting false detections. I also mentioned the possibilities of using \acp{CNN} for point-estimate parameter estimation 
+in my signal detection paper~\cite{PhysRevLett.120.141103}, 
+but acknowledge that this may not be the most useful when 
+compared with recent developments in \ac{ML} for Bayesian parameter 
+estimation which returns the posterior directly.
+
+There have also been many recent developments in the field of 
+\ac{ML} hyperparameter
+optimisation~\cite{li2019generalized,1206.2944,NIPS2011_86e8f7ab}
+(Ch.~\ref{ch:chap_2}, Sec.~\ref{sec:hyperpar_optim}), and such 
+optimisation algorithms have become more widely available and 
+easier to use~\cite{omalley2019kerastuner}. It would be interesting 
+to see whether the use of such algorithms can outperform a  
+random hyperparameter search used by most \ac{GW} astronomy 
+\ac{ML} practitioners today. 
+It should also be noted that the gap must be 
+bridged between proof-of-principal studies to the development of 
+easy-to-use packaged \ac{ML} \ac{GW} detection pipelines in order to 
+make the most use of these approaches. 
+
+% Parameter estimation future work
+Following the initial release of my study on Bayesian parameter 
+estimation using \acp{CVAE}, there has been a flurry of follow-up 
+studies which have used many alternative \ac{ML} techniques to 
+produce similar data products. Such work includes those done
+by~\cite{2019arXiv190905966C} using reduced order modeling and 
+perceptron networks and also~\cite{PhysRevD.102.104057} using normalising 
+flows. There have also been studies which use hybrid normalising flow - 
+nested sampling algorithms in order to boost sampler 
+convergence times~\cite{PhysRevD.103.103006}, as well as studies using \acp{CVAE} 
+which have built upon my own work~\cite{2021arXiv210710730K}. We also note 
+that there has been exciting recent developments which have shown for the 
+first time that \ac{ML} models (normalising flows) may be used to 
+accurately estimate Bayesian posteriors for real \ac{GW} signals in 
+real noise~\cite{2008.03312}. Applying variational 
+inference algorithms such as \acp{CVAE} and normalising flows to 
+\ac{BNS} signals should also be explored, given the expected 
+increase in detected \ac{GW} signals by the \ac{LVK}. Some issues that will 
+need to be overcome will be the large length of \ac{BNS} signals 
+($\sim100$s or more depending on the lower cut-off frequency) and 
+%cut-off in sensitivity - for a BNS with 25Hz the length is 90s, 
+%10Hz cut-off the length is 1000s, for 5Hz it's around 2 hours, 
+%and for ET at 1 Hz it would be about 5 days.}). 
+the large standard sampling rate of preprocessed data used by data analysis 
+pipelines ($\sim8$kHz), where the computational power needed to train 
+may be large. Possible solutions could be to use similar techniques as 
+those employed by~\cite{PhysRevD.102.104057} like principal component analysis 
+to reduce the dimensionality of the \ac{GW} timeseries, or those 
+employed by~\cite{PhysRevD.102.063015} who used varying sample rates at 
+different intervals of the input signal. As mentioned earlier in 
+Ch.~\ref{ch:chap_4} Sec.~\ref{sec:vit_data_aug}, we also apply 
+data augmentation to phase, distance and 
+time of coalescence. It should be noted that this form of signal augmentation 
+can be extended in future work to include more parameters and 
+may therefore reduce the need for a large training set.
+
+%
+% Changing PSD discussions
+%
+It is known that the \ac{PSD} of \ac{GW} detectors varies as a function of 
+time over the course of a given observation run. A changing noise floor 
+can have adverse impact on the performance of neural networks 
+which have been pre-trained on a \ac{PSD} which does not encompass 
+such variance. One solution may be to provide many different 
+\ac{PSD} realisations within the bounds of what the variance of 
+the \ac{PSD} is to be expected over the course of an observing run as 
+input to the neural network during training, thus marginalizing 
+over the \ac{PSD}. Careful decisions would then have to be 
+made as to how often one should re-train such a model as an 
+observing run progresses. We also acknowledge the option 
+to use the estimated \ac{PSD} for each training/validation/testing 
+sample as a conditional input together with the data, as was done 
+by~\cite{2021arXiv210612594D} using normalising flows. 
+
+Re-training periodically may also 
+benefit from the use of transfer learning~\cite{Goodfellow-et-al-2016} 
+whereby previous iterations of the neural network model are used 
+as the initialised values for the new neural network's weights. It 
+is also important to produce packaged, reviewed pipelines of 
+variational inference \ac{GW} algorithms, so that their benefits 
+may be more fully utilised by others in the \ac{GW} astronomical 
+community. Extending the \texttt{VItamin} analysis we 
+presented in Ch.~\ref{ch:chap_5}, to larger prior ranges, as well as 
+increasing the sample rate will be necessary in order to confirm 
+the degree to which the computational cost may or may not increase 
+for more complicated signals.
+
+%
+% Discussion on non-Gaussianity
+%
+It is also acknowledged that one of the 
+limiting factors of my own work has been the use of Gaussian noise, rather 
+than realistic non-Gaussian noise. If the \ac{ML} models used by myself for 
+signal detection and parameter estimation were trained on real data, 
+then (in principle) the \ac{ML} model would be able to learn the true likelihood 
+and not be limited to the analytically imposed version. Assuming this to 
+be the case, it may be possible that \ac{ML} will be able to 
+exceed the performance of existing methods in non-Gaussian noise 
+both in terms of speed and accuracy \hunter{citation would be nice}.
+It is my hope that the next generation 
+of Ph.D. students and/or postdocs will apply \acp{CVAE} under realistic 
+noise conditions and test on real \ac{GW} signals in  
+future work.
+
+% Final thoughts
+It is my hope that my own work will continue to be expanded upon 
+and serve as a foundation for future studies which aim to provide rapid \ac{ML} 
+data products, such as signal detection statistics and Bayesian posteriors
+, in real time to scientists both inside and outside of the \ac{LVK}. Given 
+that \ac{ML} studies for \ac{GW} astronomy have largely focused 
+on \ac{CBC} events, possibly due in-part to the fact that 
+they are the only sources 
+we have detected so far, I believe that \ac{ML} will also have a crucial role to 
+play regarding sources we have yet to detect or remain unmoddeled. It is my 
+belief that rapid data products from \ac{ML} will only 
+enhance current and future analyses, hopefully 
+continuing to advance the field of \ac{GW} data analysis.

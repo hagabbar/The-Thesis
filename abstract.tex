@@ -1,38 +1,72 @@
 \chapter{Abstract}
 
 Over 100 years ago Einstein formulated his now famous theory of 
-General Relativity. In his theory he discovered a wave-like solution 
-to the field equations which lead to the beginning of a brand-new 
-astronomical field, \ac{GW} astronomy. 
+General Relativity. In his theory he lays out a set of equations 
+which lead to the beginning of a brand-new 
+astronomical field, \ac{GW} astronomy. The \ac{LVK}'s
+aim is the detection of \ac{GW} events from some of the most violent 
+and cataclysmic events 
+in the known universe. The \ac{LVK} detectors are composed of 
+large-scale Michelson Morley interferometers which are able to detect 
+\acp{GW} from a range 
+of sources including: \acp{BBH}, \acp{BNS}, 
+\acp{NSBH}, supernovae and stochastic \acp{GW}. 
+Although these \ac{GW} events release an incredible amount of 
+energy, the amplitudes of the \acp{GW} from such events 
+are also incredibly small. 
 
-The Laser Interferometer Gravitational Wave Observatory (LIGO), Virgo, 
-KAGRA (LVK) Collaboration's main focus is the detection of gravitational 
-wave events from some of the most violent and cataclysmic events 
-in the known universe. The LVK detectors are composed of 
-large-scale Michelson Morley interferometers able to detect 
-strain amplitudes on the order of $h \sim 10^{-21}$ from a range 
-of sources including binary black holes, binary neutron stars, 
-neutron star black holes, supernovae and stochastic gravitational 
-waves. Although these events release an incredible amount of 
-energy, the amplitudes of the \ac{GW}s from such events 
-is also incredibly small. 
-
-The LVK uses sophisticated techniques such as matched 
-template filtering and Bayesian inference in order 
+The \ac{LVK} uses sophisticated techniques such as matched 
+filtering and Bayesian inference in order 
 to both detect and infer source parameters 
-from \ac{GW} events. Although optimal under most 
-cirucumstances, these standard methods are computationally 
-expensive to use. A solution to reducing the computational 
-expense of such techniques is to use machine learning.
+from \ac{GW} events. Although optimal under many 
+circumstances, these standard methods are computationally 
+expensive to use. Given the expected of order $100$s of \ac{GW} 
+signals the detectors are expecting to see in the coming years, there 
+is an urgent need for less computationally expensive detection and 
+parameter inference techniques. A possible solution to reducing the computational 
+expense of such techniques is the exciting field of \ac{ML}.
 
-In this thesis, I will show how we have employed 
-various machine learning and statistical techniques 
-in order to both optimize the search and show 
-that such machine learning techniques are indeed just 
-as efficient as the gold standard approaches currently 
-used in the collaboration. The first two chapters 
-will give a brief introduction to general relativity 
-as it relates to gravitational wave astronomy, \ac{GW}s, 
-standard \ac{GW} data analysis methods and machine 
-learning. Chapters 
+%
+% Matched filtering
+%
+In this thesis, we deploy 
+various \ac{ML} and statistical techniques such as 
+\acp{CVAE} and \acp{CNN} in two first-of-their-kind proof-of-principle 
+studies. We describe how we used 
+a \ac{CNN} which can match the sensitivity of matched 
+filtering, the standard technique used by the \ac{LVK} 
+for detecting \acp{GW}. We show how our \ac{CNN} may be trained using 
+simulated \ac{BBH} waveforms buried in Gaussian noise 
+and signals with Gaussian noise alone. We compare the results 
+of our \ac{CNN} classification predictions to results from 
+matched filtering given the same testing data as the 
+\ac{CNN}. In our results we are able to show using receiver 
+operating charactersitics and efficiency curves that our \ac{ML} approach 
+is able to generally achieve the same levels of sensitivity as that of 
+matched filtering. It is also shown that the \ac{CNN} approach is 
+able to generate predictions in low-latency. Given approximately $25000$ test cases,  
+the \ac{CNN} is able to produce classification predictions for all in $\mathds{1}$s.
+
+%
+% ML for Bayesian inference
+%
+In our second study, we show how \acp{CVAE} may be used in order 
+to perform Bayesian inference. We train our \ac{CVAE} using simulated 
+\ac{BBH} waveforms in Gaussian noise, as well as the source parameter 
+values of those waveforms. When testing, the \ac{CVAE} is only supplied 
+the \ac{BBH} waveform and is able to produce samples from the 
+Bayesian posterior. We compare our results to that of several standard 
+Bayesian samplers used by the \ac{LVK} including: \texttt{Dynesty}, 
+\texttt{ptemcee}, \texttt{emcee}, and \texttt{CPnest}. It is shown that 
+when properly trained our \ac{CVAE} method is able to produce Bayesian 
+posteriors which are generally consistent with other Bayesian samplers. Our results 
+are quantified using a variety of figures of merit such as \ac{PP} plots 
+in order to check the 1-dimensional marginalised posteriors from all 
+approaches are self-consistent with the frequentist perspective. We also 
+employ the use of the \ac{JS}-divergence in order to compute the similarity 
+of different posterior distributions from one another, as well as other 
+figures of merit explained later in this thesis. We also demonstrate that our 
+\ac{CVAE} model is able to produce posteriors with $8000$ samples in under 
+a second, representing a $6$ order of magnitude increase in performance 
+over traditional sampling methods. 
 
